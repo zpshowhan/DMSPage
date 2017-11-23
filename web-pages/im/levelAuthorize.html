@@ -1,0 +1,623 @@
+<!DOCTYPE html>
+<html>
+
+<!-- Mirrored from www.zi-han.net/theme/hplus/index_v1.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 20 Jan 2016 14:18:23 GMT -->
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!--360浏览器优先以webkit内核解析-->
+    <title>资产录入</title>
+
+    <link rel="shortcut icon" href="favicon.ico">
+    <link href="../../css/bootstrap.min14ed.css?v=3.3.6" rel="stylesheet">
+    <link href="../../css/font-awesome.min93e3.css?v=4.4.0" rel="stylesheet">
+    <link href="../../css/plugins/awesome-bootstrap-checkbox/awesome-bootstrap-checkbox.css" rel="stylesheet">
+    <link href="../../css/animate.min.css" rel="stylesheet">
+    <link href="../../css/style.min862f.css?v=4.1.0" rel="stylesheet">    
+    <link href="../css/index.css" rel="stylesheet">      
+    <link href="../css/kendo.common.min.css" rel="stylesheet">
+    <link href="../css/dropdowntreeview.css" rel="stylesheet">  
+    <link href="../../css/plugins/toastr/toastr.min.css" rel="stylesheet">
+    <link href="../../css/plugins/bootstrap-table/bootstrap-table.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="../../css/plugins/webuploader/webuploader.css">
+
+<style>
+.checked {
+ background-color:#ff0000;
+ font-weight:bold;
+}
+.btn-default {
+    color: #333;
+    background-color: #fff;
+    border-color: #ccc;
+}
+.edit {
+ font-weight:bold;
+}
+.select {
+ color: #4e97d9;
+ font-weight:bold;
+}
+</style>
+
+</head>
+
+<body class="gray-bg">
+  <div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+        <div class="col-sm-4">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>选择文档</h5>
+                </div>
+                <div class="ibox-content" style="padding-bottom:20px">
+                        <!--<p>您可以尝试文件拖拽，或者点击 添加文件 按钮，来选择文档.</p>-->
+                        <p>您可以点击 <code>添加文件</code> 按钮，来选择文档.</p>   
+                        <div id="uploader" class="wu-example">
+                        <!--用来存放文件信息-->
+                            <div class="btns">
+                                <div id="picker">添加文件</div>
+                                <button id="ctlBtn" class="btn btn-default">开始上传</button>
+                            </div>
+                        <!--<div id="thelist" class="uploader-list"></div>-->
+                        </div>                       
+                      <div class="hr-line-dashed"></div>
+                        <div class="panel panel-default">
+                             <table  class="table table-striped" >
+                                 <tbody id="fileList" ></tbody>
+                             </table>   
+                        </div>
+                </div>
+            </div>
+        </div>
+      <div class="col-sm-8">
+          <div class="ibox float-e-margins">
+              <div class="ibox-title">
+                    <h5>文档详情</h5>
+             </div>
+              <div class="ibox-content">
+                  <form method="get" class="form-horizontal">
+                      <div class="form-group">
+                          <label class="col-sm-2 control-label">文档名称 *</label>
+                          <div class="col-sm-10">
+                            <input id="fileName" name="fileName" type="text" class="form-control required">
+                          </div>
+                      </div>
+                      <div class="hr-line-dashed"></div>
+                      <div class="form-group">
+                          <label class="col-sm-2 control-label">上传人</label>
+
+                          <div class="col-sm-10">
+                              <input type="text" disabled="" placeholder="系统管理员" class="form-control">
+                          </div>
+                      </div>
+                      <div class="hr-line-dashed"></div>
+                      <div class="form-group">
+                          <label class="col-sm-2 control-label">文档介绍 *</label>
+
+                          <div class="col-sm-10">
+                            <textarea id="fileDesc" name="fileDesc" type="text" class="form-control required"></textarea>
+                          </div>
+                      </div>
+                      <div class="hr-line-dashed"></div>
+                      <div class="form-group">
+                          <label class="col-sm-2 control-label">文档标签</label>
+
+                          <div class="col-sm-10">
+                              <input id="fileLabel" type="text" class="form-control">
+                          </div>
+                      </div>
+
+                      <div class="hr-line-dashed"></div>
+                      <div class="form-group">
+                          <label class="col-sm-2 control-label">可见范围</label>
+                          <div class="col-sm-10">
+                            <div id="rangeDropDownTreeView"></div>
+                              <!--
+                              <select id="visible_range" class="form-control m-b" name="account">
+                                  <option>组织机构编码 1</option>
+                                  <option>组织机构编码 2</option>
+                                  <option>组织机构编码 3</option>
+                                  <option>组织机构编码 4</option>
+                              </select>
+                              -->
+                          </div>
+                      </div>
+                      <div class="hr-line-dashed"></div>
+                      <div class="form-group">
+                          <label class="col-sm-2 control-label">文档分类</label>
+
+                          <div class="col-sm-10">
+                              <select id="file_type" class="form-control m-b" name="account">
+                                  <!--<option>分类 1</option>
+                                  <option>分类 2</option>
+                                  <option>分类 3</option>
+                                  <option>分类 4</option>-->
+                              </select>
+                          </div>
+                      </div>
+                      <div class="hr-line-dashed"></div>
+                      <div class="form-group">
+                          <label class="col-sm-2 control-label">所属年度</label>
+                          <div class="col-sm-10">
+                              <select id="year_range" class="form-control m-b" name="account">
+                              </select>
+                          </div>
+                      </div>
+                      <div class="hr-line-dashed"></div>
+                      <div class="form-group">
+                          <label class="col-sm-2 control-label">是否公开</label>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                          <div class="radio radio-info radio-inline">
+                              <input type="radio" id="publicYes" value="1" name="rangeRadioInline">
+                              <label for="publicYes"> 是 </label>
+                          </div>
+                          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                          <div class="radio radio-inline">
+                              <input type="radio" id="publicNo" value="0" name="rangeRadioInline">
+                              <label for="publicNo"> 否 </label>
+                          </div>
+                      </div>
+                  </form>
+      </div>
+  </div>
+</div>
+</body>
+    <script src="../../js/jquery.min.js?v=2.1.4"></script>
+    <script src="../../js/bootstrap.min.js?v=3.3.6"></script>
+    <script src="../../js/content.min.js"></script>
+    <script src="../../js/plugins/bootstrap-table/bootstrap-table.min.js"></script>
+    <script src="../../js/plugins/bootstrap-table/bootstrap-table-mobile.min.js"></script>
+    <script src="../../js/plugins/bootstrap-table/locale/bootstrap-table-zh-CN.min.js"></script>
+    <script src="../../js/demo/bootstrap-table-demo.min.js"></script>
+    <script src="../../js/plugins/layer/layer.min.js"></script>
+    <script src="../../js/plugins/webuploader/webuploader.min.js"></script>
+    <script src="../js/tmpl.min.js"></script>  
+    <script src="../js/kendo.chopper.min.js"></script>  
+    <script src="../js/dropdowntreeview.js"></script>
+    <script src="../../js/plugins/toastr/toastr.min.js"></script>
+    <script type="text/javascript" src="http://tajs.qq.com/stats?sId=9051096" charset="UTF-8"></script>
+
+    <script type="text/x-tmpl" id="template-listing">
+      <tr class="row-file">
+        <td class="column-name">
+             {% if (o.select) { %}
+                <p class="select">{%=o.name%}</p>
+            {% } else { %}
+                <p class="edit">{%=o.name%}</p>
+            {% } %}
+         </td>
+        <td class="column-delete">
+          <button type="button" class="btn btn-danger btn-xs button-delete">
+            <span class="glyphicon glyphicon-trash"></span>
+          </button>
+        </td>
+      </tr>
+    </script>
+
+    <script>
+    var year = new Date().getFullYear()
+    var log = console.info.bind(console)
+    var MAX_FILE_COUNT = 10
+
+    function FileList () {  
+        this.isAsset = true //false 文档 true 资产
+        this.type = undefined //分类   
+        this.list=[]  //文件列表
+        this.isPublic = true  //是否公开
+        this.curFileId  //当前编辑的文件ID
+        this.range=undefined //可见范围
+        this.year=year   //年度
+        this.uploder //上传人
+
+        this.addFile = function (file) {
+            if ( this.list.length < MAX_FILE_COUNT) {
+                this.list.splice(0,0,file)
+                this.setCurFile(file.id)
+            }
+        }
+
+        this.select=function(id) {
+             for ( var i=0; i<this.list.length;i++) {
+                if(this.list[i].id == id) {
+                    this.list[i].select = true
+                } else{
+                    this.list[i].select = false
+                }
+             }
+        }
+
+        this.getCurFile=function(){
+            for(var i=0;i<this.list.length;i++){
+                if(this.list[i].id==this.curFileId){
+                    return this.list[i]
+                }
+            }
+        }
+
+        this.showSelectFile=function(id){
+            var file = this.getCurFile()
+            $('#fileName').val(file.name)
+            $('#fileDesc').val(file.desc)
+            $('#fileLabel').val(file.label)
+            $("#year_range").val(fileList.year)
+            //log("show file is public = " +fileList.isPublic)
+            if ( fileList.isPublic ) {                                
+                $("#publicYes").attr("checked",'checked')
+                $("#publicNo").attr("checked",false)
+            } else {                      
+                $("#publicNo").attr("checked",'checked')
+                $("#publicYes").attr("checked",false)
+            }
+
+        }
+
+        this.saveEditFile=function(){
+            var file = this.getCurFile()
+            file.name = $('#fileName').val()
+            file.desc = $('#fileDesc').val()
+            file.label =  $('#fileLabel').val()
+            fileList.year = $('#year_range').val()
+            fileList.range= $('#visible_range').val()
+            fileList.type= $('#file_type').val()
+            var val = $("input[name='rangeRadioInline']:checked").val()
+            fileList.isPublic =(val==1)?true:false
+            //log("public is check = "+ val + "  " +fileList.isPublic)
+        }
+
+        this.setCurFile = function (id) {
+            this.curFileId = id
+            this.select(id)
+            this.showSelectFile(id)
+        }
+
+        this.length = function() {
+            return this.list.length
+        }
+
+        this.removeFile = function (fileId) {
+            for ( var i=0; i<this.list.length;i++) {
+                if(this.list[i].id == fileId) {
+                    this.list.splice(i,1)
+                    if( this.list.length > 0) {
+                        if( fileId = this.curFileId){
+                            this.setCurFile(this.list[0].id)
+                        }
+                    } else {//空文件列表
+                        this.setCurFile(0)
+                    }
+                }
+            }
+        }
+    }
+
+    //文件属性 部分属性公用FileList里的
+    function UploadFile (fileId,fileName) {
+        this.id = fileId
+        this.name = fileName
+        this.select = false
+        this.desc=""
+        this.label=""
+    }
+
+    //list 转成树形json
+    function listToTree(list,pid) {
+        var ret = [];//一个存放结果的临时数组
+        for(var i in list) {
+            if(list[i].pid == pid) {//如果当前项的父id等于要查找的父id，进行递归
+                list[i].children = listToTree(list, list[i].id);
+                ret.push(list[i]);//把当前项保存到临时数组中
+            }
+        }
+        return ret;//递归结束后返回结果
+    } 
+
+        //生成树下拉菜单
+    function creatSelectTree(d){        
+        var j="-";//前缀符号，用于显示父子关系，这里可以使用其它符号
+        var option="";
+        for(var i=0;i<d.length;i++){
+            if(d[i].children.length){//如果有子集
+                option+="<option value='"+d[i].id+"'>"+j+d[i].name+"</option>";
+                j+="-";//前缀符号加一个符号
+                option+=creatSelectTree(d[i].children);//递归调用子集
+                j=j.slice(0,j.length-1);//每次递归结束返回上级时，前缀符号需要减一个符号
+            }else{//没有子集直接显示
+                option+="<option value='"+d[i].id+"'>"+j+d[i].name+"</option>";
+            }
+        }
+        return option;//返回最终html结果
+    }
+    function generateOptions(id,list){
+        //获取容器对象
+        var selectbox=document.getElementById(id);
+        var tree=listToTree(list,0);//调用函数，传入要转换的list数组，和树中顶级元素的pid
+        log(tree);
+        //调用函数，并将结构出入到下拉框容器中
+        selectbox.innerHTML=creatSelectTree(tree);
+    }
+    var datasource = [{
+            "text": "\u90e8\u95e8", 
+            "expanded": true, 
+            "id": 0, 
+            "items": [
+                {
+                    "text": "\u8fd0\u8425\u90e8", 
+                    "expanded": true, 
+                    "pid": 0, 
+                    "comments": "20140821-1", 
+                    "items": [
+                        {
+                            "text": "\u4ea7\u54c1\u7ec4", 
+                            "expanded": true, 
+                            "pid": 1, 
+                            "comments": "20140821-7", 
+                            "items": [], 
+                            "id": 7
+                        }
+                    ], 
+                    "id": 1
+                }, 
+                {
+                    "text": "\u8d22\u52a1\u90e8", 
+                    "expanded": true, 
+                    "pid": 0, 
+                    "comments": "20140821-2", 
+                    "items": [], 
+                    "id": 2
+                }, 
+                {
+                    "text": "\u884c\u653f\u90e8", 
+                    "expanded": true, 
+                    "pid": 0, 
+                    "comments": "20140821-3", 
+                    "items": [], 
+                    "id": 3
+                }, 
+                {
+                    "text": "\u7814\u53d1\u90e8", 
+                    "expanded": true, 
+                    "pid": 0, 
+                    "comments": "20140821-4", 
+                    "items": [
+                        {
+                            "text": "\u5f00\u53d1\u7ec4", 
+                            "expanded": true, 
+                            "pid": 4, 
+                            "comments": "20140821-8", 
+                            "items": [], 
+                            "id": 8
+                        }, 
+                        {
+                            "text": "\u6d4b\u8bd5\u7ec4", 
+                            "expanded": true, 
+                            "pid": 4, 
+                            "comments": "20140821-9", 
+                            "items": [], 
+                            "id": 9
+                        }
+                    ], 
+                    "id": 4
+                }, 
+                {
+                    "text": "\u8fd0\u7ef4\u90e8", 
+                    "expanded": true, 
+                    "pid": 0, 
+                    "comments": "20140821-5", 
+                    "items": [], 
+                    "id": 5
+                }, 
+                {
+                    "text": "\u9500\u552e\u90e8", 
+                    "expanded": true, 
+                    "pid": 0, 
+                    "comments": "20140821-6", 
+                    "items": [
+                        {
+                            "text": "\u552e\u524d\u7ec4", 
+                            "expanded": true, 
+                            "pid": 6, 
+                            "comments": "20140821-10", 
+                            "items": [], 
+                            "id": 10
+                        }, 
+                        {
+                            "text": "\u552e\u540e\u7ec4", 
+                            "expanded": true, 
+                            "pid": 6, 
+                            "comments": "20140821-11", 
+                            "items": [], 
+                            "id": 11
+                        }
+                    ], 
+                    "id": 6
+                }
+            ]
+        }];
+    
+    var typelist = [
+            { id: 19, pid: 0, name: 'nodejs' },
+            { id: 20, pid: 19, name: 'express' },
+            { id: 21, pid: 19, name: 'mongodb' },
+            { id: 60, pid: 20, name: 'ejs' },
+            { id: 59, pid: 0, name: '前端开发' },
+            { id: 70, pid: 59, name: 'javascript' },
+            { id: 71, pid: 59, name: 'css' },
+            { id: 72, pid: 59, name: 'html' },
+            { id: 73, pid: 59, name: 'bootstrap' },
+            { id: 61, pid: 0, name: '视觉设计' },
+            { id: 63, pid: 61, name: '网页设计' },
+            ]
+    
+    $(function() {
+        var DropDownTreeView = $('#rangeDropDownTreeView').kendoDropDownTreeView({
+            dropDownWidth : '500px',
+            valueField    : 'id',
+            treeview      : {
+                dataSource: datasource
+            }
+        }).data("kendoDropDownTreeView");
+        //generateOptions("file_type",typelist)
+    });
+
+    var fileList = new FileList()
+    var uploader = WebUploader.create({
+        auto:false,
+        // swf文件路径
+        swf: '../../js/plugins/webuploader/Uploader.swf',
+
+        // 文件接收服务端。
+        server: 'dmsUploader',
+
+        threads:'5',
+        fileNumLimit:MAX_FILE_COUNT,
+
+        // 选择文件的按钮。可选。
+        // 内部根据当前运行是创建，可能是input元素，也可能是flash.
+        pick: '#picker',
+
+        // 不压缩image, 默认如果是jpeg，文件上传前会压缩一把再上传！
+        resize: false
+    });
+
+    uploader.on('error',function(type) {
+        //log("error" + type)
+        if( type == 'Q_EXCEED_NUM_LIMIT') {
+            var msg= "一次上传最多只能选择"+MAX_FILE_COUNT+"个文件"
+            toaster(msg)
+        }
+    })
+    
+    // 当有文件被添加进队列的时候
+    uploader.on( 'fileQueued', function( file ) {    
+        if(fileList.list.length > 0) {
+            fileList.saveEditFile()
+        }
+        var upload = new UploadFile(file.id,file.name)
+        fileList.addFile(upload)
+        reloadFileList();
+    });
+
+    //重新载入页面文件列表
+    function reloadFileList() {
+        $("#fileList").empty()
+        for(var i=0; i< fileList.list.length; i++ ) {  
+            var file = fileList.list[i]
+            $(tmpl("template-listing", file)).data(file).appendTo("#fileList");            
+            $(".button-delete").click(function(event) {
+                var id = $(this).parent().parent().data("id")
+                fileList.removeFile(id)
+                uploader.removeFile(id) //从队列中移除
+                reloadFileList()
+            })
+            $(".row-file").click(function(event){
+                var id = $(this).data("id")
+                fileList.saveEditFile(id)
+                if(id != undefined) {
+                    fileList.setCurFile(id)
+                    reloadFileList()
+                }
+            })
+        }
+    }
+
+    function toaster(msg) {
+        //var toastIndex=toastCount++;
+        toastr.options={
+            closeButton:true,
+            debug:false,
+            progressBar:true,
+            positionClass:"toast-top-left",
+            onclick:null,
+            showDuration:"400",
+            hideDuration:"1000",
+            timeOu:"7000",
+            extendedTimeOut:'1000',
+            showEasing:'swing',
+            hideEasing:'linear',
+            showMethod: "fadeIn",
+            hideMethod: "fadeOut",
+        }
+        var $toast=toastr["warning"](msg,"提示");
+        if($toast.find("#okBtn").length){
+            $toast.delegate("#okBtn","click",function(){
+                $toast.remove()
+            })
+        }
+    }
+        
+    function generateNodeText(fileId,fileName) {
+
+        if(fileName.length>24){
+            fileName = fileName.substring(0,22)+'...'
+        }
+        return '<tr> ' +                   
+                '<td >' +
+                ' <h5 onclick="editFileNode()">'+fileName+'</h5>'+
+                '</td>'+
+                '<td >'+
+                    '<a onclick="editFileNode(\''+fileId+'\')" class="btn btn-white btn-sm"><i class="fa fa-pencil"></i> 编辑 </a> &nbsp&nbsp'+
+                    '<a onclick="delFileNode(\''+fileId+'\')" class="btn btn-white btn-sm"><i class="fa fa-times"></i> 删除 </a>'+
+                '</td>'+
+            '</tr>'
+    }
+
+    function addFileNode2(FileId, text) {
+    var s=document.getElementById('fileList');
+    var a= document.createElement("a");
+    a.innerHTML=text;
+    s.insertBefore(a,s.childNodes[0]);
+    }
+
+    function addFileNode3(fileId, text) {
+    var s=document.getElementById('fileList');
+    var a= document.createElement("tr");
+    a.innerHTML = text;
+    s.insertBefore(a,s.childNodes[0]);
+    }
+
+    function addFileNode(fileId,txt) {
+    var s=document.getElementById('fileList');
+    var li= document.createElement("li");
+    var len = s.childNodes.length;
+    if(len == 0) {
+        li.setAttribute('class','checked');
+    }
+    li.setAttribute('value',fileId);
+    li.innerHTML=txt;
+        s.insertBefore(li,s.childNodes[0]);
+        li.setAttribute("onclick","javascript:clickNode("+li+");");
+    }
+
+    setYearSelect();
+
+    function setYearSelect(){
+        var s = document.getElementById("year_range");
+        var years = getYearRange();
+        for(var i=0;i<years.length;i++) {
+            var op= document.createElement("option");
+            var len = s.childNodes.length;
+            op.setAttribute('value',years[i]);
+            op.innerHTML='<option>'+years[i]+'</option>';
+            s.appendChild(op);
+        }
+    }
+
+    function getYearRange() {
+        var now = new Date();
+        var t_y = now.getFullYear();
+        var years = [];
+        for ( var i=0;i<10;i++) {
+            years.push(t_y-i);
+        }
+        return years;
+    }
+
+    </script>
+</body>
+
+
+<!-- Mirrored from www.zi-han.net/theme/hplus/index_v1.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 20 Jan 2016 14:18:30 GMT -->
+</html>

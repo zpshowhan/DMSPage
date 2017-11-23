@@ -1,0 +1,64 @@
+<link rel="shortcut icon" href="favicon.ico">
+	<link href="../css/bootstrap.min14ed.css?v=3.3.6" rel="stylesheet">
+    <link href="../css/font-awesome.min93e3.css?v=4.4.0" rel="stylesheet">
+	
+	<link href="../css/plugins/bootstrap-table/bootstrap-table.min.css" rel="stylesheet">
+    <link href="../css/animate.min.css" rel="stylesheet">
+    <link href="../css/style.min862f.css?v=4.1.0" rel="stylesheet">
+	<link href="css/font-mine.css" rel="stylesheet">
+	<link href="css/style.css" rel="stylesheet">
+
+	<div class="col-sm-10">
+		<div class="ibox float-e-margins">
+			<div class="ibox-title">
+				<h3>文档列表</h3>
+			</div>
+			<div class="ibox-content">
+				<table id="team_list" data-mobile-responsive="true">
+					<thead>
+						<tr>
+							<th data-field="teamId" data-visible="false">ID</th>
+							<th data-field="teamName" data-width="40%">协作名称</th>
+							<th data-field="lastModifyTime" data-width="30%">最后修改时间</th>
+							<th data-field="teamStatus" data-visible="false">状态</th>
+							<th data-field="OPER" data-width="30%" data-formatter="formatTeamOper">OPER</th>
+						</tr>
+					</thead>
+				</table>
+			</div>
+		</div>
+	</div>
+
+<script src="../js/jquery.min.js?v=2.1.4"></script>
+<script src="../js/bootstrap.min.js?v=3.3.6"></script>
+<script src="../js/content.min.js?v=1.0.0"></script>
+<script src="../js/plugins/bootstrap-table/bootstrap-table.min.js"></script>
+<script src="../js/plugins/bootstrap-table/bootstrap-table-mobile.min.js"></script>
+<script src="../js/plugins/bootstrap-table/locale/bootstrap-table-zh-CN.min.js"></script>
+<script type="text/javascript" >
+$(function(){
+	var data = [
+		{teamId:1,teamName:'Document_2014.doc',lastModifyTime:'2017/07/14 12:00:00',teamStatus:'1'},
+		{teamId:2,teamName:'Italy street.excel',lastModifyTime:'2017/07/14 12:00:00',teamStatus:'1'},
+		{teamId:3,teamName:'My feel.one',lastModifyTime:'2017/07/14 12:00:00',teamStatus:'1'},
+		{teamId:4,teamName:'Michal Jackson.ppt',lastModifyTime:'2017/07/14 12:00:00',teamStatus:'1'},
+		{teamId:5,teamName:'Document_2014.vsd',lastModifyTime:'2017/07/14 12:00:00',teamStatus:'1'},
+		{teamId:6,teamName:'Monica\'s birthday.mdb',lastModifyTime:'2017/07/14 12:00:00',teamStatus:'1'},
+		{teamId:7,teamName:'一千零一夜.txt',lastModifyTime:'2017/07/14 12:00:00',teamStatus:'1'}
+	];
+	$('#team_list').bootstrapTable({
+					data:data,
+					height:"500",
+					idField:'teamId',
+					uniqueId:'teamName',
+					dataType: "json",
+					pagination: true,
+					clickToSelect:true,
+					singleSelect:true,
+					pageSize: 10,
+					pageNumber: 1,
+					pageList: [5, 10, 20],
+					sidePagination: "client"
+	});
+});
+</script>

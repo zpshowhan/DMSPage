@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html>
+
+
+<!-- Mirrored from www.zi-han.net/theme/hplus/search_results.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 20 Jan 2016 14:19:47 GMT -->
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+    <title>我的协同</title>
+    <meta name="keywords" content="我参与的文档协同工作">
+    <meta name="description" content="我参与的文档协同工作">
+
+    <link rel="shortcut icon" href="favicon.ico">
+	<link href="../css/bootstrap.min14ed.css?v=3.3.6" rel="stylesheet">
+    <link href="../css/font-awesome.min93e3.css?v=4.4.0" rel="stylesheet">
+	<link href="../css/plugins/sweetalert/sweetalert.css" rel="stylesheet">
+
+    <link href="../css/animate.min.css" rel="stylesheet">
+    <link href="../css/style.min862f.css?v=4.1.0" rel="stylesheet">
+	<link href="../css/plugins/datapicker/datepicker3.css" rel="stylesheet">
+	<link href="../css/font-mine.css" rel="stylesheet">
+	<link href="../css/style.css" rel="stylesheet">
+</head>
+
+<body class="gray-bg">
+    <div class="wrapper wrapper-content">
+        <div class="row">
+            <div class="col-sm-3">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-content">
+                        <div class="file-manager">
+                            <h3>条件过滤：</h3>
+							<font style="line-height:30px;">文件名称：</font >
+							<input id="cname" name="name" minlength="2" type="text" class="form-control Rounded" required="" aria-required="true">
+							<font style="line-height:30px;">上传人：</font >
+							<input id="cname" name="name" minlength="2" type="text" class="form-control Rounded" required="" aria-required="true">
+							<font style="line-height:30px;">最后修改时间：</font >
+							<div class="input-group date">
+                                <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                <input type="text" class="form-control">
+                            </div>
+							<div class="hr-line-dashed"></div>
+                            <button class="btn btn-primary btn-block">查询</button>
+                            <div class="clearfix"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-9 animated fadeInRight">
+                <div class="row" id="fileShow">
+
+                </div>
+            </div>
+        </div>
+		<div class="chat-top">
+            <a class="open-small-chat chat-unchecked" title="列表显示" conf="1">
+                <i class="glyphicon glyphicon-th-list"></i>
+            </a>
+			<a class="open-small-chat" title="平铺显示" conf="2">
+                <i class="glyphicon glyphicon-th-large"></i>
+            </a>
+        </div>
+    </div>
+    <script src="../js/jquery.min.js?v=2.1.4"></script>
+    <script src="../js/bootstrap.min.js?v=3.3.6"></script>
+	<script src="../js/plugins/datapicker/bootstrap-datepicker.js"></script>
+	<script src="../js/plugins/sweetalert/sweetalert.min.js"></script>
+    <script src="../js/content.min.js?v=1.0.0"></script>
+    <script>
+        $(document).ready(function(){
+			$(".file-box").each(function(){animationHover(this,"pulse")});
+			$(".open-small-chat").bind('click',function(){
+				$('.open-small-chat').addClass('chat-unchecked');
+				$(this).removeClass('chat-unchecked');
+				if($(this).attr('conf')=='1'){
+					$('#fileShow').load('collaborative_file_list.html');
+				}else{
+					$('#fileShow').load('collaborative_file_box.html');
+				}
+			});
+
+			$('#fileShow').load('collaborative_file_box.html');
+
+			$(".input-group.date").datepicker({todayBtn:"linked",keyboardNavigation:!1,forceParse:!1,calendarWeeks:!0,autoclose:!0});
+		});
+
+		this.formatTeamOper = function(val, index, row){
+			var div = $('<div></div>');
+			var btn1 = $('<button class="btn btn-primary btn-xs" onclick="queryTreamInfo('+row.teamId+')">查询</button>');
+			var btn2 = $('<button class="btn btn-primary btn-xs" onclick="checkin('+row.teamId+')">签入</button>');
+			var btn3 = $('<button class="btn btn-primary btn-xs" onclick="checkout('+row.teamId+')">签出</button>');
+			if(row.teamStatus=='1'){
+				btn3.attr({disabled:'disabled'});
+			}else if(row.teamStatus=='2'){
+				btn2.attr({disabled:'disabled'});
+			}
+
+			div.append(btn1);
+			div.append('&nbsp;&nbsp;');
+			div.append(btn2);
+			div.append('&nbsp;&nbsp;');
+			div.append(btn3);
+
+			return div.html();
+		}
+
+		this.queryTreamInfo = function(teamId){
+			parent.addTabPage('collaborative_versions.html','文档协同明细');
+		}
+
+		this.checkin = function(teamId){
+			parent.layer.open({
+					type: 2,
+					title: '文档签入',
+					shadeClose: true,
+					shade: 0.8,
+					move: false,
+					scrollbar: false,
+					area: ['50%', '55%'],
+					content: 'collaborative_upload.html',
+					btn: ['签入', '取消'],
+					yes: function(index, layero){
+						parent.layer.close(index);
+						swal({
+							title:"成功签入",
+							text:"文档上传成功，解除对文档锁定。",
+							type:"success"
+						});
+					},
+					cancel: function(index, layero){
+						parent.layer.close(index);
+					}
+
+			});
+
+		}
+
+		this.checkout = function(teamId){
+			swal({
+					title:"成功签出",
+					text:"文档下载成功，锁定文档，防止其他协同人员下载编辑文档。",
+					type:"success"
+			})
+		}
+    </script>
+    <script type="text/javascript" src="http://tajs.qq.com/stats?sId=9051096" charset="UTF-8"></script>
+</body>
+
+
+<!-- Mirrored from www.zi-han.net/theme/hplus/search_results.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 20 Jan 2016 14:19:47 GMT -->
+</html>

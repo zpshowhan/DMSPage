@@ -1,0 +1,10 @@
+{  
+    "total":11,  
+    "page":1,  
+    "records":11,  
+    "rows":[  
+        {"id":1, "name":"Pandy1", "cell":["第一级1",0,null,false,false]},  
+        {"id":3, "name":"Pandy2", "cell":["第二级1",1,1,true,false]},  
+        {"id":2, "name":"Pandy3", "cell":["第一级2",0,null,true,false]}  
+    ]  
+}

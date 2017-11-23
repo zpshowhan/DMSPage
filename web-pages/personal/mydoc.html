@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>我的文档</title>
+    <link href="../css/bootstrap.min14ed.css?v=3.3.6" rel="stylesheet">
+    <link href="../css/font-awesome.min93e3.css?v=4.4.0" rel="stylesheet">
+	<link href="../css/plugins/sweetalert/sweetalert.css" rel="stylesheet">
+    <link href="../css/animate.min.css" rel="stylesheet">
+    <link href="../css/style.min862f.css?v=4.1.0" rel="stylesheet">
+
+</head>
+<style>
+        .form-control-static{
+			padding-top:0px;
+		}
+		 .myform-control{
+		    margin: 20px 0 35px;
+			clear: both;
+			background:url(basicInfo-bg_7819f20.png) ;
+		}
+		.col-md-6{
+			top:13px;
+		}
+		.label-success{
+			margin-right: 20px;
+		}
+		p{ text-indent:26px;}
+    </style>
+<body class="gray-bg">
+    <div class="wrapper wrapper-content animated fadeInRight">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-content">					
+						<div class="col-sm-4">
+							<h2><span id="docName">协同平台操作手册</span></h2>
+						</div>
+						<div class="myform-control">
+							<div class="col-md-6" id="left"></div>
+							<div class="col-md-6" id="right"></div>
+						</div>
+                        <div class="hr-line-dashed"></div>
+						<div >
+                            <h3><span>文档介绍</span></h3>
+                            <p id="docIntro"> </p>
+                        </div>
+						<div class="bs-example" id="tags">
+							<div class="hr-line-dashed"></div>
+							<h3><span>标签</span></h3>
+					    </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="../js/jquery.min.js?v=2.1.4"></script>
+    <script src="../js/bootstrap.min.js?v=3.3.6"></script>
+    <script src="../js/content.min.js?v=1.0.0"></script>
+	<script src="../js/plugins/sweetalert/sweetalert.min.js"></script>
+	<script type="text/javascript">
+		$(function(){
+			var e={"docName":"协同平台操作手册","docIntro":"个人办公——制订个人工作计划，上级可安排下级工作任务，计划有强大提醒功能；工作报告可设置模板并按模板填写，上级可进行点评审批，点评信息自动发短信给对方。日常办公——通过新增需要审批的业务单据并提交，由系统根据相应流程设置自动判断下个办理人，需要我审批的所有单据会集中在“我办理的事宜”模块，如果外出可将部分或全部业务委托给指定人办理，实现外出期间需要我审批的流程自动提交给委托办理人办理。公共信息——公告发布及阅读跟踪；文件库管理，可对内部文件进行归类、存档、备案的管理，可建多级文件夹，设多级权限控制，包括新增、修改、查看等权限，实现业务流程审批及公告的归档；知识库管理可对知识进行分类，并集思广益，可跟踪浏览情况。在线短信——在线交流模块提供类似网络寻呼信息交流工具，帮助企业规范的内部网络通信系统，自动弹屏显示内部员工信息、公告、新收邮件通告，以及各种业务流程处理通知，并能通过信息链接直接定位到相关单据。行政办公——会议室管理可实现会议室的申请、预约情况查询、会议提醒及人员签到等；投票管理可实现匿名投票。流程管理——根据不同流向判断设置多个审批环节，为各种业务定制审批流程，包括系统业务单据和自定义表单；通过流程监控可查看流转情况，进行催办、特送等；对重要公文可启用流水号管理；表单定制为各行业客户提供灵活的自定义表单，满足个性化需求。车辆管理——车辆是公司重要资产，因流动性大，管理特别难，可根据车辆状态进行车辆的申请与安排，将所有维修、加油、投保、年审、事故及违章等重要信息记录下来，便于事后查看分析，还能自动记算百公里油耗，投保、年审自动提醒等。办公用品——采购入库、领用、退回、库存、盘点、领用分析等，该模块主要用于非公司主营产品的办公用品管理，公司主营库存商品用于办公用品时用ERP领料出库来实现。","metadata":[{"title":"文档拼音","content":"XIETONGPINGTAICAOZUOSHOUCHE"},{"title":"文档短拼音","content":"XTPCCZSC"},{"title":"上传时间","content":"2016-10-13"},{"title":"文档大小","content":"1.5M"},{"title":"上传人","content":"姜洋"},{"title":"分类路径","content":"会议文件/部门会议文件"},{"title":"格式类型","content":"WORD"},{"title":"文档后缀","content":"doc"},{"title":"是否公开","content":"是"},{"title":"文档状态","content":"审核中"}],"tags":[{"tag":"文档"},{"tag":"会议"},{"tag":"记录"}]};
+			$("#docName").text(e.docName);
+			$("#docIntro").text(e.docIntro);
+			var metadataList=e.metadata;
+			for (var index = 0; index < metadataList.length; index++) {
+				var metadata = metadataList[index];	
+				var block="<div class=\"form-group\"><label class=\"col-sm-3 control-label\">"+metadata.title+"：</label><div class=\"col-sm-9\"><p class=\"form-control-static\">"+metadata.content+"</p></div></div>";
+				if (index%2==0) {
+					$("#left").append(block);
+				} else {
+					$("#right").append(block);
+				}
+			}
+			var line =metadataList.length/2;
+			if (metadataList.length%2==1) {
+				line++;
+			};
+			var heihgt= line*36;
+			$(".myform-control").height(heihgt);
+			var tags=e.tags;
+			for (var index = 0; index < tags.length; index++) {
+				var tag = tags[index];
+				var Labels="<span class=\"label label-success\">"+tag.tag+"</span>";
+				$("#tags").append(Labels);
+			};
+			
+		});
+	</script>
+</body>
+</html>

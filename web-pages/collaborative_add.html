@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html>
+
+
+<!-- Mirrored from www.zi-han.net/theme/hplus/search_results.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 20 Jan 2016 14:19:47 GMT -->
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+    <title>发起协同</title>
+    <meta name="keywords" content="上传文档，发起协同，邀请人员参与">
+    <meta name="description" content="上传文档，发起协同，邀请人员">
+
+    <link rel="shortcut icon" href="favicon.ico">
+	<link href="../css/bootstrap.min14ed.css?v=3.3.6" rel="stylesheet">
+    <link href="../css/font-awesome.min93e3.css?v=4.4.0" rel="stylesheet">
+    <link href="../css/plugins/bootstrap-table/bootstrap-table.min.css" rel="stylesheet">
+
+    <link href="../css/animate.min.css" rel="stylesheet">
+    <link href="../css/style.min862f.css?v=4.1.0" rel="stylesheet">
+	<link href="../css/font-mine.css" rel="stylesheet">
+	<link href="../css/style.css" rel="stylesheet">
+</head>
+
+<body class="gray-bg">
+    <div class="wrapper wrapper-content">
+		<div class="row">
+            <div class="col-sm-12">
+				<div class="ibox float-e-margins">
+					<div class="ibox-title">
+						<h3>第一步：文件上传</h5>
+					</div>
+					<div class="ibox-content">
+						<div class="row">
+							<div class="col-sm-12">
+								<table width="100%">
+									<tr>
+										<td colspan="2">
+											<label class="font-noraml">选择文件</label>
+										</td>
+									</tr>
+									<tr>
+										<td width="60%" valign="top">
+											<input type="file" class="form-control Rounded">
+										</td>
+
+										<td width="40%" valign="top" style="padding-left:20px;">
+											*&nbsp;&nbsp;请选择需要发起协同工作的目标文件
+										</td>
+									</tr>
+									<tr>
+										<td colspan="2">
+											<font style="line-height:30px;">文档名称：</font >
+										</td>
+									</tr>
+									<tr>
+										<td valign="top">
+											<input id="fname" name="name" minlength="2" type="text" class="form-control Rounded" required="" aria-required="true">
+										</td>
+
+										<td valign="top" style="padding-left:20px;">
+											*&nbsp;&nbsp;请填写协同文件的文件名称
+										</td>
+									</tr>
+
+									<tr>
+										<td colspan="2">
+											<font style="line-height:30px;">文档描述：</font >
+										</td>
+									</tr>
+									<tr>
+										<td valign="top">
+											<textarea id="fremark" name="name" minlength="2" class="form-control Rounded" required="" aria-required="true" style="resize:none;"></textarea>
+										</td>
+
+										<td valign="top" style="padding-left:20px;">
+											*&nbsp;&nbsp;请填写协同文件的描述简介
+										</td>
+									</tr>
+								</table>
+							</div>
+						</div>
+					</div>
+					<div class="ibox-title">
+						<h3>第二步：添加协同人员</h5>
+					</div>
+
+					<div class="ibox-content">
+						<div class="row">
+							<div class="col-sm-5">
+								<h3>备选人员：</h3>
+								<table id="candidates_table" data-mobile-responsive="true">
+									<thead>
+										<tr>
+											<th data-field="radio" data-radio="true">RADIO</th>
+											<th data-width="30%" data-field="name">姓名</th>
+											<th data-width="40%" data-field="org">组织机构</th>
+											<th data-width="30%" data-field="dept">部门</th>
+										 </tr>
+									 </thead>
+								</table>
+
+							</div>
+							<div class="col-sm-2">
+								<table width="100%" height="420">
+									<tr>
+										<td align="center" valign="middle">
+											<a href="javascript:;" class="btn btn-white btn-bitbucket" onClick="pullIn()">
+												<i class="fa fa-arrow-right"></i>
+											</a>
+											<br/>
+											<br/>
+											<a href="javascript:;" class="btn btn-white btn-bitbucket" onClick="pushOut()">
+												<i class="fa fa-arrow-left"></i>
+											</a>
+										</td>
+									</tr>
+								</table>
+
+							</div>
+							<div class="col-sm-5">
+								<h3>协同人员：</h3>
+							   <table id="collaboratives_table" data-mobile-responsive="true">
+									<thead>
+										<tr>
+											<th data-field="radio" data-radio="true">RADIO</th>
+											<th data-width="30%" data-field="name">姓名</th>
+											<th data-width="40%" data-field="org">组织机构</th>
+											<th data-width="30%" data-field="dept">部门</th>
+										 </tr>
+									 </thead>
+								</table>
+							</div>
+						</div>
+						<div class="hr-line-dashed"></div>
+						<div style="width:100%;text-align:right;">
+							<button class="btn btn-primary" type="button" ><i class="fa fa-check"></i>&nbsp;提交</button>
+						</div>
+					</div>
+				</div>
+            </div>
+        </div>
+    </div>
+    <script src="../js/jquery.min.js?v=2.1.4"></script>
+    <script src="../js/bootstrap.min.js?v=3.3.6"></script>
+	<script src="../js/plugins/bootstrap-table/bootstrap-table.min.js"></script>
+    <script src="../js/plugins/bootstrap-table/bootstrap-table-mobile.min.js"></script>
+    <script src="../js/plugins/bootstrap-table/locale/bootstrap-table-zh-CN.min.js"></script>
+    <script src="../js/content.min.js?v=1.0.0"></script>
+    <script>
+	$(function(){
+		var data = [
+			{name:'释小龙',org:'海事局',dept:'人事部'},
+			{name:'郭富城',org:'海事局',dept:'人事部'},
+			{name:'李小龙',org:'海事局',dept:'财务部'},
+			{name:'张筱雨',org:'海事局',dept:'技术研发部'},
+			{name:'梁小龙',org:'海事局',dept:'技术研发部'},
+			{name:'狄龙',org:'海事局',dept:'后勤部'}
+		];
+		$("#candidates_table").bootstrapTable({
+			data:data,
+			height:"400",
+			search:!0,
+			undefinedText:'',
+			clickToSelect:true,
+			singleSelect:true,
+			striped:!0
+		});
+
+		$("#collaboratives_table").bootstrapTable({
+			height:"400",
+			undefinedText:'',
+			clickToSelect:true,
+			singleSelect:true,
+			striped:!0
+		});
+	});
+
+
+	this.pullIn = function(){
+		var arr = $("#candidates_table").bootstrapTable('getSelections');
+		if(arr.length==0){
+			return false;
+		}
+		$("#collaboratives_table").bootstrapTable('append',arr);
+		var ids = new Array();
+		for(var i=0;i<arr.length;i++){
+			ids[ids.length] = arr[i].name;
+		}
+		$("#candidates_table").bootstrapTable('remove',{field: 'name', values: ids});
+	}
+
+	this.pushOut = function(){
+		var arr = $("#collaboratives_table").bootstrapTable('getSelections');
+		if(arr.length==0){
+			return false;
+		}
+		$("#candidates_table").bootstrapTable('append',arr);
+		var ids = new Array();
+		for(var i=0;i<arr.length;i++){
+			ids[ids.length] = arr[i].name;
+		}
+		$("#collaboratives_table").bootstrapTable('remove',{field: 'name', values: ids});
+	}
+
+    </script>
+    <script type="text/javascript" src="http://tajs.qq.com/stats?sId=9051096" charset="UTF-8"></script>
+</body>
+
+
+<!-- Mirrored from www.zi-han.net/theme/hplus/search_results.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 20 Jan 2016 14:19:47 GMT -->
+</html>

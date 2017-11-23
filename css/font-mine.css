@@ -1,0 +1,21 @@
+@font-face {font-family: "FontAwesome";
+  src: url('../fonts/officeIconFont.eot?t=1498200424303'); /* IE9*/
+  src: url('../fonts/officeIconFont.eot?t=1498200424303#iefix') format('embedded-opentype'), /* IE6-IE8 */
+  url('../fonts/officeIconFont.woff?t=1498200424303') format('woff'), /* chrome, firefox */
+  url('../fonts/officeIconFont.ttf?t=1498200424303') format('truetype'), /* chrome, firefox, opera, Safari, Android, iOS 4.2+*/
+  url('../fonts/officeIconFont.svg?t=1498200424303#officeIconFont') format('svg'); /* iOS 4.1- */
+}
+
+.fa-onenote:before { content: "\e6c4"; }
+
+.fa-ppt:before { content: "\e695"; }
+
+.fa-word:before { content: "\e608"; }
+
+.fa-excel:before { content: "\e64f"; }
+
+.fa-visio:before { content: "\e60f"; }
+
+.fa-DB2:before { content: "\e6b2"; }
+
+.fa-access:before { content: "\e604"; }

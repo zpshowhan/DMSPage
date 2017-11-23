@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>我的搜索</title>
+    <link href="../../css/font-awesome.min93e3.css?v=4.4.0" rel="stylesheet">
+    <link href="../../css/animate.min.css" rel="stylesheet">
+    <link href="../../css/style.min862f.css?v=4.1.0" rel="stylesheet">
+    <link href="../../css/bootstrap.min14ed.css?v=3.3.6" rel="stylesheet">
+    <link href="../../css/plugins/sweetalert/sweetalert.css" rel="stylesheet">  
+
+</head>
+
+<body class="gray-bg">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="wrapper wrapper-content">
+                <div class="row animated fadeInRight">
+                    <div class="col-sm-12">
+                        <div class="ibox float-e-margins">                           
+                            <div class="" id="ibox-content">
+
+                                <div id="vertical-timeline" class="vertical-container light-timeline">
+                                    <div class="vertical-timeline-block">
+                                        <div class="vertical-timeline-icon navy-bg">
+                                            <i class="fa fa-file-text"></i>
+                                        </div>
+
+                                        <div class="vertical-timeline-content">
+                                            <h2>海事局</h2>
+                                            <p>说明书 船舶安全 人员招录
+                                            </p>
+											<p>李伟</p>
+                                            <a href="javascript:void(0);" class="btn btn-sm btn-primary" style="margin:0 6px" onclick="delDoc(1);"><i class='fa fa-remove'></i>删除</a>
+											<a onclick="selectFile();" class="btn btn-sm btn-primary" target="_blank"><i class='fa fa-search'></i> 查询</a>
+                                            <span class="vertical-date">
+                                        今天 <br>
+                                        <small>7月4日</small>
+                                    </span>
+                                        </div>
+                                    </div>
+
+                                    <div class="vertical-timeline-block">
+                                        <div class="vertical-timeline-icon navy-bg">
+                                            <i class="fa fa-file-text"></i>
+                                        </div>
+
+                                        <div class="vertical-timeline-content">
+                                            <h2>通知</h2>
+                                            <p>文件目录 面试 办事</p>
+											<p>张三</p>
+                                             <a href="#" class="btn btn-sm btn-primary" style="margin:0 6px" onclick="delDoc(1);"><i class='fa fa-remove'></i>删除</a>
+											<a href="#" class="btn btn-sm btn-primary"  onclick="c();"> <i class='fa fa-search'></i>查询</a>
+                                            <span class="vertical-date">
+                                        今天 <br>
+                                        <small>7月4日</small>
+                                    </span>
+                                        </div>
+                                    </div>
+
+                                    <div class="vertical-timeline-block">
+                                        <div class="vertical-timeline-icon navy-bg">
+                                            <i class="fa fa-file-text"></i>
+                                        </div>
+
+                                        <div class="vertical-timeline-content">
+                                            <h2>办事</h2>
+                                            <p>文件 通知 公告</p>
+											<p>李四</p>
+                                            <a href="#" class="btn btn-sm btn-primary" style="margin:0 6px" onclick="delDoc(1);"><i class='fa fa-remove'></i>删除</a>
+											<a href="#" class="btn btn-sm btn-primary"  onclick="c();"> <i class='fa fa-search'></i>查询</a>
+                                            <span class="vertical-date"> 昨天 <br><small>7月5日</small></span>
+                                        </div>
+                                    </div>
+
+                                    <div class="vertical-timeline-block">
+                                        <div class="vertical-timeline-icon navy-bg">
+                                            <i class="fa fa-file-text"></i>
+                                        </div>
+
+                                        <div class="vertical-timeline-content">
+                                            <h2>办事</h2>
+                                            <p>文件 通知 公告</p>
+											<p>李四</p>
+                                            <a href="#" class="btn btn-sm btn-primary" style="margin:0 6px" onclick="delDoc(1);"><i class='fa fa-remove'></i>删除</a>
+											<a href="#" class="btn btn-sm btn-primary"  onclick="c();"><i class='fa fa-search'></i> 查询</a>
+                                            <span class="vertical-date"> 昨天 <br><small>7月5日</small></span>
+                                        </div>
+                                    </div>
+
+                                    <div class="vertical-timeline-block">
+                                        <div class="vertical-timeline-icon navy-bg">
+                                            <i class="fa fa-file-text"></i>
+                                        </div>
+
+                                        <div class="vertical-timeline-content">
+                                            <h2>办事</h2>
+                                            <p>文件 通知 公告</p>
+											<p>李四</p>
+                                            <a href="#" class="btn btn-sm btn-primary" style="margin:0 6px" onclick="delDoc(1);"><i class='fa fa-remove'></i>删除</a>
+											<a href="#" class="btn btn-sm btn-primary"  onclick="c();"> <i class='fa fa-search'></i>查询</a>
+                                            <span class="vertical-date"> 昨天 <br><small>7月5日</small></span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <script src="../../js/jquery.min.js?v=2.1.4"></script>
+    <script src="../../js/bootstrap.min.js?v=3.3.6"></script>
+    <script src="../../js/content.min.js?v=1.0.0"></script>
+	<script src="../../js/plugins/sweetalert/sweetalert.min.js"></script>
+<script type="text/javascript" src="../../js/contabs.min.js"></script>
+    <script>
+        $(document).ready(function(){$("#lightVersion").click(function(event){event.preventDefault();$("#ibox-content").removeClass("ibox-content");$("#vertical-timeline").removeClass("dark-timeline");$("#vertical-timeline").addClass("light-timeline")});$("#darkVersion").click(function(event){event.preventDefault();$("#ibox-content").addClass("ibox-content");$("#vertical-timeline").removeClass("light-timeline");$("#vertical-timeline").addClass("dark-timeline")});$("#leftVersion").click(function(event){event.preventDefault();$("#vertical-timeline").toggleClass("center-orientation")})});
+  
+	function delDoc(i){
+	 swal("删除成功！", "您已经永久删除了这条信息。", "success");
+		  
+		}  
+		   function selectFile(){
+     parent.addTabPage('./file_search.html','文档检索');
+    }
+   </script>
+</body>
+</html>

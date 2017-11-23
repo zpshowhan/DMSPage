@@ -1,0 +1,92 @@
+.k-treeview .k-in{
+  border-color: transparent;
+  border-radius: 0px;
+}
+ul, ol, li {
+  list-style: none;
+  list-style-image: none;
+}
+.k-widget {
+  color: #666666;
+  box-shadow: none;
+}
+.k-treeview .k-icon {
+  background-color: rgba(0, 0, 0, 0);
+  border-radius: 0px;
+}
+.k-minus {
+  background: url("images/tree_unfold.png");
+  width: 16px;
+  height: 16px;
+}
+.k-icon {
+  border-color: transparent;
+}
+.k-icon {
+  opacity: 0.8;
+}
+.k-header {
+  border-color: #dbdbdb;
+  background-color: #ffffff;
+  background-position: 50% 50%;
+  color: #666666;
+}
+.k-dropdown {
+  border-radius: 0px;
+  cursor: pointer;
+}
+.k-dropdown-wrap.k-state-default {
+  width: 177px;
+  background-image: none;
+  background-position: 50% 50%;
+  background-color: #ffffff;
+  border-color: #dbdbdb;
+}
+.k-dropdown-wrap {
+  border-radius: 0px;
+}
+.k-dropdown .k-input{
+  color: #808080;
+  border-color: #dbdbdb;
+}
+.k-state-default > .k-select {
+  border-color: #dbdbdb;
+}
+.k-dropdown-wrap .k-select {
+  border-radius: 0 0px 0px 0;
+}
+.k-icon {
+  background: url('images/tree_unfold.png');
+  border-color: transparent;
+  opacity: 0.8;
+}
+input {
+  font-family: inherit;
+  font-size: inherit;
+  line-height: inherit;
+  color: inherit;
+  font: inherit;
+  margin: 0;
+}
+.k-treeview {
+  box-shadow: none;
+}
+.k-group {
+  border-color: #dbdbdb;
+}
+.k-item {
+  border-color: transparent;
+}
+.k-plus {
+  background: url("images/tree_fold.png");
+  width: 16px;
+  height: 16px;
+}
+.k-in:hover {
+  color: #fff;
+  background-color: #B483C8;
+  cursor: pointer;
+}
+#DropDownTreeView .k-treeview {
+  width: 206px;
+}

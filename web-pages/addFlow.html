@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html>
+
+
+<!-- Mirrored from www.zi-han.net/theme/hplus/table_bootstrap.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 20 Jan 2016 14:20:03 GMT -->
+<head>
+
+    <meta charset="utf-8">
+
+
+
+    <title>添加工作流</title>
+	<link rel="shortcut icon" href="favicon.ico">
+    <link href="../css/bootstrap.min14ed.css?v=3.3.6" rel="stylesheet">
+    <link href="../css/font-awesome.min93e3.css?v=4.4.0" rel="stylesheet">
+    <link href="../css/plugins/bootstrap-table/bootstrap-table.min.css" rel="stylesheet">
+    <link href="../css/animate.min.css" rel="stylesheet">
+    <link href="../css/style.min862f.css?v=4.1.0" rel="stylesheet">
+	<link href="../css/plugins/sweetalert/sweetalert.css" rel="stylesheet">
+    <link href="../css/plugins/iCheck/custom.css" rel="stylesheet">
+	<link href='../css/dragula.css' rel='stylesheet' type='text/css' />
+	<link href="../css/style.min862f.css?v=4.1.0" rel="stylesheet">
+    <style type="text/css">
+	.top{
+		margin-top: 10px;
+	}
+</style>
+
+</head>
+
+<body class="gray-bg">
+<div class="wrapper wrapper-content" >
+	 <div class="ibox-content">
+		<div class="row row-lg">
+			<div class="col-lg-12">
+					<div class="col-md-6" style = "padding-left: 0px;width:40%;">
+						<div class="form-group" >
+							<label class="col-sm-3 control-label" style = "padding-left: 0px;">工作流名称：</label>
+							<div class="col-sm-9">
+								<input type="text" name="" class="form-control" placeholder="请输入步骤名称">
+							</div>
+						</div>
+					</div>
+					<div class="col-md-6" style = "padding-left: 0px;width:40%;">
+						<div class="form-group">
+							<label class="col-sm-3 control-label" style = "padding-left: 0px;" >工作流类型：</label>
+							<div class="col-sm-9">
+								<select class="form-control" name="">
+									<option>文档</option>
+									<option>数字资产</option>
+								</select>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-6" style = "padding-left: 0px;width:20%;">
+						<div class="form-group">
+							<div class="col-sm-9">
+								<a data-toggle="modal" class="btn btn-primary" onclick = 'showActionList()' ><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> 添加工作流节点</a>
+							</div>
+						</div>
+					</div>
+				<div class="example" >
+					<h4 class="example-title">工作流节点列表</h4>
+					<div class="ibox-content" id="sortable" style="height:400px;overflow: auto;">
+					</div>
+					<br>
+					  <a data-toggle="modal" class="btn btn-primary" onclick = 'mySubmit()' > <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>  提交</a>
+					  <a data-toggle="modal" class="btn btn-primary" onclick = 'reset()' ><span class="glyphicon glyphicon-repeat" aria-hidden="true"></span>  重置</a>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+    <script src="../js/jquery.min.js?v=2.1.4"></script>
+    <script src="../js/bootstrap.min.js?v=3.3.6"></script>
+    <script src="../js/plugins/bootstrap-table/bootstrap-table.min.js"></script>
+    <script src="../js/plugins/bootstrap-table/bootstrap-table-mobile.min.js"></script>
+    <script src="../js/plugins/bootstrap-table/locale/bootstrap-table-zh-CN.min.js"></script>
+	<script src="../js/plugins/layer/layer.js"></script>
+	<script src="../js/plugins/sweetalert/sweetalert.min.js"></script>
+	<script src='../js/dragula.js'></script>
+	<script src="../js/content.min.js?v=1.0.0"></script>
+	<script type="text/javascript" src="http://tajs.qq.com/stats?sId=9051096" charset="UTF-8"></script>
+    <script type="text/javascript">
+	 var i = 0;
+	 var actionList = new Array();
+	 var index=0;
+	 $(function(){
+
+		var $sortable =$("#sortable") ; //jQuery对象
+		var sortable=$sortable[0]; //DOM对象
+		dragula([sortable]);
+	 });
+
+	function showActionList(){
+		index= layer.open({
+			type: 1,
+			title: "添加节点",
+			area: ['80%', '80%'],
+			closeBtn: 0,
+			shade: false,
+			maxmin: true,
+			content: $('#addAction'), //iframe的url
+			btn: ['确定','取消'],
+			btn1: function(index, layero){
+				var actionName=$("#actionName").val();
+				var actionType=$("#actionType").val();
+				var percentage=$("#percentage").val();
+				if (actionType=="1") {
+					type="alert-success";
+				}else if (actionType=="2") {
+					type="alert-info";
+				}
+				var userList=$("[name=userSelect]").serializeArray();
+				var roleList=$("[name=role_id]").serializeArray();
+				//console.log(userList);
+				var users = new Array();
+				var action = new Object();
+				var names = "";
+				$("[name=userSelect]").each(function(){
+					names = names+" "+$(this).find("option:selected").text();
+				});
+
+				for (var userindex = 0; userindex < userList.length; userindex++) {
+					var user = new Object();
+					user.user_id = userList[userindex].value;
+					user.role_id= roleList[userindex].value;
+					users[users.length]=user;
+				}
+				action.users=users;
+				action.actionName=actionName;
+				action.actionType=actionType;
+				action.percentage=percentage;
+				actionList[i]=action;
+				$("#sortable").append("<div class=\"alert "+type+" alert-dismissable\"  id=\"action"+i+"\"><div><button aria-hidden=\"true\" data-dismiss=\"alert\" class=\"close\" type=\"button\">×</button></div><div style=\"cursor:pointer\" id=\"actionName"+i+"\" onclick=\"clickHandler(this)\">"+actionName+"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"+names+"</div></div>")
+				i++;
+				layer.close(index);
+				clear();
+			},
+			btn2: function(index, layero){
+				clear();
+				layer.close(index);
+			},
+			success: function(layero, index){
+				$("[index=1]").click();
+			}
+		});
+
+	};
+
+	function clickHandler (e) {
+		var actionIndex = e.id.substring(10);
+		var action = actionList[actionIndex];
+		index= layer.open({
+			type: 1,
+			title: "修改节点",
+			shade: false,
+			area: ['80%', '80%'],
+			closeBtn: 0,
+			maxmin: true,
+			content: $('#addAction'), //iframe的url
+			btn: ['确定','取消'],
+			btn1: function(index, layero){
+				var actionName=$("#actionName").val();
+				var actionType=$("#actionType").val();
+				var percentage=$("#percentage").val();
+				if (actionType=="1") {
+					type="alert alert-success alert-dismissable";
+				}else if (actionType=="2") {
+					type="alert alert-info alert-dismissable";
+				}
+				var userList=$("[name=userSelect]").serializeArray();
+				var roleList=$("[name=role_id]").serializeArray();
+				var users = new Array();
+				var action = new Object();
+				for (var userindex = 0; userindex < userList.length; userindex++) {
+					var user = new Object();
+					user.user_id = userList[userindex].value;
+					user.role_id= roleList[userindex].value;
+					users[users.length]=user;
+				}
+				action.users=users;
+				action.actionName=actionName;
+				action.actionType=actionType;
+				action.percentage=percentage;
+				actionList[actionIndex]=action;
+				var names="";
+				$("[name=userSelect]").each(function(){
+					names = names+" "+$(this).find("option:selected").text();
+				});
+				actionName = actionName+"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"+names;
+				$("#action"+actionIndex).attr("class",type);
+				$("#actionName"+actionIndex).html(actionName);
+				layer.close(index);
+				clear();
+			},
+			btn2: function(index, layero){
+				clear();
+				layer.close(index);
+			},
+		success: function(layero, index){
+				$("#actionName").val(action.actionName);
+				$("#actionType").val(action.actionType);
+				$("#actionType").change();
+				$("#percentage").val(action.percentage);
+				var users = action.users;
+				for (var usersindex = 0; usersindex < users.length;) {
+					var user = users[usersindex];
+					usersindex++;
+					$("[index="+usersindex+"]").val(user.role_id);
+					$("[index="+usersindex+"]").click();
+					$("[index=user"+usersindex+"]").val(user.user_id);
+					if (usersindex < users.length) {
+						$("[index=plus"+usersindex+"]").click();
+					}
+				}
+			}
+		});
+
+	}
+
+	function mySubmit(){
+		swal({
+			title:"添加成功",
+			type:"success"
+		})
+	};
+
+	function reset(){
+		location.reload();
+	};
+
+	function selectChange(obj){
+		var index=$(obj).attr("index");
+		$("#roleSelect"+index).html("<div class=\"form-group\"><label class=\"col-sm-3 control-label\" style = \"padding-left: 0px;\" >人员：</label><div class=\"col-sm-9\"><select class=\"form-control\" name=\"userSelect\"  index=\"user"+index+"\"><option value=\""+$(obj).val()+"\">"+$(obj).find("option:selected").text()+"</option><option value=\"1\">张三</option><option value=\"2\">李四</option><option value=\"3\">王五</option></select><input type=\"hidden\"  name=\"role_id\" value=\""+$(obj).val()+"\"> </div></div>");
+	}
+
+	function add(obj){
+		var index=$(obj).attr("index").substring(4);
+		$("#operation"+index).html("<button class=\"btn btn-success btn-circle\" onclick=\"minus(this)\" type=\"button\" index=\"minus"+index+"\" name=\"minus\"><i class=\"glyphicon glyphicon-minus\"></i></button>");
+		index++;
+		$("#roleList").append("<div id=\"roleDiv"+index+"\" ><div class=\"col-md-6 top\" style = \"padding-left: 0px;width:40%;\"><div class=\"form-group\"><label class=\"col-sm-3 control-label\" style = \"padding-left: 0px;\" >角色：</label><div class=\"col-sm-9\"><select class=\"form-control\" onclick=\"selectChange(this)\" name=\"roleSelect\"  index=\""+index+"\"><option value=\"r1\" selected = \"selected\">管理员</option><option value=\"r2\">审批人1</option><option value=\"r3\">审批人2</option></select></div></div></div><div class=\"col-md-6 top\" style = \"padding-left: 0px;width:40%;\" id=\"roleSelect"+index+"\"></div><div class=\"col-md-6 top\" style = \"padding-left: 0px;width:20%;\" id=\"operation"+index+"\"><button class=\"btn btn-success btn-circle\" type=\"button\"  onclick=\"add(this)\" index=\"plus"+index+"\" name=\"plus\"><i class=\"glyphicon glyphicon-plus\"></i></button></div></div>");
+		$("[index="+index+"]").click();
+	}
+
+	function minus(obj){
+		var index=$(obj).attr("index").substring(5);
+		$("#roleDiv"+index).remove();
+	}
+
+	function actionType(obj){
+		var value=$(obj).val();
+		$("#roleList").html("<div id=\"roleDiv1\" ><div class=\"col-md-6 top\" style = \"padding-left: 0px;width:40%;\"><div class=\"form-group\"><label class=\"col-sm-3 control-label\" style = \"padding-left: 0px;\" >角色：</label><div class=\"col-sm-9\"><select class=\"form-control\" onclick=\"selectChange(this)\" name=\"roleSelect\"  index=\"1\"><option value=\"r1\" selected = \"selected\">管理员</option><option value=\"r2\">审批人1</option><option value=\"r3\">审批人2</option></select></div></div></div><div class=\"col-md-6 top\" style = \"padding-left: 0px;width:40%;\" id=\"roleSelect1\"></div></div>");
+		$("[index=1]").click();
+		if (value==1) {
+			$("#percentageDiv").hide();
+			$("#percentage").val("");
+		} else {
+			$("#roleList").append("<div class=\"col-md-6 top\" style = \"padding-left: 0px;width:20%;\" id=\"operation1\"><button class=\"btn btn-success btn-circle\" type=\"button\"  onclick=\"add(this)\" index=\"plus1\" name=\"plus\"><i class=\"glyphicon glyphicon-plus\"></i></button></div>");
+			$("#percentageDiv").show();
+		}
+
+	}
+
+	function clear(){
+		$("#addAction :input").val("");
+		$("#actionType").val(1);
+		$("#percentage").val("");
+		$("#percentageDiv").hide();
+		$("#roleList").html("<div id=\"roleDiv1\" ><div class=\"col-md-6 top\" style = \"padding-left: 0px;width:40%;\"><div class=\"form-group\"><label class=\"col-sm-3 control-label\" style = \"padding-left: 0px;\" >角色：</label><div class=\"col-sm-9\"><select class=\"form-control\" onclick=\"selectChange(this)\" name=\"roleSelect\"  index=\"1\"><option value=\"r1\" selected=\"selected\">管理员</option><option value=\"r2\">审批人1</option><option value=\"r3\">审批人2</option></select></div></div></div><div class=\"col-md-6 top\" style = \"padding-left: 0px;width:40%;\" id=\"roleSelect1\"></div></div>");
+	}
+
+	</script>
+</body>
+
+<div class="gray-bg" id="addAction" style="display:none;">
+	<div class="wrapper wrapper-content"  >
+		<div id = "xx" class="ibox float-e-margins">
+			<div class="ibox-content" >
+				<div class="row row-lg">
+					<div class="col-lg-12">
+						<div class="col-md-6" style = "padding-left: 0px;width:50%;">
+							<div class="form-group" >
+								<label class="col-sm-3 control-label" style = "padding-left: 0px;">节点名称：</label>
+								<div class="col-sm-9">
+									<input type="text" id="actionName" class="form-control" placeholder="请输入步骤名称">
+								</div>
+							</div>
+						</div>
+						<div class="col-md-6" style = "padding-left: 0px;width:50%;">
+							<div class="form-group">
+								<label class="col-sm-3 control-label" style = "padding-left: 0px;" >节点类型：</label>
+								<div class="col-sm-9">
+									<select class="form-control" id="actionType"  onchange="actionType(this)">
+										<option value="1">单人</option>
+										<option value="2">会签</option>
+									</select>
+								</div>
+							</div>
+						</div>
+						<div class="col-md-6 top" style = "display:none;padding-left: 0px;width:50%;" id="percentageDiv">
+							<div class="form-group" >
+								<label class="col-sm-3 control-label" style = "padding-left: 0px;">通过百分比：</label>
+								<div class="col-sm-9">
+									<input type="text" id="percentage" class="form-control" placeholder="请输入通过百分比">
+								</div>
+							</div>
+						</div>
+					</div>
+					<div  style="height:350px;display:block;margin-top: 95px;margin-left: 15px;">
+						<div style="margin-top: 20px;">
+							<h4 class="example-title">角色列表:</h4>
+						</div>
+						<div class="hr-line-dashed"></div>
+						<div id="roleList" style="height:300px;overflow:auto;">
+							<div id="roleDiv1">
+								<div class="col-md-6 top" style = "padding-left: 0px;width:40%;">
+									<div class="form-group">
+										<label class="col-sm-3 control-label" style = "padding-left: 0px;" >角色：</label>
+										<div class="col-sm-9">
+											<select class="form-control" name="roleSelect" onclick="selectChange(this)"  index="1">
+												<option value="r1" selected = "selected">管理员</option>
+												<option value="r2">审批人1</option>
+												<option value="r3">审批人2</option>
+											</select>
+										</div>
+									</div>
+								</div>
+								<div class="col-md-6 top" style = "padding-left: 0px;width:40%;" id="roleSelect1">
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- Mirrored from www.zi-han.net/theme/hplus/table_bootstrap.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 20 Jan 2016 14:20:06 GMT -->
+</html>

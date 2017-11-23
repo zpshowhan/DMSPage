@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>角色列表</title>
+<link rel="shortcut icon" href="favicon.ico">
+<link href="../../css/bootstrap.min14ed.css?v=3.3.6" rel="stylesheet">
+<link href="../../css/font-awesome.min93e3.css?v=4.4.0" rel="stylesheet">
+ <link href="../../css/plugins/bootstrap-table/bootstrap-table.min.css" rel="stylesheet">
+<link href="../../css/animate.min.css" rel="stylesheet">
+<link href="../../css/style.min862f.css?v=4.1.0" rel="stylesheet">
+<!-- jqgrid-->
+<link href="../../css/plugins/jqgrid/ui.jqgridffe4.css?0820" rel="stylesheet">
+<link href="../../css/plugins/sweetalert/sweetalert.css" rel="stylesheet">
+<link href="../../js/plugins/layer/skin/layer.css" rel="stylesheet">
+<link href="../../css/admin.min.css" rel="stylesheet">
+<style>
+/* Additional style to fix warning dialog position */
+#alertmod_table_list_2 {
+	top: 900px !important;
+}
+.ui-jqgrid-sortable {
+    text-align: center;
+}
+</style>
+</head>
+<body class="gray-bg">
+	<div class="wrapper wrapper-content  animated fadeInRight">
+        <div class="ibox float-e-margins">
+			<div class="ibox ">
+				<div class="ibox-title">
+					<h5>角色列表</h5>
+					<!--
+					<ul class="toolbar">
+					<li><button class="btn btn-success " type="button"   id="addBtn"><i class="fa fa-plus"></i>&nbsp;&nbsp;<span class="bold">添加</span>
+					</button></li>
+					<li><button class="btn btn-success " type="button"  id="editBtn" ><i class="fa fa-edit"></i>&nbsp;&nbsp;<span class="bold">编辑</span>
+					</button></li>
+					</ul> -->
+				</div>
+				<div class="ibox-content">
+					<table id="roleTable" class="table text-nowrap" data-search="true" data-query-params="queryParams">
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+	<script src="../../js/jquery.min.js?v=2.1.4"></script>
+	<script src="../../js/bootstrap.min.js?v=3.3.6"></script>
+    <script src="../../js/plugins/bootstrap-table/bootstrap-table.min.js"></script>
+    <script src="../../js/plugins/bootstrap-table/bootstrap-table-mobile.min.js"></script>
+    <script src="../../js/plugins/bootstrap-table/locale/bootstrap-table-zh-CN.min.js"></script>
+	 <script src="../../js/demo/bootstrap-table-demo.min.js"></script>
+	<script src="../../js/plugins/peity/jquery.peity.min.js"></script>
+	<script src="../../js/plugins/jqgrid/i18n/grid.locale-cnffe4.js?0820"></script>
+	<script src="../../js/plugins/jqgrid/jquery.jqGrid.minffe4.js?0820"></script>
+	<script src="../../js/plugins/layer/layer.min.js"></script>
+	<script src="../../js/demo/layer-demo.min.js"></script>
+	<script src="../../js/content.min.js"></script>
+	<script src="../../js/plugins/sweetalert/sweetalert.min.js"></script>
+
+    <script  type="text/javascript">
+	var log = console.log.bind(console)
+	var $table = $("#roleTable");
+	   $(function() {
+	   		$table.bootstrapTable({
+				url:"../../js/role_list.json",
+				height:"450px",
+				sidePagination:'client',
+				pageSize:10,
+				pageList:[10, 25, 50],
+				pagination:true,
+				columns: [
+						{
+							field: 'order',
+							width:"40",
+							align: 'center',
+							title:'序号',
+							formatter:lineFormatter
+						}, {
+							field: 'roleId',
+							title:'角色ID',
+							visible:false
+						}, {
+							title: '角色名称',
+							field: 'roleName',
+							align: 'center',
+							width:"100",
+							sortable: true
+						}, {
+							title: '角色描述',
+							align: 'center',
+							field:'roleDesc',
+							width:"290",
+							sortable:true
+						}, {
+							title: '创建时间',
+							field:'createTime',
+							width:"80",
+							sortable:true,
+							align: 'center'
+						}, {
+							title: '操作',
+							field:'oper',
+							width:'80',
+							formatter:operFormatter,
+							align: 'center'
+						}
+					]
+			});
+ 	});
+
+function lineFormatter(value, row,index) {
+	return index+1;
+}
+
+function operFormatter(value, row, index) {
+	return '<a onclick="editRole(\''+row.roleName+'\',\''+row.roleId+'\',\''+row.roleDesc+'\')"><i class="fa fa-edit"></i>&nbsp;编辑</a>';
+}
+
+function showPageFormat(pageFrom, pageTo, totalRows) {
+	return '显示'+pageFrom+'到'+pageTo+'条 '+'共'+totalRows+'条记录';
+}
+
+function editRole(roleName,roleId,roleDesc) {
+	var index= layer.open({
+		type: 2,
+		title: roleName + '编辑',
+		shadeClose: false,
+		shade: false,
+		maxmin: true,
+		moveType: 1,//拖拽风格，0是默认，1是传统拖动
+		area: ['60%', '90%'],
+		btn: ['提交修改', '取消'],
+		content: 'edit_auth.html?roleName='+roleName+'&roleId='+roleId, //iframe的url
+		success: function(layero , index){
+        	var body = layer.getChildFrame('body', index);
+			//body.find('h5').html(roleName);
+			body.find('textarea').html(roleDesc)
+		}
+	});
+}
+      /* var mydata =
+       $("#table_list_2").jqGrid({
+ 				data : mydata,
+ 				datatype : "local",
+ 				height : 360,
+        rownumbers:true,
+ 				autowidth : true,
+ 				shrinkToFit : true,
+ 				rowNum : 10,
+ 				rowList : [ 10, 20, 30 ],
+ 				colNames : [ "角色名称", "角色描述", "创建时间","操作" ],
+ 				colModel : [ {
+ 					name : "roleName",
+ 					index : "roleName",
+ 					editable : true,
+ 					width : 60,
+          align : "center"
+ 				}, {
+ 					name : "roleDesc",
+ 					index : "roleDesc",
+ 					editable : true,
+ 					width : 190,
+          align : "center"
+ 				}, {
+ 					name : "createTime",
+ 					index : "createTime",
+ 					editable : true,
+ 					width : 90,
+          align : "center"
+
+ 				}, {
+ 					name : "optionType",
+ 					index : "optionType",
+ 					editable : true,
+ 					width : 80,
+ 					align : "center",
+                     formatter : function(value, row) {
+                    return   '<a  onclick="editRole()"><i class="fa fa-edit"></i>&nbsp;编辑</a>'
+ 								}
+
+ 				}],
+ 				pager : "#pager_list_2",
+ 				viewrecords : true,
+ 				caption : "",
+ 				add:true,
+ 				edit:true,
+ 				altRows:true,
+ 				addtext:"Add",
+ 				edittext:"Edit",
+ 				hidegrid : false
+ 			});
+ 			//$("#table_list_2").setSelection(4, true);
+ 			$("#table_list_2").jqGrid("navGrid", "#pager_list_2",
+ 			 {
+ 				edit : false,
+ 				add : false,
+ 				del : false,
+ 				search : false,
+ 				refresh : false
+ 			}, {
+ 				height : 100,
+ 				reloadAfterSubmit : true
+ 			});
+ 			//表格重绘
+ 			$(window).bind("resize", function() {
+ 				var width = $(".jqGrid_wrapper").width();
+ 				$("#table_list_2").setGridWidth(width)
+ 			})
+
+	    //关闭按钮
+	    $('#closeBtn').on('click', function(){
+		   parent.window.location.reload();
+           var index = parent.layer.getFrameIndex(window.name); //获取窗口索引
+           parent.layer.close(index);
+		})
+		//编辑按钮
+	    $('#editBtn').on('click', function(){
+		    $('#signupForm')[0].reset();
+		})
+		//添加按钮
+		$('#addBtn').on('click', function(){
+		   parent.window.location.reload();
+           var index = parent.layer.getFrameIndex(window.name); //获取窗口索引
+           parent.layer.close(index);
+		})
+
+  });*/
+	</script>
+</body>
+</html>

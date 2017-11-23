@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html>
+
+
+<!-- Mirrored from www.zi-han.net/theme/hplus/search_results.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 20 Jan 2016 14:19:47 GMT -->
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+    <title>文件柜管理</title>
+    <meta name="keywords" content="管理文件柜新增、启用等操作。">
+    <meta name="description" content="系统管理员可以通过此功能，完成对文件柜的新增、启用和查询等操作。">
+	<link rel="shortcut icon" href="favicon.ico">
+	<link href="../css/bootstrap.min14ed.css?v=3.3.6" rel="stylesheet">
+    <link href="../css/font-awesome.min93e3.css?v=4.4.0" rel="stylesheet">
+
+	<link href="../css/plugins/bootstrap-table/bootstrap-table.min.css" rel="stylesheet">
+	<link href="../css/plugins/sweetalert/sweetalert.css" rel="stylesheet">
+
+    <link href="../css/animate.min.css" rel="stylesheet">
+    <link href="../css/style.min862f.css?v=4.1.0" rel="stylesheet">
+	<link href="../css/font-mine.css" rel="stylesheet">
+	<link href="../css/style.css" rel="stylesheet">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"></head>
+
+<body class="gray-bg">
+	<div class="wrapper wrapper-content animated fadeInRight">
+		<div class="row">
+			<div class="col-sm-8">
+				<div class="ibox float-e-margins">
+					<div class="ibox-title">
+						<h3>文件柜列表</h3>
+					</div>
+
+					<div class="ibox-content">
+						<div class="btn-group hidden-xs" id="cabinetsToolbar" role="group">
+                        	<button id="useCabinet" type="button" class="btn btn-outline btn-default" title="启用文件柜" onClick="useFileCabinet()">
+                            	<i class="glyphicon glyphicon-play" aria-hidden="true"></i>
+                            </button>
+                        </div>
+						<table id="cabinet_list" data-mobile-responsive="true">
+							<thead>
+								<tr>
+									<th data-field="radio" data-radio="true">RADIO</th>
+									<th data-field="bucketId" data-visible="false">ID</th>
+									<th data-field="bucketName" data-width="20%">名称</th>
+									<th data-field="createTime" data-width="30%">创建时间</th>
+									<th data-field="bucketRemark" data-width="40%">描述信息</th>
+								</tr>
+							</thead>
+						</table>
+					</div>
+				</div>
+			</div>
+
+			<div class="col-sm-4">
+				<div class="row">
+					<div class="col-sm-12">
+						<div class="ibox float-e-margins">
+							<div class="ibox-title">
+								<h3>系统配置信息</h3>
+							</div>
+
+							<div class="ibox-content">
+								<table width="100%">
+									<tr>
+										<td width="50%" style="padding:10px;"><label class="control-label">当前启用文件柜：</label></td>
+										<td style="padding:10px;">
+											<label name="using.cabinetName" class="control-label">F000002</label>
+										</td>
+									</tr>
+									<tr>
+										<td style="padding:10px;"><label class="control-label">系统初始文件柜：</label></td>
+										<td style="padding:10px;">
+											<label class="control-label">F000001</label>
+										</td>
+									</tr>
+								</table>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="col-sm-12">
+						<div class="ibox float-e-margins">
+							<div class="ibox-title">
+								<h3>新增文件柜</h3>
+							</div>
+
+							<div class="ibox-content">
+								<table width="100%">
+									<tr>
+										<td width="25%" style="padding:10px;" valign="top"><label class="control-label">名称：</label></td>
+										<td style="padding:10px;" valign="top">
+											<input id="newName" name="newName" minlength="2" type="text" class="form-control Rounded" required="" aria-required="true" placeholder="请填写文件柜名称">
+										</td>
+									</tr>
+									<tr>
+										<td style="padding:10px;" valign="top"><label class="control-label">描述：</label></td>
+										<td style="padding:10px;" valign="top">
+											<textarea id="newRemark" name="newRemark" class="form-control Rounded" required="" aria-required="true" placeholder="请填写详细描述" style="resize:none;"></textarea>
+										</td>
+									</tr>
+									<tr>
+										<td colspan="2" align="right" style="padding:10px;">
+											<button class="btn btn-primary btn-block" style="width:60px;" onClick="createFileCabinet()">新增</button>
+										</td>
+									</tr>
+								</table>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<script src="../js/jquery.min.js?v=2.1.4"></script>
+    <script src="../js/bootstrap.min.js?v=3.3.6"></script>
+    <script src="../js/content.min.js?v=1.0.0"></script>
+	<script src="../js/plugins/bootstrap-table/bootstrap-table.min.js"></script>
+    <script src="../js/plugins/bootstrap-table/bootstrap-table-mobile.min.js"></script>
+    <script src="../js/plugins/bootstrap-table/locale/bootstrap-table-zh-CN.min.js"></script>
+	<script src="../js/plugins/sweetalert/sweetalert.min.js"></script>
+
+	<script type="text/javascript" >
+		$(function(){
+			var data = [
+				{bucketId:1,bucketName:'F000001',createTime:'2016/7/10 10:29:00',bucketRemark:'系统提供的默认启用的文件柜'},
+				{bucketId:2,bucketName:'F000002',createTime:'2017/7/10 10:16:00',bucketRemark:'2017年所用的文件柜'},
+				{bucketId:3,bucketName:'F000003',createTime:'2017/7/13 22:29:00',bucketRemark:'特殊活动所用文件柜'}
+			];
+			$('#cabinet_list').bootstrapTable({
+					data:data,
+					height:"500",
+					idField:'bucketId',
+					uniqueId:'bucketName',
+					dataType: "json",
+					pagination: true,
+					toolbar:"#cabinetsToolbar",
+					clickToSelect:true,
+					singleSelect:true,
+					pageSize: 10,
+					pageNumber: 1,
+					pageList: [5, 10, 20],
+					sidePagination: "client"
+				});
+		});
+
+		this.booleanFormat = function(value,row,index){
+			if(value==1){
+				return '是';
+			}else{
+				return '否';
+			}
+		}
+
+		this.useFileCabinet = function(){
+			var arr = $('#cabinet_list').bootstrapTable('getSelections');
+			if(arr.length==0){
+				swal({
+					title:"无法启用",
+					text:"请先选择将要启用的文件柜，否则无法完成切换工作。",
+					type:"warning"
+				});
+				return false;
+			}
+			$('label[name="using.cabinetName"]').text(arr[0].bucketName);
+			swal({
+				title:"启用成功",
+				text:"当前启用的文件柜已经成功切换为："+arr[0].bucketName+"。",
+				type:"success"
+			});
+		}
+
+		this.createFileCabinet = function(){
+			var arr = $('#cabinet_list').bootstrapTable('getData');
+			var id = 1;
+			if(arr.length>0){
+				id = arr[arr.length-1].bucketId +1;
+			}
+			var name = $('input[name="newName"]').val();
+			var remark = $('textarea[name="newRemark"]').val();
+			var row = {bucketId:id,bucketName:name,bucketDefault:1,createTime:'2016/7/13 11:29:00',bucketRemark:remark};
+			$('#cabinet_list').bootstrapTable('append',row);
+			swal({
+				title:"添加成功",
+				text:"成功创建文件柜："+arr[0].bucketName+"，点击启用按钮，可以将当前启用文件柜切换为新文件柜。",
+				type:"success"
+			});
+		}
+	</script>
+</body>
+</html>

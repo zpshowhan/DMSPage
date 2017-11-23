@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html>
+
+
+<!-- Mirrored from www.zi-han.net/theme/hplus/table_bootstrap.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 20 Jan 2016 14:20:03 GMT -->
+<head>
+
+    <meta charset="utf-8">
+
+    <link href="../../css/bootstrap.min14ed.css?v=3.3.6" rel="stylesheet">
+    <link href="../../css/font-awesome.min93e3.css?v=4.4.0" rel="stylesheet">
+    <link href="../../css/plugins/bootstrap-table/bootstrap-table.min.css" rel="stylesheet">
+    <link href="../../css/animate.min.css" rel="stylesheet">
+    <link href="../../css/style.min862f.css?v=4.1.0" rel="stylesheet">
+	<link href="../../css/plugins/sweetalert/sweetalert.css" rel="stylesheet">
+    <link href="../../css/plugins/iCheck/custom.css" rel="stylesheet">
+<style type="text/css">
+	.top{
+		margin-top: 10px;
+	}
+
+	.form-control {
+		display: inline;
+	}
+	.mycontrol {
+		display: inline;
+		width: 100px;
+		padding: 6px 12px;
+		font-size: 14px;
+		line-height: 1.42857143;
+		color: #555;
+		background-color: #fff;
+		background-image: none;
+		border: 1px solid #ccc;
+		border-radius: 4px;
+		height: 30px;
+		margin-top:5px;
+		margin-bottom:5px;
+	}
+</style>
+
+</head>
+
+<body class="gray-bg" >
+	<div class="wrapper wrapper-content animated fadeInRight">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-content">
+						<div class="row" style="float: left;">
+							&nbsp;&nbsp;字段名称： <input type="text" class="form-control" style="width: 100px;">
+							&nbsp;&nbsp; 时间范围：
+							<input placeholder="开始日期" class="form-control layer-date" id="start" style="width: 100px; vertical-align:  middle;">
+							- <input placeholder="结束日期" class="form-control layer-date" id="end" style="width: 100px; vertical-align: middle;">
+							&nbsp;&nbsp;  注册点：
+							<select class="form-control" style="width: 100px;">
+								<option>文档</option>
+								<option>音频</option>
+								<option>视频</option>
+							</select>
+							&nbsp;&nbsp; <button onClick="hh()" type="button" class="btn btn-sm btn-primary">搜索</button>
+						</div>
+						<div class="title-action">
+							<span><button type="button" class="btn btn-sm btn-primary" id="add">添加</button></span>
+							<span><button type="button" class="btn btn-sm btn-primary" id="delete">删除</button></span>
+							<span><button type="button" class="btn btn-sm btn-primary" id="enable">启用</button></span>
+							<span><button type="button" class="btn btn-sm btn-primary" id="disable">禁用</button></span>
+						</div>
+						<div class="example" >
+							<table id="exampleTableFromData"  ></table>
+						</div>
+                    </div>
+                </div>
+			</div>
+		</div>
+	</div>
+    <script src="../../js/jquery.min.js?v=2.1.4"></script>
+    <script src="../../js/bootstrap.min.js?v=3.3.6"></script>
+    <script src="../../js/plugins/bootstrap-table/bootstrap-table.min.js"></script>
+    <script src="../../js/plugins/bootstrap-table/bootstrap-table-mobile.min.js"></script>
+    <script src="../../js/plugins/bootstrap-table/locale/bootstrap-table-zh-CN.min.js"></script>
+	<script src="../../js/plugins/layer/layer.js"></script>
+	<script src="../../js/plugins/sweetalert/sweetalert.min.js"></script>
+	<script src="../../js/plugins/layer/laydate/laydate.js"></script>
+
+    <script type="text/javascript">
+	var data =[{"modelId":"1","fieldName":"页码","fieldEnName":"page number","cteateTime":"2017-01-02","registPoint":"1","isUsed":"1"},
+			   {"modelId":"1","fieldName":"时长","fieldEnName":"duration","cteateTime":"2017-01-02","registPoint":"2","isUsed":"1"},
+			   {"modelId":"1","fieldName":"来源","fieldEnName":"source","cteateTime":"2017-01-02","registPoint":"2","isUsed":"0"},
+			   {"modelId":"1","fieldName":"时长","fieldEnName":"duration","cteateTime":"2017-01-02","registPoint":"3","isUsed":"1"},
+			   {"modelId":"1","fieldName":"帧数","fieldEnName":"FPS","cteateTime":"2017-01-02","registPoint":"3","isUsed":"1"},
+			   {"modelId":"1","fieldName":"码率","fieldEnName":"Bit rate","cteateTime":"2017-01-02","registPoint":"3","isUsed":"1"},
+			   {"modelId":"1","fieldName":"分辨率","fieldEnName":"Image resolution","cteateTime":"2017-01-02","registPoint":"3","isUsed":"1"}];
+	 $(function(){
+		$("#exampleTableFromData").bootstrapTable({
+			//url: 'json/dev.json',
+			data: data,
+			height:"452",
+			//toolbar: '#toolbar', //工具按钮用哪个容器
+			//striped: true, //是否显示行间隔色
+			//cache: false, //是否使用缓存，默认为true，所以一般情况下需要设置一下这个属性（*）
+			pagination: true, //是否显示分页
+			//sortable: true, //是否启用排序
+			//sortOrder: "asc", //排序方式
+			//queryParams: postQueryParams,//传递参数（*）
+			//sidePagination: "client",      //分页方式：client客户端分页，server服务端分页（*）
+			pageSize: 10, //每页的记录行数（*）
+			pageList: [10, 25, 50, 100], //可供选择的每页的行数（*）
+			//strictSearch: true,
+			//height: table_h, //行高，如果没有设置height属性，表格自动根据记录条数觉得表格高度,设置了行高后编辑时标头宽度不会随着下面的行改变，且颜色也不会改变？？？？
+			//uniqueId: "id", //每一行的唯一标识，一般为主键列
+			//cardView: false, //是否显示详细视图
+			//detailView: false, //是否显示父子表
+			//paginationHAlign: "left",
+			//singleSelect: true,
+			//search:true,               //是否显示表格搜索，此搜索是客户端搜索，不会进服务端
+			//strictSearch: true,
+			//showColumns: true, //是否显示所有的列
+			//showRefresh: true, //是否显示刷新按钮
+			//clickToSelect: true, //是否启用点击选中行
+			//paginationPreText: "<<",
+			//paginationNextText: ">>",
+			columns: [{
+				field: 'checkStatus',
+				checkbox: true
+			}, {
+				field: 'modelId',
+				title: '序号',
+				width: "75px",
+				visible:false,
+			}, {
+				field: 'fieldName',
+				title: '字段名称',
+			}, {
+				field: 'fieldEnName',
+				title: '英文名称',
+			}, {
+				field: 'cteateTime',
+				title: '创建时间',
+			}, {
+				field: 'registPoint',
+				title: '注册点',
+				formatter: judgement
+			}, {
+				field: 'isUsed',
+				title: '是否启用',
+				formatter: judgementIsUsed
+			}, {
+				field: 'operate',
+				title: '操作',
+				width: '80px',
+				events: showRoleList,
+				formatter: operateFormatter
+			}, ],
+
+		 });
+
+		 $("#add").click(function(){
+			layer.open({
+					type: 1,
+					shadeClose: false,
+					title:"添加元数据",
+					shade: false,
+					maxmin: true,
+					moveType: 1,//拖拽风格，0是默认，1是传统拖动
+					area: ['80%', '60%'],
+					content: $("#addDiv"), //iframe的url
+					btn: ['确定','取消'],
+					btn1: function(index, layero){
+						layer.close(index);
+					}
+				});
+		 });
+
+		 $("#delete").click(function(){
+
+		 });
+
+		 $("#enable").click(function(){
+
+		 });
+
+		 $("#disable").click(function(){
+
+		 });
+
+	 });
+
+	window.showRoleList = {
+              'click #btn_detail': function (e, value, row, index) {
+				  layer.open({
+					type: 1,
+					shadeClose: false,
+					title:"修改元数据",
+					shade: false,
+					maxmin: true,
+					moveType: 1,//拖拽风格，0是默认，1是传统拖动
+					area: ['80%', '60%'],
+					content: $("#addDiv"), //iframe的url
+					btn: ['确定','取消'],
+					btn1: function(index, layero){
+						layer.close(index);
+					}
+				});
+          },
+	}
+
+	 function operateFormatter(value, row, index) {
+        return [
+            '<button id="btn_detail" type="button" class="btn btn-primary btn-xs" >修改</button>',
+        ].join('');
+    }
+
+	function judgement(value, row, index) {
+		if (value == 1)
+		{
+			 return [
+            '<p style="color:blue">文档模型</p>',
+        ].join('');
+		}else if(value == 2){
+			 return [
+            '<p style="color: ##FF00FF">音频模型</p>',
+        ].join('');
+		}else{
+			 return [
+            '<p style="color:#33CC00">视频模型</p>',
+        ].join('');
+		}
+
+    }
+
+	function judgementIsUsed(value, row, index) {
+		if (value == 1)
+		{
+			 return [
+            '<p style="color:blue">是</p>',
+        ].join('');
+		}else{
+			 return [
+            '<p style="color:red">否</P>',
+        ].join('');
+		}
+
+    }
+
+	var start = {
+		elem: "#start",
+		format: "YYYY/MM/DD hh:mm:ss",
+		min: '1900-01-01 00:00:00',
+		max: "2099-06-16 23:59:59",
+		istime: true,
+		istoday: false,
+		choose: function(datas) {
+			end.min = datas;
+			end.start = datas
+		}
+	};
+	var end = {
+		elem: "#end",
+		format: "YYYY/MM/DD hh:mm:ss",
+		min: '1900-01-01 00:00:00',
+		max: "2099-06-16 23:59:59",
+		istime: true,
+		istoday: false,
+		choose: function(datas) {
+			start.max = datas
+		}
+	};
+	laydate(start);
+	laydate(end);
+
+	</script>
+</body>
+
+
+<!-- Mirrored from www.zi-han.net/theme/hplus/table_bootstrap.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 20 Jan 2016 14:20:06 GMT -->
+</html>
+
+
+<div class="gray-bg" id="addDiv" style="display:none">
+	<div class="wrapper wrapper-content">
+		<div class="ibox-content">
+			<div class="row"  style="height:200px">
+				<div class="col-md-6">
+					<div class="form-group">
+						<label class="col-sm-3 control-label">字段名称：</label>
+						<div class="col-sm-9">
+							<input type="text" name="" class="form-control" > <span class="help-block m-b-none"></span>
+						</div>
+					</div>
+
+				</div>
+				<div class="col-md-6">
+					<div class="form-group">
+						<label class="col-sm-3 control-label">英文名称：</label>
+						<div class="col-sm-9">
+							<input type="text" name="" class="form-control" > <span class="help-block m-b-none"></span>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-6">
+					<div class="form-group">
+						<label class="col-sm-3 control-label">注册点：</label>
+						<div class="col-sm-9">
+							<select class="form-control" name="">
+								<option>文档</option>
+								<option>音频</option>
+								<option>视频</option>
+							</select>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

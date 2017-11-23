@@ -1,0 +1,66 @@
+
+.ibox-title{
+  padding: 6px 15px 0px 15px  !important; 
+}
+
+ .ibox-content{
+  padding: 0px 15px 15px  15px !important; 
+}
+
+.ibox-title h5{
+   line-height:35px; 
+   margin: 0  !important;
+}
+.ibox-title   .toolbar {
+	float: right;
+	margin-bottom: 3px !important;
+}
+.ibox-title   .toolbar ul{
+ margin-right: 10px;
+ margin-top: 8px  !important; 
+ 
+}
+.ibox-title   .toolbar li {
+	list-style: none; /* 去掉ul前面的符号 */
+	margin: 0px; /* 与外界元素的距离为0 */
+	padding: 0px; /* 与内部元素的距离为0 */
+	width: auto; /* 宽度根据元素内容调整 */
+    float: left;
+	margin-right: 8px;
+} 
+
+.ibox-title   .toolbar li button {
+	 padding:5px;
+}
+
+.jqGrid_wrapper{
+	border-top: none;
+}
+
+
+.nav-tabs>li>a{ color:#5d5d5d  ; }
+.nav-tabs>li>a:active{ color:#090909;  font-weight: bold }
+
+  
+ 
+
+ .kuang{
+  margin:10px 10px 20px 20px;
+  width:120px;
+  height: 30px;
+  font-size:16px;
+  color: 	#fff;
+  text-align: center; 
+  padding: 5px;
+  FILTER: progid:DXImageTransform.Microsoft.Gradient(gradientType=0, startColorStr=#AC07BD, endColorStr=#f6f6f8); /*IE 6 7 8*/
+  background: -ms-linear-gradient(top, #478dc9, #f6f6f8);        /* IE 10 */
+  background:-moz-linear-gradient(top, #478dc9, #f6f6f8);/*火狐*/
+  background:-webkit-gradient(linear, 0% 0%, 0% 100%, from(#478dc9), to(#4444d4));/*谷歌*/
+  background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#478dc9), to(#4444d4));      /* Safari 4-5, Chrome 1-9*/
+  background: -webkit-linear-gradient(top, #478dc9, #478dc9);   /*Safari5.1 Chrome 10+*/
+  background: -o-linear-gradient(top, #478dc9, #478dc9);  /*Opera 11.10+*/
+  -moz-border-radius: 6px; /* Firefox */
+  -webkit-border-radius: 6px; /* Safari 和 Chrome */
+  border-radius: 6px; 
+}
+  

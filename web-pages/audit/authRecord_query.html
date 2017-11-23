@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<!-- <link rel="shortcut icon" href="favicon.ico"> --> 
+<link href="../../css/bootstrap.min14ed.css?v=3.3.6" rel="stylesheet">
+<link href="../../css/font-awesome.min93e3.css?v=4.4.0" rel="stylesheet"> 
+<link href="../../css/animate.min.css" rel="stylesheet">
+<link href="../../css/style.min862f.css?v=4.1.0" rel="stylesheet">
+<link href="../../css/admin.css" rel="stylesheet">
+<style>
+.form-group  label{ 
+    float:left;
+} 
+.form-group  input{ 
+    float:left;
+    width: 60%  !important;
+}  
+ .form-group  button{ 
+    float:left;
+    margin-left: 10px;
+}   
+</style> 
+</head>
+<body class="gray-bg">
+ 	 <div class="wrapper wrapper-content animated fadeInRight">
+        <div class="row">
+           <div class="col-sm-12">
+                <div class="ibox float-e-margins"> 
+                    <div class="ibox-content" >
+                        <form class="form-horizontal m-t" id="signupForm" >
+                          <div class="form-group">
+                                <label class="col-sm-3 control-label">用户名称：</label>
+                                <div class="col-sm-8">
+                                    <input id="userName" name="userName" class="form-control" type="text">
+                                    <!--button class="btn btn-success " type="button"   id="queryBtn"><i class="fa fa-search"></i>&nbsp;&nbsp;<span class="bold">查询</span>
+                        </button-->
+                                </div>
+                                
+                            </div>
+                           <div class="form-group">
+                                <label class="col-sm-3 control-label">文档名称：</label>
+                                <div class="col-sm-8">
+                                    <input id="fileName" name="fileName" class="form-control" type="text" aria-required="true" aria-invalid="false" class="valid">
+                                       <!--button class="btn btn-success " type="button"   id="queryBtn"><i class="fa fa-search"></i>&nbsp;&nbsp;<span class="bold">查询</span>
+                        </button-->
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label">时间范围：</label>
+                                <div class="col-sm-8">
+                                     <input placeholder="开始日期" style="width:30%!important;" class="form-control layer-date" id="start" >
+                                    <input placeholder="结束日期" style="width:30%!important;" class="form-control layer-date" id="end">
+                                    <!--button class="btn btn-success " type="button"   id="queryBtn"><i class="fa fa-search"></i>&nbsp;&nbsp;<span class="bold">查询</span>
+                        </button-->
+                                </div>
+                            </div>  
+                             <div class="form-group" >
+                                 &nbsp;
+                                 <button class="btn btn-success "    type="button"   id="queryBtn" style="margin-left:40%;"><i class="fa fa-search"></i>&nbsp;&nbsp;<span class="bold">查询</span>
+                                  </button>
+                                  <button class="btn btn-success " type="button"   id="canelBtn"><i class="fa fa-remove"></i>&nbsp;&nbsp;<span class="bold">取消</span>
+                                  </button>
+                                </div>
+                            </div>  
+                        </form> 
+                    </div>
+                </div>
+                </div></div>
+                </div>
+			 
+<script src="../../js/jquery.min.js?v=2.1.4"></script>
+    <script src="../../js/bootstrap.min.js?v=3.3.6"></script>
+    <script src="../../js/content.min.js?v=1.0.0"></script>
+    <script src="../../js/plugins/validate/jquery.validate.min.js"></script>
+    <script src="../../js/plugins/validate/messages_zh.min.js"></script>
+    <script src="../../js/plugins/layer/laydate/laydate.js"></script>
+    <script src="js/demo/form.validate.js"></script>
+    <script>
+       // laydate({elem:"#hello",event:"focus"});
+        var start={
+            elem:"#start",format:"YYYY/MM/DD hh:mm:ss",
+            min:laydate.now(),max:"2099-06-16 23:59:59",istime:true,
+            istoday:false,choose:
+            function(datas){end.min=datas;
+                end.start=datas
+            }
+        };
+        var end={
+                elem:"#end",
+                format:"YYYY/MM/DD hh:mm:ss",min:laydate.now(),
+                max:"2099-06-16 23:59:59",istime:true,istoday:false,
+                 choose:function(datas){
+                 start.max=datas}};laydate(start);
+            laydate(end);
+    </script>
+    <script>
+	   $(document).ready(function() {
+	    //关闭按钮
+	    $('#queryBtn').on('click', function(){ 
+		    parent.window.location.reload();
+            var index = parent.layer.getFrameIndex(window.name); //获取窗口索引
+            parent.layer.close(index);
+		})  
+		//保存按钮
+		$('#canelBtn').on('click', function(){
+		    //parent.window.location.reload();
+            var index = parent.layer.getFrameIndex(window.name); //获取窗口索引
+            parent.layer.close(index);
+		})  
+	   }) 
+	</script>
+</body>
+</html>

@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+
+
+<!-- Mirrored from www.zi-han.net/theme/hplus/search_results.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 20 Jan 2016 14:19:47 GMT -->
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+    <title>图标管理</title>
+    <meta name="keywords" content="图标管理">
+    <meta name="description" content="管理不同文档类型在UI层显示何种图标">
+
+    <link rel="shortcut icon" href="favicon.ico">
+	<link href="../css/bootstrap.min14ed.css?v=3.3.6" rel="stylesheet">
+    <link href="../css/font-awesome.min93e3.css?v=4.4.0" rel="stylesheet">
+
+    <link href="../css/animate.min.css" rel="stylesheet">
+    <link href="../css/style.min862f.css?v=4.1.0" rel="stylesheet">
+	<link href="../css/plugins/datapicker/datepicker3.css" rel="stylesheet">
+	<link href="../css/font-mine.css" rel="stylesheet">
+	<link href="../css/style.css" rel="stylesheet">
+</head>
+
+<body class="gray-bg">
+    <div class="wrapper wrapper-content">
+        <div class="row">
+            <div class="col-sm-3">
+                <div class="ibox float-e-margins">
+					<div class="ibox-title">
+						<h3>图标筛选</h3>
+					</div>
+                    <div class="ibox-content">
+                        <div class="file-manager">
+                   			<font style="line-height:30px;">文档类型：</font >
+							<select id="fileType" name="fileType" class="form-control Rounded" required="" aria-required="true">
+								<option value="1">Word</option>
+								<option value="2">Excel</option>
+								<option value="3">Visio</option>
+								<option value="4">OneNote</option>
+								<option value="5">Access</option>
+							</select>
+							<div class="hr-line-dashed"></div>
+							<font style="line-height:30px;">图标尺寸：</font >
+							<select id="size" name="size" class="form-control Rounded" required="" aria-required="true">
+								<option value="4X4">4X4</option>
+								<option value="16X16">16X16</option>
+								<option value="64X64">64X64</option>
+							</select>
+							<div class="hr-line-dashed"></div>
+							<font style="line-height:30px;">是否启用：</font >
+							<input type="radio" name="status" value="1" checked=>
+							<font for="radio1">是</font>&nbsp;&nbsp;
+							<input type="radio" name="status" value="0">
+							<font for="radio1">否</font>
+							<div class="hr-line-dashed"></div>
+							<div class="row">
+								<div class="col-sm-6">
+									<button class="btn btn-primary btn-block">查询</button>
+								</div>
+								<div class="col-sm-6">
+									<button class="btn btn-primary btn-block">新增</button>
+								</div>
+							</div>
+                            <div class="clearfix"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-9 animated fadeInRight">
+                <div class="row" id="fileShow">
+
+                </div>
+            </div>
+        </div>
+		<div class="chat-top">
+            <a class="open-small-chat chat-unchecked" title="列表显示" conf="1">
+                <i class="glyphicon glyphicon-th-list"></i>
+            </a>
+			<a class="open-small-chat" title="平铺显示" conf="2">
+                <i class="glyphicon glyphicon-th-large"></i>
+            </a>
+        </div>
+    </div>
+    <script src="../js/jquery.min.js?v=2.1.4"></script>
+    <script src="../js/bootstrap.min.js?v=3.3.6"></script>
+	<script src="../js/plugins/datapicker/bootstrap-datepicker.js"></script>
+    <script src="../js/content.min.js?v=1.0.0"></script>
+    <script>
+        $(document).ready(function(){
+			$(".file-box").each(function(){animationHover(this,"pulse")});
+			$(".open-small-chat").bind('click',function(){
+				$('.open-small-chat').addClass('chat-unchecked');
+				$(this).removeClass('chat-unchecked');
+				if($(this).attr('conf')=='1'){
+					$('#fileShow').load('file_list.html');
+				}else{
+					$('#fileShow').load('file_box.html');
+				}
+			});
+
+			$('#fileShow').load('file_box.html');
+			$(".input-group.date").datepicker({todayBtn:"linked",keyboardNavigation:!1,forceParse:!1,calendarWeeks:!0,autoclose:!0});
+		});
+
+		this.formatIconForFileType = function(val,index,row){
+			if(val=='1'){
+				return 'Word';
+			}else if(val=='2'){
+				return 'Excel';
+			}else if(val=='3'){
+				return 'PPT';
+			}
+		}
+
+		this.formatIconOper = function(val,index,row){
+			var html = '<button class="btn btn-primary btn-xs">查询</button>';
+			html = html+'&nbsp;&nbsp;';
+			html = html+'<button class="btn btn-primary btn-xs">修改</button>';
+			html = html+'&nbsp;&nbsp;';
+			html = html+'<button class="btn btn-primary btn-xs">删除</button>';
+			return html;
+		}
+
+		this.queryIconDetail = function(){
+
+		}
+
+    </script>
+    <script type="text/javascript" src="http://tajs.qq.com/stats?sId=9051096" charset="UTF-8"></script>
+</body>
+
+
+<!-- Mirrored from www.zi-han.net/theme/hplus/search_results.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 20 Jan 2016 14:19:47 GMT -->
+</html>

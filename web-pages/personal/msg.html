@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>消息提醒</title>
+<link href="../../css/animate.min.css" rel="stylesheet">
+<link href="../../css/style.min862f.css?v=4.1.0" rel="stylesheet">
+<link href="../../css/bootstrap.min14ed.css?v=3.3.6" rel="stylesheet">
+<link href="../../css/font-awesome.min93e3.css?v=4.4.0" rel="stylesheet">
+<link href="../../css/plugins/bootstrap-table/bootstrap-table.min.css"
+	rel="stylesheet">
+<link href="../../css/plugins/sweetalert/sweetalert.css" rel="stylesheet">
+<link href="../../css/plugins/iCheck/custom.css" rel="stylesheet">
+<link href="../../css/admin.css" rel="stylesheet">
+<style type="text/css">
+.form-control {
+	display: inline;
+}
+.row{
+   margin-top:6px;
+}
+.ibox-content{
+  padding-top:6px;
+}
+</style>
+</head>
+<body class="gray-bg">
+	<div class="wrapper wrapper-content">
+		<div class="row">
+			<div class="col-lg-12">
+				<div class="ibox float-e-margins">
+					<div class="ibox-title">
+						<h5>消息提醒</h5>
+						<div class="ibox-tools">
+							<a class="collapse-link"> <i class="fa fa-chevron-up"></i>
+							</a> <a class="close-link"> <i class="fa fa-times"></i>
+							</a>
+						</div>
+					</div>
+					<div class="ibox-content">
+						<div class="row">
+							 <form id="searchForm">
+											&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;关键字:
+										   <input class="form-control" id="msg_title" name="msgTitle" style="width:100px">
+											&nbsp;&nbsp;
+											   已读未读:
+										   <select class="form-control m-b" name="account" style="width: 100px">
+												<option>全部</option>
+												<option>未读</option>
+												<option>已读</option>
+											</select> &nbsp;&nbsp;
+											消息类型：
+											<select class="form-control m-b" name="account" style="width: 100px">
+												<option>全部</option>
+												<option>系统通知</option>
+												<option>文档通知</option>
+												<option>审批通知</option>
+											</select> &nbsp;&nbsp;
+											创建时间：<input placeholder="开始日期"
+										class="form-control layer-date" id="start"
+										style="width: 100px; vertical-align: middle;">- <input
+										placeholder="结束日期" class="form-control layer-date" id="end"
+										style="width: 100px; vertical-align: middle;">&nbsp;&nbsp;
+											<button type="button" class="btn btn-sm btn-primary"><i class='fa fa-search'></i>搜索</button>
+									    </form>
+						</div>
+						<div class="ibox-content">
+							<table id="msgTable"></table>
+							<!--<table data-toggle="table" data-url="../js/data_undone.json"
+								data-height="446" data-pagination="true">
+								<thead>
+									<tr>
+										<th data-field="index" data-align="center">序号</th>
+										<th data-field="filename" data-align="left">文档（资产）名称</th>
+										<th data-field="filetype" data-align="left">类别</th>
+										<th data-field="userid" data-align="center">上传人</th>
+										<th data-field="createtime" data-align="center">创建时间</th>
+										<th data-field="oper" data-align="center">操作</th>
+									</tr>
+								</thead>
+							</table>-->
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<script src="../../js/jquery.min.js?v=2.1.4"></script>
+	<script src="../../js/bootstrap.min.js?v=3.3.6"></script>
+	<script src="../../js/plugins/bootstrap-table/bootstrap-table.min.js"></script>
+	<script
+		src="../../js/plugins/bootstrap-table/bootstrap-table-mobile.min.js"></script>
+	<script
+		src="../../js/plugins/bootstrap-table/locale/bootstrap-table-zh-CN.min.js"></script>
+	<script src="../../js/plugins/layer/layer.js"></script>
+	<script src="../../js/plugins/sweetalert/sweetalert.min.js"></script>
+	<script src="../../js/plugins/layer/laydate/laydate.js"></script>
+	<script>
+     var data= 	[{
+        "msgname":"XX文档被修改了",
+        "createtime":"2017-6-24 3:22 22",
+        "msgsource":"船员系统",
+        "msgcontent":"文章写得很好！",
+        "msgtype":"文档通知",
+        "readstatus":"未读"
+    },{
+        "msgname":"XX文档被修改了",
+        "createtime":"2017-6-24 3:22 22",
+        "msgsource":"船员系统",
+        "msgcontent":"文章写得很好！",
+        "msgtype":"文档通知",
+        "readstatus":"已读"
+    },{
+        "msgname":"XX文档被审批了",
+        "createtime":"2017-6-24 3:22 22",
+        "msgsource":"船员系统",
+        "msgcontent":"文章写得很好！",
+        "msgtype":"审批通知",
+        "readstatus":"未读"
+    },{
+        "msgname":"XX文档被审批通过了",
+        "createtime":"2017-6-24 3:22 22",
+        "msgsource":"船员系统",
+        "msgcontent":"文章写得很好！",
+        "msgtype":"审批通知",
+        "readstatus":"未读"
+    },{
+        "msgname":"XX文档被修改了",
+        "createtime":"2017-6-24 3:22 22",
+        "msgsource":"船员系统",
+        "msgcontent":"文章写得很好！",
+        "msgtype":"文档通知",
+        "readstatus":"未读"
+    },{
+        "msgname":"XX文档被修改了",
+        "createtime":"2017-6-24 3:22 22",
+        "msgsource":"船员系统",
+        "msgcontent":"文章写得很好！",
+        "msgtype":"文档通知",
+        "readstatus":"未读"
+    },{
+        "msgname":"XX文档被修改了",
+        "createtime":"2017-6-24 3:22 22",
+        "msgsource":"船员系统",
+        "msgcontent":"文章写得很好！",
+        "msgtype":"文档通知",
+        "readstatus":"已读"
+    },{
+        "msgname":"XX文档被驳回了",
+        "createtime":"2017-6-24 3:22 22",
+        "msgsource":"船员系统",
+        "msgcontent":"文章写得很好！",
+        "msgtype":"审批通知",
+        "readstatus":"已读"
+    },{
+        "msgname":"XX文档被修改了",
+        "createtime":"2017-6-24 3:22 22",
+        "msgsource":"船员系统",
+        "msgcontent":"文章写得很好！",
+        "msgtype":"文档通知",
+        "readstatus":"已读"
+    },{
+        "msgname":"XX文档被修改了",
+        "createtime":"2017-6-24 3:22 22",
+        "msgsource":"船员系统",
+        "msgcontent":"文章写得很好！",
+        "msgtype":"文档通知",
+        "readstatus":"未读"
+    },{
+        "msgname":"XX文档被修改了",
+        "createtime":"2017-6-24 3:22 22",
+        "msgsource":"船员系统",
+        "msgcontent":"文章写得很好！",
+        "msgtype":"文档通知",
+        "readstatus":"已读"
+    },{
+        "msgname":"XX文档被修改了",
+        "createtime":"2017-6-24 3:22 22",
+        "msgsource":"船员系统",
+        "msgcontent":"文章写得很好！",
+        "msgtype":"文档通知",
+        "readstatus":"未读"
+    }];
+    var $msgtab = $("#msgTable");
+		$(function(){
+		    $msgtab.bootstrapTable({
+			//url: 'json/dev.json',
+			data: data,
+			//height:"452",
+			detailView:true,
+			detailFormatter:'detailFormatter',
+			rowStyle:'rowStyle',
+			//toolbar: '#toolbar', //工具按钮用哪个容器
+			//striped: true, //是否显示行间隔色
+			//cache: false, //是否使用缓存，默认为true，所以一般情况下需要设置一下这个属性（*）
+			pagination: true, //是否显示分页
+			//sortable: true, //是否启用排序
+			//sortOrder: "asc", //排序方式
+			//queryParams: postQueryParams,//传递参数（*）
+			//sidePagination: "client",      //分页方式：client客户端分页，server服务端分页（*）
+			pageSize: 10, //每页的记录行数（*）
+			pageList: [10, 25, 50, 100], //可供选择的每页的行数（*）
+			//strictSearch: true,
+			//height: table_h, //行高，如果没有设置height属性，表格自动根据记录条数觉得表格高度,设置了行高后编辑时标头宽度不会随着下面的行改变，且颜色也不会改变？？？？
+			//uniqueId: "id", //每一行的唯一标识，一般为主键列
+			//cardView: false, //是否显示详细视图
+			//detailView: false, //是否显示父子表
+			//paginationHAlign: "left",
+			//singleSelect: true,
+			//search:true,               //是否显示表格搜索，此搜索是客户端搜索，不会进服务端
+			//strictSearch: true,
+			//showColumns: true, //是否显示所有的列
+			//showRefresh: true, //是否显示刷新按钮
+			//clickToSelect: true, //是否启用点击选中行
+			//paginationPreText: "<<",
+			//paginationNextText: ">>",
+			columns: [ {
+					field : "index",
+					title : "序号",
+					width : 10,
+					formatter: function (value, row, index) {
+                              return index+1;
+                          }
+				}, {
+					field : "msgname",
+					title : "消息名称",
+					width : 400
+				}, {
+					field : "createtime",
+					title : "创建时间",
+					width : 200
+				},{
+					field : "msgsource",
+					title : "消息来源",
+					visible:false
+				},{
+					field : "msgcontent",
+					title : "消息内容",
+					visible:false
+				},{
+					field : "msgtype",
+					title : "消息类型",
+					width : 80
+				},{
+					field : "readstatus",
+					title : "读取状态",
+					width : 60
+				}],
+
+		 });});
+		 $msgtab.on('collapse-row.bs.table', function (row, index) {
+		  $msgtab.bootstrapTable('updateCell', {index:index,field:'readstatus',value:'已读'});
+		});
+
+		 function detailFormatter(index, row, element){
+		   return "消息来源: "+row.msgsource+"<br />消息内容： "+row.msgcontent;
+		 }
+		 function rowStyle(row,index){
+		   var strclass = "";
+		   if(row.readstatus == '已读'){
+		    strclass = 'success';
+		   }else{
+		     strclass = 'warning';
+		   }
+		    return { classes: strclass }
+		 }
+
+		var start = {
+			elem : "#start",
+			format : "YYYY/MM/DD hh:mm:ss",
+			min : laydate.now(),
+			max : "2099-06-16 23:59:59",
+			istime : true,
+			istoday : false,
+			choose : function(datas) {
+				end.min = datas;
+				end.start = datas
+			}
+		};
+		var end = {
+			elem : "#end",
+			format : "YYYY/MM/DD hh:mm:ss",
+			min : laydate.now(),
+			max : "2099-06-16 23:59:59",
+			istime : true,
+			istoday : false,
+			choose : function(datas) {
+				start.max = datas
+			}
+		};
+		laydate(start);
+		laydate(end);
+
+		function delLog(i) {
+			swal({
+				title : "您确定要删除这条信息吗",
+				text : "删除后将无法恢复，请谨慎操作！",
+				type : "warning",
+				showCancelButton : true,
+				confirmButtonColor : "#DD6B55",
+				confirmButtonText : "删除",
+				closeOnConfirm : false
+			}, function() {
+				swal("删除成功！", "您已经永久删除了这条信息。", "success");
+			});
+		}
+
+		function copyLog(i) {
+			swal({
+				title : "输入日志名称",
+				type : "input",
+				showCancelButton : true,
+				closeOnConfirm : false,
+				animation : "slide-from-top",
+				inputPlaceholder : "日志名称"
+			}, function(inputValue) {
+				if (inputValue === false)
+					returnfalse;
+				if (inputValue === "") {
+					swal.showInputError("你需要输入日志名称！");
+					return false
+				}
+				swal("备份成功");
+			});
+
+		}
+
+		function checkFile(i){
+		  window.location.href = "../audit.html";
+		}
+	</script>
+</body>
+</html>

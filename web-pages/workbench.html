@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html>
+
+
+<!-- Mirrored from www.zi-han.net/theme/hplus/index_v1.html?v=4.0 by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 20 Jan 2016 14:20:20 GMT -->
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!--360浏览器优先以webkit内核解析-->
+
+
+    <title>工作台</title>
+
+    <link rel="shortcut icon" href="favicon.ico">
+    <link href="../css/bootstrap.min14ed.css?v=3.3.6" rel="stylesheet">
+    <link href="../css/font-awesome.min93e3.css?v=4.4.0" rel="stylesheet">
+
+	<link href="../css/plugins/bootstrap-table/bootstrap-table.min.css" rel="stylesheet">
+
+    <link href="../css/animate.min.css" rel="stylesheet">
+    <link href="../css/style.min862f.css?v=4.1.0" rel="stylesheet">
+    <link href="../css/plugins/footable/footable.core.css" rel="stylesheet">
+	<link href="../css/style.css" rel="stylesheet">
+    <script src="../js/jquery.min.js?v=2.1.4"></script>
+    <script src="../js/bootstrap.min.js?v=3.3.6"></script>
+    <script src="../js/content.min.js"></script>
+
+	<script src="../js/plugins/flot/jquery.flot.js"></script>
+    <script src="../js/plugins/flot/jquery.flot.tooltip.min.js"></script>
+    <script src="../js/plugins/flot/jquery.flot.resize.js"></script>
+	<script src="../js/plugins/peity/jquery.peity.min.js"></script>
+    <!--
+    <script src="../js/welcome.min.js"></script>
+    -->
+
+</head>
+
+<body class="gray-bg">
+    <div class="wrapper wrapper-content">
+        <div class="row animated fadeInRight">
+
+			<div class="col-sm-12" >
+				<div class="ibox float-e-margins">
+					<div class="ibox-title">
+						<h5>文档查询</h5>
+						<div class="ibox-tools">
+						</div>
+					</div>
+					<div class="ibox-content">
+						<div id="sington_div" class="input-group">
+							<input type="text" placeholder="请填写搜索关键字" name="search" class="form-control input-lg">
+							<div class="input-group-btn">
+								<button class="btn btn-lg btn-primary" type="submit" onClick="retrievalFile()">
+									搜索
+								</button>
+							</div>
+						</div>
+					</div>
+				</div>
+            </div>
+
+			<div  class="col-sm-12">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title">
+						<h5>待办事项</h5>
+                        <div class="ibox-tools">
+							<a class="collapse-link">
+								<i class="fa fa-chevron-up"></i>
+							</a>
+                            <a class="dropdown-toggle" data-toggle="dropdown" href="javascript:;">
+                            	<i class="fa fa-wrench"></i>
+                            </a>
+                            <ul class="dropdown-menu dropdown-user">
+
+                            </ul>
+                            <a class="close-link">
+                            <i class="fa fa-times"></i>
+                            </a>
+                    	</div>
+                    </div>
+                    <div class="ibox-content">
+                        <div class="table-responsive">
+                        	<table class="table table-striped">
+                            	<thead>
+                                	<tr>
+                                    	<th>序号</th>
+                                        <th>名称</th>
+                                        <th>类别</th>
+										<th>上传人</th>
+                                       	<th>日期</th>
+                                        <th>操作</th>
+                                    </tr>
+                               	</thead>
+                                <tbody>
+                                	<tr>
+                                    	<td>1</td>
+                                        <td>交通运输部关于同意国际航行船舶临时进出长兴岛港部分码头泊位期限的批复.pdf
+                                        </td>
+                                        <td>文档</td>
+                                        <td>000000000000000000</td>
+                                        <td>2016-12-07 12:45:56</td>
+										<td>
+											<a href="javascript:;" title="审批">
+												<i class="fa fa-edit"></i>
+											</a>
+										</td>
+                                    </tr>
+									<tr>
+                                    	<td>2</td>
+                                        <td>交通运输部关于同意国际航行船舶临时进出长兴岛港部分码头泊位期限的批复.pdf
+                                        </td>
+                                        <td>文档</td>
+                                        <td>000000000000000000</td>
+                                        <td>2016-12-07 12:45:56</td>
+										<td>
+											<a href="javascript:;" title="审批">
+												<i class="fa fa-edit"></i>
+											</a>
+										</td>
+                                    </tr>
+									<tr>
+                                    	<td>3</td>
+                                        <td>交通运输部关于同意国际航行船舶临时进出长兴岛港部分码头泊位期限的批复.pdf
+                                        </td>
+                                        <td>文档</td>
+                                        <td>000000000000000000</td>
+                                        <td>2016-12-07 12:45:56</td>
+										<td>
+											<a href="javascript:;" title="审批">
+												<i class="fa fa-edit"></i>
+											</a>
+										</td>
+                                    </tr>
+									<tr>
+                                    	<td>4</td>
+                                        <td>交通运输部关于同意国际航行船舶临时进出长兴岛港部分码头泊位期限的批复.pdf
+                                        </td>
+                                        <td>文档</td>
+                                        <td>000000000000000000</td>
+                                        <td>2016-12-07 12:45:56</td>
+										<td>
+											<a href="javascript:;" title="审批">
+												<i class="fa fa-edit"></i>
+											</a>
+										</td>
+                                    </tr>
+									<tr>
+                                    	<td>5</td>
+                                        <td>交通运输部关于同意国际航行船舶临时进出长兴岛港部分码头泊位期限的批复.pdf
+                                        </td>
+                                        <td>文档</td>
+                                        <td>000000000000000000</td>
+                                        <td>2016-12-07 12:45:56</td>
+										<td>
+											<a href="javascript:;" title="审批">
+												<i class="fa fa-edit"></i>
+											</a>
+										</td>
+                                    </tr>
+                           		</tbody>
+                       		</table>
+                    	</div>
+						<div class="ibox-btns">
+							<div class="hr-line-dashed"></div>
+							<a class="href-btn" href="javascript:;" title="更多" data-url="personal/myUndone.html" data-title="待办事项">
+								<i class="glyphicon glyphicon-menu-right" style="color:#333333"></i>
+							</a>
+
+						</div>
+                    </div>
+                </div>
+            </div>
+
+			<div  class="col-sm-6">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title">
+                    	<h5>我的上传</h5>
+						<div class="ibox-tools">
+							<a class="collapse-link">
+								<i class="fa fa-chevron-up"></i>
+							</a>
+                            <a class="dropdown-toggle" data-toggle="dropdown" href="javascript:;">
+                            	<i class="fa fa-wrench"></i>
+                            </a>
+                            <ul class="dropdown-menu dropdown-user">
+
+                            </ul>
+                            <a class="close-link">
+                            <i class="fa fa-times"></i>
+                            </a>
+                    	</div>
+                    </div>
+                    <div class="ibox-content">
+                    	<div class="row">
+							<div class="col-xs-12">
+								<div class="table-responsive">
+									<table class="table table-striped">
+										<thead>
+											<tr>
+												<th width="70%">名称</th>
+												<th width="10%">类别</th>
+												<th width="20%">大小</th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr>
+												<td>交通运输部关于同意国际航行船舶临时进出长兴岛港部分码头泊位期限的批复.pdf</td>
+												<td>文档</td>
+												<td>10M</td>
+											</tr>
+											<tr>
+												<td>交通运输部关于同意国际航行船舶临时进出长兴岛港部分码头泊位期限的批复.pdf</td>
+												<td>文档</td>
+												<td>10M</td>
+											</tr>
+											<tr>
+												<td>世界海员日.mp4</td>
+												<td>资产</td>
+												<td>40M</td>
+											</tr>
+											<tr>
+												<td>世界海员日.mp4</td>
+												<td>资产</td>
+												<td>40M</td>
+											</tr>
+											<tr>
+												<td>世界海员日.mp4</td>
+												<td>资产</td>
+												<td>40M</td>
+											</tr>
+										</tbody>
+									</table>
+								</div>
+							</div>
+                      	</div>
+						<div class="ibox-btns">
+							<div class="hr-line-dashed"></div>
+							<a class="href-btn" href="javascript:;" title="文档上传" data-url="im/levelAuthorize.html" data-title="文档入库">
+								<i class="glyphicon glyphicon-open-file" style="color:#00CC00"></i>
+							</a>
+
+							<a class="href-btn" href="javascript:;" title="资产上传" style="margin-left:15px;" data-url="im/levelAuthorize.html" data-title="资产入库">
+								<i class="glyphicon glyphicon-floppy-open" style="color:#00CC00"></i>
+							</a>
+
+							<a class="href-btn" href="javascript:;" title="更多" style="margin-left:15px;" data-url="personal/myRecords.html" data-title="我的足迹">
+								<i class="glyphicon glyphicon-menu-right" style="color:#333333"></i>
+							</a>
+						</div>
+                	</div>
+                </div>
+            </div>
+
+			<div  class="col-sm-6">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title">
+                    	<h5>我的下载</h5>
+						<div class="ibox-tools">
+							<a class="collapse-link">
+								<i class="fa fa-chevron-up"></i>
+							</a>
+                            <a class="dropdown-toggle" data-toggle="dropdown" href="javascript:;">
+                            	<i class="fa fa-wrench"></i>
+                            </a>
+                            <ul class="dropdown-menu dropdown-user">
+
+                            </ul>
+                            <a class="close-link">
+                            <i class="fa fa-times"></i>
+                            </a>
+                    	</div>
+                    </div>
+                    <div class="ibox-content">
+                    	<div class="row">
+							<div class="col-xs-12">
+								<div class="table-responsive">
+									<table class="table table-striped">
+										<thead>
+											<tr>
+												<th width="70%">名称</th>
+												<th width="10%">类别</th>
+												<th width="20%">大小</th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr>
+												<td>交通运输部关于同意国际航行船舶临时进出长兴岛港部分码头泊位期限的批复.pdf</td>
+												<td>文档</td>
+												<td>10M</td>
+											</tr>
+											<tr>
+												<td>交通运输部关于同意国际航行船舶临时进出长兴岛港部分码头泊位期限的批复.pdf</td>
+												<td>文档</td>
+												<td>10M</td>
+											</tr>
+											<tr>
+												<td>世界海员日.mp4</td>
+												<td>资产</td>
+												<td>40M</td>
+											</tr>
+											<tr>
+												<td>世界海员日.mp4</td>
+												<td>资产</td>
+												<td>40M</td>
+											</tr>
+											<tr>
+												<td>世界海员日.mp4</td>
+												<td>资产</td>
+												<td>40M</td>
+											</tr>
+										</tbody>
+									</table>
+								</div>
+							</div>
+                      	</div>
+						<div class="ibox-btns">
+							<div class="hr-line-dashed"></div>
+
+							<a  class="href-btn" href="javascript:;" title="更多" data-url="personal/myRecords.html" data-title="我的足迹">
+								<i class="glyphicon glyphicon-menu-right" style="color:#333333"></i>
+							</a>
+						</div>
+                	</div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <script type="text/javascript">
+
+		$(function(){
+			$('a.href-btn').click(function(){
+				var title = $(this).attr('data-title');
+				var url = $(this).attr('data-url');
+				var params = $(this).attr('data-params');
+				parent.addTabPage(url, title);
+			});
+		});
+		function retrievalFile(){
+			parent.addTabPage('file_search.html','文档检索');
+		}
+        function openApprovalHistoryPage(){
+			parent.addTabPage('myUndone.html','待办事项');
+		}
+
+		function openUploadFilePage(){
+			parent.addTabPage('im/levelAuthorize.html','文档入库');
+		}
+
+		function openUploadAssetsPage(){
+			parent.addTabPage('im/levelAuthorize.html','资产入库');
+		}
+
+		function openMyTracksPage(){
+			parent.addTabPage('myRecords.html','我的足迹');
+		}
+    </script>
+</body>
+
+
+<!-- Mirrored from www.zi-han.net/theme/hplus/index_v1.html?v=4.0 by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 20 Jan 2016 14:20:20 GMT -->
+
+</html>

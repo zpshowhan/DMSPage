@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>文档审计</title>
+<meta name="keywords" content="#">
+<meta name="description"
+	content="H+是一个完全响应式，基于Bootstrap3最新版本开发的扁平化主题，她采用了主流的左右两栏式布局，使用了Html5+CSS3等现代技术">
+
+<link rel="shortcut icon" href="favicon.ico">
+<link href="../../css/bootstrap.min14ed.css?v=3.3.6" rel="stylesheet">
+<link href="../../css/font-awesome.min93e3.css?v=4.4.0" rel="stylesheet">
+
+<!-- jqgrid-->
+<link href="../../css/plugins/jqgrid/ui.jqgridffe4.css?0820"
+	rel="stylesheet">
+
+<link href="../../css/animate.min.css" rel="stylesheet">
+<link href="../../css/style.min862f.css?v=4.1.0" rel="stylesheet">
+<link href="../../js/plugins/layer/skin/layer.css" rel="stylesheet">
+<link href="../../css/admin.min.css" rel="stylesheet">
+<style>
+/* Additional style to fix warning dialog position */
+#alertmod_table_list_2 {
+	top: 900px !important;
+}
+</style>
+
+</head>
+<body class="gray-bg">
+	<div class="wrapper wrapper-content  animated fadeInRight">
+		<div class="row">
+			<div class="col-sm-12">
+			 <div class="tabs-container">
+                    <ul class="nav nav-tabs">
+						 <li class="active"><a data-toggle="tab" href="#tab-1" aria-expanded="true"> 文档审计</a>
+                        </li>
+                        <li class=""><a data-toggle="tab" href="#tab-2" aria-expanded="false">文档审计图表</a>
+                        </li>
+                    </ul>
+					<div class="tab-content">
+                        <div id="tab-1" class="tab-pane active">
+							<div class="panel-body">
+								<div class="ibox ">
+									<div  class="ibox-title" style="border-top: 0px">
+
+										<ul class="toolbar">
+										<li><button class="btn btn-success " type="button"   id="queryBtn"><i class="fa fa-search"></i>&nbsp;&nbsp;<span class="bold">查询</span>
+										</button></li>
+
+										<li><button class="btn btn-success " type="button"   id="refreshBtn"  ><i class="fa fa-refresh"></i>&nbsp;&nbsp;<span class="bold">刷新</span>
+										</button></li>
+										</ul>
+									</div>
+									<div class="ibox-content">
+										<div class="jqGrid_wrapper">
+											<table id="table_list_2"></table>
+											<div id="pager_list_2"></div>
+										</div>
+									</div>
+								</div>
+							</div>
+                        </div>
+						 <div id="tab-2" class="tab-pane">
+                            <div class="panel-body">
+								<div class="ibox" >
+									<div class="ibox-title" style="border-top: 0px">
+										<h5>文档操作统计图</h5>
+									</div>
+									<div class="ibox-content" style="height:400px;">
+										<!-- -->
+										<iframe class="J_iframe" name="iframe0" width="100%" height="100%" src="authRecord_echarts.html" frameborder="0" data-id="authRecord.html" seamless></iframe>
+
+									</div>
+								</div>
+                            </div>
+						 </div>
+					</div>
+			</div>
+
+			</div>
+
+		</div>
+	</div>
+	<script src="../../js/jquery.min.js?v=2.1.4"></script>
+	<script src="../../js/bootstrap.min.js?v=3.3.6"></script>
+	<script src="../../js/plugins/peity/jquery.peity.min.js"></script>
+	<script src="../../js/plugins/jqgrid/i18n/grid.locale-cnffe4.js?0820"></script>
+    <script src="../../js/plugins/jqgrid/jquery.jqGrid.minffe4.js?0820"></script>
+	<script src="../../js/content.min.js?v=1.0.0"></script>
+    <script src="../../js/plugins/layer/layer.min.js"></script>
+	<script  type="text/javascript">
+		$(document).ready(function() {
+			$.jgrid.defaults.styleUI = "Bootstrap";
+
+			var mydata = [ {
+				userName: "0000000000000000000",
+				loginIp : "10.10.0.184",
+				loginTime : "2007-10-24 11:23:13",
+				fileName:"操作指南",
+				fileOper:"上传",
+				isonline : "Y"
+			}, {
+				userName: "0000000000000000002",
+				loginIp : "10.10.0.184",
+				loginTime : "2007-10-14 11:23:13",
+				fileName:"操作指南",
+				fileOper:"审核",
+				isonline : "N"
+
+			}, {
+				userName : "0000000000000000003",
+				loginIp : "10.10.0.184",
+				loginTime : "2007-10-05 11:23:13",
+				fileName:"操作指南",
+				fileOper:"审核",
+				isonline : "Y"
+
+			}, {
+				userName : "0000000000000000004",
+				loginIp : "10.10.0.184",
+				loginTime : "2007-10-01 11:23:13",
+				fileName:"操作指南",
+				fileOper:"发布",
+				isonline : "N"
+
+			}, {
+				userName : "0000000000000000005",
+				loginIp : "10.10.0.184",
+				loginTime : "2007-10-09 11:23:13",
+				fileName:"操作指南",
+				fileOper:"预览",
+				isonline : "Y"
+
+			}, {
+				userName : "0000000000000000006",
+				loginIp : "10.10.0.184",
+				loginTime : "2007-10-13 11:23:13",
+				fileName:"操作指南",
+				fileOper:"下载",
+				isonline : "N"
+
+			}, {
+				userName : "0000000000000000007",
+				loginIp : "10.10.0.184",
+				loginTime : "2007-10-12 11:23:13",
+				fileName:"操作指南",
+				fileOper:"下载",
+				isonline : "Y"
+
+			}, {
+				userName : "0000000000000000008",
+				loginIp : "10.10.0.184",
+				loginTime : "2007-10-27 11:23:13",
+				fileName:"操作指南",
+				fileOper:"上传",
+				isonline : "Y"
+			}, {
+				userName : "0000000000000000009",
+				loginIp : "10.10.0.184",
+				loginTime : "2007-10-16 11:23:13",
+				fileName:"操作指南",
+				fileOper:"上传",
+				isonline : "N"
+
+			}, {
+				userName : "0000000000000000010",
+				loginIp : "10.10.0.184",
+				loginTime : "2007-10-11 11:23:13",
+				fileName:"操作指南",
+				fileOper:"预览",
+				isonline : "Y"
+
+			},{
+				userName : "0000000000000000011",
+				loginIp : "10.10.0.184",
+				loginTime : "2007-10-10 11:23:13",
+				fileName:"操作指南",
+				fileOper:"上传",
+				isonline : "N"
+
+			}, {
+				userName : "0000000000000000012",
+				loginIp : "10.10.0.184",
+				loginTime : "2007-10-09 11:23:13",
+				fileName:"操作指南",
+				fileOper:"预览",
+				isonline : "Y"
+
+			}, {
+				userName : "0000000000000000013",
+				loginIp : "10.10.0.184",
+				loginTime : "2007-10-06 11:23:13",
+				fileName:"操作指南",
+				fileOper:"预览",
+				isonline : "Y"
+
+			}, {
+				userName : "0000000000000000014",
+				loginIp : "10.10.0.184",
+				loginTime : "2007-10-04 11:23:13",
+				fileName:"操作指南",
+				fileOper:"下载",
+				isonline : "Y"
+
+			}, {
+				userName : "0000000000000000015",
+				loginIp : "10.10.0.184",
+				loginTime : "2007-10-02 11:23:13",
+				fileName:"操作指南",
+				fileOper:"预览",
+				isonline : "Y"
+
+			}, {
+				userName: "0000000000000000016",
+				loginIp : "10.10.0.184",
+				loginTime : "2007-10-02 11:23:13",
+				fileName:"操作指南",
+				fileOper:"预览",
+				isonline : "N"
+
+			}, {
+				userName : "0000000000000000017",
+				loginIp : "10.10.0.184",
+				loginTime : "2007-10-08 11:23:13",
+				fileName:"操作指南",
+				fileOper:"上传",
+				isonline : "Y"
+
+			} ];
+
+			$("#table_list_2").jqGrid({
+				data : mydata,
+				datatype : "local",
+				height : 360,
+                rownumbers:true,
+				autowidth : true,
+				shrinkToFit : true,
+				rowNum : 10,
+				rowList : [ 10, 20, 30 ],
+				colNames : [ "用户名", "登录IP", "操作时间", "文档名称","访问来源", "文档操作", "操作结果" ],
+				colModel : [ {
+					name : "userName",
+					index : "userName",
+					editable : true,
+					width : 60,
+					sorttype : "int",
+					search : true
+				}, {
+					name : "loginIp",
+					index : "loginIp",
+					editable : true,
+					width : 90
+				}, {
+					name : "loginTime",
+					index : "loginTime",
+					editable : true,
+					width : 100
+
+				}, {
+					name : "fileName",
+					index : "fileName",
+					editable : true,
+					width : 90
+				}, {
+					name : "accessSrc",
+					index : "accessSrc",
+					editable : true,
+					width : 90
+				}, {
+					name : "fileOper",
+					index : "fileOper",
+					editable : true,
+					width : 100
+
+				}, {
+					name : "isonline",
+					index : "isonline",
+					editable : true,
+					width : 80,
+					align : "left",
+					sorttype : "float",
+					formatter : function(value, row) {
+									if(value=="Y"){
+										return "成功";
+									}else if(value=="N"){
+										return "失败";
+									}else{
+										return value;
+									}
+					}
+				}],
+				pager : "#pager_list_2",
+				viewrecords : true,
+				hidegrid : true
+			});
+			$("#table_list_2").setSelection(4, true);
+			//表格重绘
+			$(window).bind("resize", function() {
+				var width = $(".jqGrid_wrapper").width();
+				$("#table_list_2").setGridWidth(width)
+			})
+			// add
+			 $('#addBtn').on('click', function(){
+               	          var index = layer.open({
+							type: 2,
+							//title: '添加页面',
+							shade: false,
+
+					    	moveType: 1,
+							content: 'authRecord_add.html',
+							area: ['60%', '60%'],
+							closeBtn: 0,
+							title: false,
+							//maxmin: true
+							 end: function(){ //此处用于演示
+							 //alert("sss")
+							 }
+
+							});
+							layer.full(index);
+			 })
+			 //edit
+			 $('#editBtn').on('click', function(){
+			 var ids = $("#table_list_2").jqGrid('getGridParam','selarrrow');
+			 if(ids.length==1)
+			 {
+               	          var index = layer.open({
+							type: 2,
+							title: '修改页面',
+							content: 'demo_editWin.html?id='+ids,
+							area: ['60%', '60%'],
+							closeBtn: 0,
+							title: false,
+							maxmin: false,
+							end: function(){ //此处用于演示
+							 //alert("sss")
+							 }
+							});
+							layer.full(index);
+			 }else if(ids.length!=1)
+			 {
+			  layer.msg('请选中一条记录修改！', {icon: 6});
+			 }
+			})
+			 //query
+			 $('#queryBtn').on('click', function(){
+                   var   index= layer.open({
+						type: 2,
+						//title: 'layer mobile页',
+						shadeClose: false,
+						title:"查询条件",
+						shade: false,
+						maxmin: true,
+					    moveType: 1,//拖拽风格，0是默认，1是传统拖动
+						//shift: 1,
+						area: ['60%', '60%'],
+						content: 'authRecord_query.html' //iframe的url
+					});
+
+			 })
+			 //fresh
+			 $('#refreshBtn').on('click', function(){
+               	  $("#table_list_2").trigger("reloadGrid");
+			 })
+			 //del
+			$('#delBtn').on('click', function(){
+
+			   var ids = $("#table_list_2").jqGrid('getGridParam','selarrrow');
+			   if(ids.length>=1){
+               var  table =" <div class='ibox-content'><table class='table table-bordered'><thead><tr><th>#</th><th>姓名</th><th>性别</th><th>年龄</th></tr></thead><tbody> <tr><td>1</td><td>1</td><td>1</td><td>1</td> </tr></table></div>"
+
+			   //询问框
+				parent.layer.confirm('您确定删除下列信息吗？<br/>'+table, {
+				btn: ['确定','取消'], //按钮
+				title:"删除提示",
+				shade: 0.8 //不显示遮罩
+				}, function(){
+				parent.layer.msg('删除成功!', {icon: 1});
+				}, function(){
+				parent.layer.msg('删除失败!', {shift: 6});
+				});
+
+			  }else{
+				     layer.msg('请选中一条记录删除！', {icon: 6});
+			  }
+			 })
+		});
+	</script>
+</body>
+</html>

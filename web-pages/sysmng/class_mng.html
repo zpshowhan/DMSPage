@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html>
+
+
+<!-- Mirrored from www.zi-han.net/theme/hplus/layouts.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 20 Jan 2016 14:18:52 GMT -->
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+    <title>H+ 后台主题UI框架 - 布局</title>
+    <meta name="keywords" content="H+后台主题,后台bootstrap框架,会员中心主题,后台HTML,响应式后台">
+    <meta name="description" content="H+是一个完全响应式，基于Bootstrap3最新版本开发的扁平化主题，她采用了主流的左右两栏式布局，使用了Html5+CSS3等现代技术">
+
+    <link href="../../css/plugins/morris/morris-0.4.3.min.css" rel="stylesheet">
+    <link href="../../css/animate.min.css" rel="stylesheet">
+    <link href="../../css/style.min862f.css?v=4.1.0" rel="stylesheet">
+	<link href="../../css/bootstrap.min14ed.css?v=3.3.6" rel="stylesheet">
+	<link href="../../css/font-awesome.min93e3.css?v=4.4.0" rel="stylesheet">
+	<link href="../../css/plugins/sweetalert/sweetalert.css" rel="stylesheet">
+    <link href="../../css/plugins/bootstrap-table/bootstrap-table.min.css" rel="stylesheet">
+    <link href="../../css/plugins/iCheck/custom.css" rel="stylesheet">
+	<link rel="stylesheet" href="../../css/bootstrap.min.css">
+	<link rel="stylesheet" href="../../css/font-awesome.css">
+	<link href="../../css/plugins/treeview/bootstrap-treeview.css" rel="stylesheet">
+<body class="gray-bg">
+    <div class="wrapper wrapper-content">
+        <div class="row">
+			<div class="col-sm-6" >
+				<div class="ibox float-e-margins">
+					<div class="ibox-content">
+						<div class="file-manager">
+							<h5>文档分类</h5>
+							<button class="btn btn-primary btn-sm" id="docAdd">添加</button>
+							<button class="btn btn-primary btn-sm" id="docModify">修改</button>
+							<button class="btn btn-primary btn-sm" id="docDelete">删除</button>
+							<button class="btn btn-primary btn-sm" id="docEnable">启用</button>
+							<button class="btn btn-primary btn-sm" id="docDisable">禁用</button>
+							<div id="docTreeview"  style="overflow:auto"></div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-sm-6" >
+				<div class="ibox float-e-margins">
+					<div class="ibox-content">
+						<div class="file-manager">
+							<h5>资产分类</h5>
+							<button class="btn btn-primary btn-sm" id="assetsAdd">添加</button>
+							<button class="btn btn-primary btn-sm" id="assetsModify">修改</button>
+							<button class="btn btn-primary btn-sm" id="assetsDelete">删除</button>
+							<button class="btn btn-primary btn-sm" id="assetsEnable">启用</button>
+							<button class="btn btn-primary btn-sm" id="assetsDisable">禁用</button>
+							<div id="assetsTreeview"  style="overflow:auto"></div>
+						</div>
+					</div>
+				</div>
+			</div>
+        </div>
+      </div>
+	<script src="../../js/plugins/layer/laydate/laydate.js"></script>
+	<script src="../../js/plugins/sweetalert/sweetalert.min.js"></script>
+	<script src="../../js/jquery.min.js?v=2.1.4"></script>
+    <script src="../../js/plugins/bootstrap-table/bootstrap-table.min.js"></script>
+	<script src="../../js/plugins/bootstrap-table/locale/bootstrap-table-zh-CN.min.js"></script>
+	<script src="../../js/plugins/layer/layer.js"></script>
+    <script src="../../js/bootstrap.min.js?v=3.3.6"></script>
+    <script src="../../js/plugins/bootstrap-table/bootstrap-table-mobile.min.js"></script>
+    <script src="../../js/content.min.js?v=1.0.0"></script>
+	<script src="../../js/BootstrapMenu.min.js"></script>
+	<script src="../../js/plugins/treeview/bootstrap-treeview.js"></script>
+
+
+
+	<script type="text/javascript">
+
+	 $(function(){
+
+		$("#docAdd").click(function(){
+			var nodes=$("#docTreeview").find(".node-checked");
+
+			if (nodes.length==0) {
+				swal({
+					title:"警告",
+					type:"warning",
+					text: "请选择一个节点！",
+				})
+			}else if (nodes.length>1) {
+				swal({
+					title:"警告",
+					type:"warning",
+					text: "添加不可以选择多个！",
+				})
+			} else {
+				 layer.open({
+					type: 1,
+					shadeClose: false,
+					title:"添加分类",
+					shade: false,
+					maxmin: true,
+					moveType: 1,//拖拽风格，0是默认，1是传统拖动
+					area: ['60%', '60%'],
+					content: '<div class=\"gray-bg\"><div class=\"wrapper wrapper-content\"><div class=\"ibox-content\"><div class=\"row\"  style="height:200px"><div  style = \" margin:0 auto;width:400px;\" ><div class=\"form-group\" ><label class=\"col-sm-3 control-label\" style = \"padding-left: 0px;\">节点名称：</label><div class=\"col-sm-9\"><input type=\"tex\" name="newFlowName" class=\"form-control\" placeholder="请输入新节点名称"></div></div></div></div></div></div></div>', //iframe的url
+					btn: ['确定','取消'],
+					btn1: function(index, layero){
+						var nodeId=$(nodes[0]).attr("data-nodeid");
+						var node = $("#docTreeview").treeview('getNode', nodeId);//node包含节点的所有信息
+						console.log(node.text);
+						layer.close(index);
+					}
+				});
+			}
+		})
+
+		$("#docModify").click(function(){
+			var nodes=$("#docTreeview").find(".node-checked");
+			if (nodes.length==0) {
+				swal({
+					title:"警告",
+					type:"warning",
+					text: "请选择一个节点！",
+				})
+			}else if (nodes.length>1) {
+				swal({
+					title:"警告",
+					type:"warning",
+					text: "修改不可以选择多个！",
+				})
+			} else {
+				 layer.open({
+					type: 1,
+					shadeClose: false,
+					title:"修改分类",
+					shade: false,
+					maxmin: true,
+					moveType: 1,//拖拽风格，0是默认，1是传统拖动
+					area: ['60%', '60%'],
+					content: '<div class=\"gray-bg\"><div class=\"wrapper wrapper-content\"><div class=\"ibox-content\"><div class=\"row\"  style="height:200px"><div  style = \" margin:0 auto;width:400px;\" ><div class=\"form-group\" ><label class=\"col-sm-3 control-label\" style = \"padding-left: 0px;\">节点名称：</label><div class=\"col-sm-9\"><input type=\"tex\" name="newFlowName" class=\"form-control\" placeholder="请输入新节点名称"></div></div></div></div></div></div></div>', //iframe的url
+					btn: ['确定','取消'],
+					btn1: function(index, layero){
+						layer.close(index);
+					}
+				});
+			}
+		})
+
+		$("#docDelete").click(function(){
+			var nodes=$("#docTreeview").find(".node-checked");
+			for (var index = 0; index < nodes.length; index++) {
+				var node = $(nodes[index]);
+			}
+		})
+
+		$("#docEnable").click(function(){
+			var nodes=$("#docTreeview").find(".node-checked");
+			for (var index = 0; index < nodes.length; index++) {
+				var node = $(nodes[index]);
+			}
+		})
+
+		$("#docDisable").click(function(){
+			var nodes=$("#docTreeview").find(".node-checked");
+			for (var index = 0; index < nodes.length; index++) {
+				var node = $(nodes[index]);
+			}
+		})
+
+		$("#assetsAdd").click(function(){
+			var nodes=$("#assetsTreeview").find(".node-checked");
+			if (nodes.length==0) {
+				swal({
+					title:"警告",
+					type:"warning",
+					text: "请选择一个节点！",
+				})
+			}else if (nodes.length>1) {
+				swal({
+					title:"警告",
+					type:"warning",
+					text: "添加不可以选择多个！",
+				})
+			} else {
+				 layer.open({
+					type: 1,
+					shadeClose: false,
+					title:"添加分类",
+					shade: false,
+					maxmin: true,
+					moveType: 1,//拖拽风格，0是默认，1是传统拖动
+					area: ['60%', '60%'],
+					content: '<div class=\"gray-bg\"><div class=\"wrapper wrapper-content\"><div class=\"ibox-content\"><div class=\"row\"  style="height:200px"><div  style = \" margin:0 auto;width:400px;\" ><div class=\"form-group\" ><label class=\"col-sm-3 control-label\" style = \"padding-left: 0px;\">节点名称：</label><div class=\"col-sm-9\"><input type=\"tex\" name="newFlowName" class=\"form-control\" placeholder="请输入新节点名称"></div></div></div></div></div></div></div>', //iframe的url
+					btn: ['确定','取消'],
+					btn1: function(index, layero){
+						var nodeId=$(nodes[0]).attr("data-nodeid");
+						var node = $("#assetsTreeview").treeview('getNode', nodeId);//node包含节点的所有信息
+						console.log(node.text);
+						layer.close(index);
+					}
+				});
+			}
+		})
+
+		$("#assetsModify").click(function(){
+			var nodes=$("#assetsTreeview").find(".node-checked");
+			if (nodes.length==0) {
+				swal({
+					title:"警告",
+					type:"warning",
+					text: "请选择一个节点！",
+				})
+			}else if (nodes.length>1) {
+				swal({
+					title:"警告",
+					type:"warning",
+					text: "修改不可以选择多个！",
+				})
+			} else {
+				 layer.open({
+					type: 1,
+					shadeClose: false,
+					title:"修改分类",
+					shade: false,
+					maxmin: true,
+					moveType: 1,//拖拽风格，0是默认，1是传统拖动
+					area: ['60%', '60%'],
+					content: '<div class=\"gray-bg\"><div class=\"wrapper wrapper-content\"><div class=\"ibox-content\"><div class=\"row\"  style="height:200px"><div  style = \" margin:0 auto;width:400px;\" ><div class=\"form-group\" ><label class=\"col-sm-3 control-label\" style = \"padding-left: 0px;\">节点名称：</label><div class=\"col-sm-9\"><input type=\"tex\" name="newFlowName" class=\"form-control\" placeholder="请输入新节点名称"></div></div></div></div></div></div></div>', //iframe的url
+					btn: ['确定','取消'],
+					btn1: function(index, layero){
+						layer.close(index);
+					}
+				});
+			}
+		})
+
+		$("#assetsDelete").click(function(){
+			var nodes=$("#assetsTreeview").find(".node-checked");
+			for (var index = 0; index < nodes.length; index++) {
+				var node = $(nodes[index]);
+			}
+		})
+
+		$("#assetsEnable").click(function(){
+			var nodes=$("#assetsTreeview").find(".node-checked");
+			for (var index = 0; index < nodes.length; index++) {
+				var node = $(nodes[index]);
+			}
+		})
+
+		$("#assetsDisable").click(function(){
+			var nodes=$("#assetsTreeview").find(".node-checked");
+			for (var index = 0; index < nodes.length; index++) {
+				var node = $(nodes[index]);
+			}
+		})
+
+
+
+		var tree =[{
+						"text": "会议文档",
+						"tags": ["启用"],
+						"id":"会议文档",
+						"nodes": [{
+							"text": "XX部门会议文档",
+							"href": "#child1",
+							"tags": ["启用"],
+							"id":"XX部门会议文档",
+							"nodes": [{
+								"text": "XX组会议文档",
+								"tags": ["启用"],
+								"id":"XX组会议文档",
+							}, {
+								"text": "XXX组会议文档",
+								"tags": ["启用"],
+								"id":"XXX组会议文档",
+							}]
+						}, {
+							"text": "XXX部门会议文档",
+							"tags": ["启用"],
+								"id":"XXX部门会议文档",
+						}]
+					},{
+						"text": "图片",
+						"tags": ["禁用"],
+								"id":"图片",
+					}, {
+						"text": "视频",
+						"tags": ["启用"],
+								"id":"视频",
+					}];
+
+			$checkableTree =$("#docTreeview").treeview({
+				data: tree,
+				showIcon: false,
+         		showCheckbox: true,
+		      	selectedColor: 'blue',
+		      	selectedBackColor: '#FFFFFF',
+          		multiSelect:true,
+				showTags:true,
+				onNodeChecked: function(event, node) {
+					$checkableTree.treeview('selectNode', [ node.nodeId, { silent: true } ]);
+				},
+				onNodeUnchecked: function (event, node) {
+					$checkableTree.treeview('unselectNode', [ node.nodeId, { silent: true } ]);
+				},
+				onNodeSelected: function(event,node) {
+					$checkableTree.treeview('checkNode', [ node.nodeId, { silent: true } ]);
+				},
+				onNodeUnselected: function(event,node) {
+					$checkableTree.treeview('uncheckNode', [ node.nodeId, { silent: true } ]);
+          		}
+			});
+
+
+
+			$assetsCheckableTree=$("#assetsTreeview").treeview({
+				showIcon: false,
+         		showCheckbox: true,
+		      	selectedColor: 'blue',
+		      	selectedBackColor: '#FFFFFF',
+          		multiSelect:true,
+				data: tree,
+				showTags:true,
+				onNodeChecked: function(event, node) {
+					$assetsCheckableTree.treeview('selectNode', [ node.nodeId, { silent: true } ]);
+				},
+				onNodeUnchecked: function (event, node) {
+					$assetsCheckableTree.treeview('unselectNode', [ node.nodeId, { silent: true } ]);
+				},
+				onNodeSelected: function(event,node) {
+					$assetsCheckableTree.treeview('checkNode', [ node.nodeId, { silent: true } ]);
+				},
+				onNodeUnselected: function(event,node) {
+					$assetsCheckableTree.treeview('uncheckNode', [ node.nodeId, { silent: true } ]);
+          		}
+			});
+
+
+	 });
+
+	</script>
+</body>
+
+
+<!-- Mirrored from www.zi-han.net/theme/hplus/layouts.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 20 Jan 2016 14:18:59 GMT -->
+</html>

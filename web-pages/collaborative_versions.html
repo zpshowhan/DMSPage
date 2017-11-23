@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html>
+
+
+<!-- Mirrored from www.zi-han.net/theme/hplus/table_bootstrap.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 20 Jan 2016 14:20:03 GMT -->
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+    <title>文档协同明细</title>
+    <meta name="keywords" content="文档协同管理，文档版本历史查看与下载">
+    <meta name="description" content="文档协同管理，文档版本历史查看与下载">
+
+    <link rel="shortcut icon" href="favicon.ico">
+	<link href="../css/bootstrap.min14ed.css?v=3.3.6" rel="stylesheet">
+    <link href="../css/font-awesome.min93e3.css?v=4.4.0" rel="stylesheet">
+    <link href="../css/plugins/bootstrap-table/bootstrap-table.min.css" rel="stylesheet">
+	<link href="../css/plugins/sweetalert/sweetalert.css" rel="stylesheet">
+	
+    <link href="../css/animate.min.css" rel="stylesheet">
+	<link href="css/style.css" rel="stylesheet">
+    <link href="../css/style.min862f.css?v=4.1.0" rel="stylesheet">
+    
+	
+	<style type="text/css">
+		
+	</style>
+</head>
+
+<body class="gray-bg">
+    <div class="wrapper wrapper-content animated fadeInRight">
+		<div class="row">
+			<div class="col-sm-12">
+				<div class="ibox float-e-margins">
+					<div class="ibox-title">
+                        版本列表
+						<small class="pull-right text-muted">
+							<input type="radio" name="playing" value="1" checked=>
+							<label for="radio1">发起人</label>&nbsp;&nbsp;
+							<input type="radio" name="playing" value="0">
+							<label for="radio1">参与者</label>
+						</small>
+                    </div>
+					<div class="ibox-content">
+						<div class="btn-group hidden-xs" id="historyToolbar" role="group">
+                        	<button id="existsCollaborative" type="button" class="btn btn-outline btn-default" title="退出协同" style="display:none;">
+                            	<i class="glyphicon glyphicon-eye-close" aria-hidden="true"></i>
+                            </button>
+                            <button id="uploadDoc" type="button" class="btn btn-outline btn-default" title="签入">
+                                <i class="glyphicon glyphicon-cloud-upload" aria-hidden="true"></i>
+                            </button>
+                            <button id="downloadDoc" type="button" class="btn btn-outline btn-default" title="签出">
+                                <i class="glyphicon glyphicon-cloud-download" aria-hidden="true"></i>
+                            </button>
+							<button id="cancelBlock" type="button" class="btn btn-outline btn-default" title="取消锁定">
+                            	<i class="glyphicon glyphicon-stop" aria-hidden="true"></i>
+                            </button>
+							<button id="stopCollaborative" type="button" class="btn btn-outline btn-default" title="定稿">
+                            	<i class="glyphicon glyphicon-save" aria-hidden="true"></i>
+                            </button>
+                        </div>
+						<table id="historyDataGrid" data-mobile-responsive="true">
+							<thead>
+								<tr>
+									<th data-field="fileName" data-width="10%">文档名称</th>
+									<th data-field="version" data-width="10%">版本号</th>
+									<th data-field="author" data-width="10%">作者</th>
+									<th data-field="size" data-width="10%">文档大小</th>
+									<th data-field="createTime" data-width="20%">上传时间</th>
+									<th data-field="intro" data-width="30%">版本介绍</th>
+									<th data-field="collaborativeCount" data-width="5%" data-formatter="collaborativeFormatter">协同人数</th>
+									<th data-field="annotateCount" data-width="5%" data-formatter="annotateCountFormatter">评注数量</th>
+								</tr>
+							</thead>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		<div class="row">
+			<div class="col-sm-12">
+				<div id="annotate_list" class="ibox float-e-margins">
+					<div class="ibox-title">
+						<small class="pull-right text-muted">版本V1.03</small>
+                        评注
+                    </div>
+					<div class="ibox-content">
+						<div class="social-feed-box">
+                                    <div class="social-avatar">
+                                        <a href="#" class="pull-left">
+                                            <i class="fa fa-user"></i>
+                                        </a>
+                                        <div class="media-body">
+                                            <a href="#">
+                                                    逆光狂胜蔡舞娘
+                                                </a>
+                                            <small class="text-muted">17 小时前</small>
+                                        </div>
+                                    </div>
+                                    <div class="social-body">
+                                        <p>
+                                            好东西，我朝淘宝准备跟进，1折开卖
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="social-feed-box">
+                                    <div class="social-avatar">
+                                        <a href="#" class="pull-left">
+                                            <i class="fa fa-user"></i>
+                                        </a>
+                                        <div class="media-body">
+                                            <a href="#">
+                                                    避雷范儿
+                                                </a>
+                                            <small class="text-muted"> 16 小时前</small>
+                                        </div>
+                                    </div>
+                                    <div class="social-body">
+                                        <p>
+                                            第一个真的好美 就是噪音太大了 挺唯美的意境瞬间变成工厂了
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="social-feed-box">
+                                    <div class="social-avatar">
+                                        <a href="#" class="pull-left">
+                                            <i class="fa fa-user"></i>
+                                        </a>
+                                        <div class="media-body">
+                                            <a href="#">
+                                                    kamppi
+                                                </a>
+                                            <small class="text-muted"> 6 小时前</small>
+                                        </div>
+                                    </div>
+                                    <div class="social-body">
+                                        <p>
+                                            好美的装置艺术，第二个让我想起了海中缓缓游动的鲸鱼。
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="social-feed-box">
+                                    <div class="social-avatar">
+                                        <a href="#" class="pull-left">
+                                            <i class="fa fa-user"></i>
+                                        </a>
+                                        <div class="media-body">
+                                            <a href="#">
+                                                    kamppi
+                                                </a>
+                                            <small class="text-muted">6 小时前</small>
+                                        </div>
+                                    </div>
+                                    <div class="social-body">
+                                        <p>
+                                            “Flylight 的灯管并不固定，由一套软件控制：每一个灯管都根据与其它灯管的互动进行移动，就像一群真正的鸟群一样。” 好像介绍的描述不对，灯管是固定的，控制的只是点亮和熄灭的时间，模拟成一团亮点移动
+                                        </p>
+                                    </div>
+                                </div>
+								
+								<div class="social-feed-box">
+                                    <div class="social-avatar">
+                                        <a href="#" class="pull-left">
+											<i class="fa fa-user"></i>
+										</a>
+										<div class="media-body">
+                                            <textarea class="form-control" placeholder="填写评论..." style="resize:none;"></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="social-body" align="right">
+										<button class="btn btn-primary btn-block" style="width:100px;">提交</button>
+									</div>
+                                </div>
+					</div>
+			</div>
+		</div>
+		
+	</div>
+    
+    <script src="../js/jquery.min.js?v=2.1.4"></script>
+    <script src="../js/bootstrap.min.js?v=3.3.6"></script>
+    <script src="../js/content.min.js?v=1.0.0"></script>
+    <script src="../js/plugins/bootstrap-table/bootstrap-table.min.js"></script>
+    <script src="../js/plugins/bootstrap-table/bootstrap-table-mobile.min.js"></script>
+    <script src="../js/plugins/bootstrap-table/locale/bootstrap-table-zh-CN.min.js"></script>
+	<script src="../js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+	<script src="../js/plugins/sweetalert/sweetalert.min.js"></script>
+	<script src="../js/plugins/layer/layer.min.js"></script>
+    <script type="text/javascript" src="http://tajs.qq.com/stats?sId=9051096" charset="UTF-8"></script>
+	
+	<script type="text/javascript" >
+		$(function(){
+			var e = [
+				{fileName:'Document_2014.doc', version:'1.03',author:'喜洋洋',size:'14M',createTime:'2017-06-23 12:00:00',intro:'测试测试测试测试测试测试测试测试测试测试测试测试',collaborativeCount:2,annotateCount:2},
+				{fileName:'Document_2014.doc', version:'1.02',author:'喜洋洋',size:'13M',createTime:'2017-06-23 12:00:00',intro:'测试测试测试测试测试测试测试测试测试测试测试测试',collaborativeCount:2,annotateCount:2},
+				{fileName:'Document_2014.doc', version:'1.01',author:'喜洋洋',size:'12M',createTime:'2017-06-23 12:00:00',intro:'测试测试测试测试测试测试测试测试测试测试测试测试',collaborativeCount:2,annotateCount:2}
+			];
+			$('#historyDataGrid').bootstrapTable({
+					data:e,
+					height:"400",
+					dataType: "json",
+					toolbar:"#historyToolbar",
+					pagination: true,
+					pageSize: 10,
+					pageNumber: 1,
+					pageList: [5, 10, 20],
+					sidePagination: "client"
+				});
+			
+			$('#existsCollaborative').click(function () {
+				swal({
+					title: "是否确认退出",
+					text: "是否确认退出文档协同？",
+					type: "warning",
+					showCancelButton: true,
+					confirmButtonColor: "#DD6B55",
+					confirmButtonText: "退出",
+					closeOnConfirm: false
+				}, function () {
+					swal("退出成功！", "您已经退出文档协同参与工作。", "success");
+				});
+			});
+			
+			$("#uploadDoc").click(function(){
+				//iframe层
+				parent.layer.open({
+					type: 2,
+					title: '文档签入',
+					shadeClose: true,
+					shade: 0.8,
+					move: false,
+					scrollbar: false,
+					area: ['50%', '55%'],
+					content: 'collaborative_upload.html',
+					btn: ['签入', '取消'],
+					yes: function(index, layero){
+						parent.layer.close(index);
+						swal({
+							title:"成功签入",
+							text:"文档上传成功，解除对文档锁定。",
+							type:"success"
+						});
+					},
+					cancel: function(index, layero){
+						parent.layer.close(index);
+					}
+					
+				});
+				
+
+			});
+			
+			$("#downloadDoc").click(function(){
+				swal({
+					title:"成功签出",
+					text:"文档下载成功，锁定文档，防止其他协同人员下载编辑文档。",
+					type:"success"
+				})
+			});
+			
+			$("#cancelBlock").click(function(){
+				swal({
+					title:"成功解除锁定",
+					text:"成功取消文档签出状态，文档锁定已经解除。",
+					type:"success"
+				})
+			});
+			
+			$("#stopCollaborative").click(function(){
+				swal({
+					title:"定稿成功",
+					text:"文档成功完成定稿，此文档的协同工作完美结束。",
+					type:"success"
+				})
+			});
+			
+			$('input[name="playing"]').click(function(){
+				if($(this).val()=='1'){
+					$('#existsCollaborative').css({'display':'none'});
+					$('#stopCollaborative').css({'display':'inline-block'});
+				}else {
+					$('#existsCollaborative').css({'display':'inline-block'});
+					$('#stopCollaborative').css({'display':'none'});
+				}
+				
+			});
+			
+		});
+		
+		this.collaborativeFormatter = function(value,row,index){
+			return "<a href='javascript:;' onclick='queryCollaborativors()'>"+value+"</a>";
+		}
+		
+		this.annotateCountFormatter = function(value,row,index){
+			return "<a href='javascript:;' onclick='queryAnnotates()'>"+value+"</a>";
+		}
+		
+		this.queryCollaborativors = function(){
+			var playing = $('input[name="playing"]:checked').val();
+			var url;
+			if(playing=='1'){
+				url='collaborative_members.html';
+			}else{
+				url='collaborative_members_r.html';
+			}
+			
+			//iframe层
+			parent.layer.open({
+				type: 2,
+				title: '协同人员列表',
+				shadeClose: true,
+				shade: 0.8,
+				move: false,
+				scrollbar: false,
+				area: ['70%', '80%'],
+				content: url
+			});
+		}
+
+			
+		this.queryAnnotates = function(row){
+			var offset = $('#annotate_list').offset().top; //#test是需要跳转的div id位置
+			$(window).scrollTop(offset);
+		}
+		
+		this.deleteRow = function(row){
+		
+		}
+	</script>
+</body>
+
+
+<!-- Mirrored from www.zi-han.net/theme/hplus/table_bootstrap.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 20 Jan 2016 14:20:06 GMT -->
+</html>

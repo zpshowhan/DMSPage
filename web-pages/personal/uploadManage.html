@@ -1,0 +1,636 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>上传管理</title>
+<link href="../../css/animate.min.css" rel="stylesheet">
+<link href="../../css/style.min862f.css?v=4.1.0" rel="stylesheet">
+<link href="../../css/bootstrap.min14ed.css?v=3.3.6" rel="stylesheet">
+<link href="../../css/font-awesome.min93e3.css?v=4.4.0" rel="stylesheet">
+<link href="../../css/plugins/bootstrap-table/bootstrap-table.min.css" rel="stylesheet">
+<link href="../../css/plugins/sweetalert/sweetalert.css" rel="stylesheet">
+<link href="../../css/plugins/iCheck/custom.css" rel="stylesheet">
+<link href="../../css/admin.css" rel="stylesheet">
+<style>
+#alertmod_table_list_2 {
+	top: 900px !important;
+}
+.form-control {
+	display: inline;
+}
+.ibox-content{
+	border-style:none;
+}
+</style>
+
+</head>
+<body class="gray-bg">
+	<div class="wrapper wrapper-content  animated fadeInRight">
+		<div class="row">
+			<div class="col-sm-12">
+				<div class="tabs-container">
+                    <ul class="nav nav-tabs">
+						 <li class="active"><a data-toggle="tab" href="#tab-1" aria-expanded="true"><i class="fa fa-file"></i>文档上传管理</a>
+                        </li>
+                        <li class="" id="sec"><a data-toggle="tab" href="#tab-2" aria-expanded="false"><i class="fa fa-play-circle-o"></i>资产上传管理</a>
+                        </li>
+                    </ul>
+					<div class="tab-content">
+                        <div id="tab-1" class="tab-pane active">
+							<div class="panel-body">
+								<div class="ibox ">
+									<div id="gridtool" class="ibox-title"  style="border-top: 0px">
+										 <form id="searchForm">
+											 文档名称：
+									<input type="text" class="form-control"
+										style="width: 100px">&nbsp;&nbsp;&nbsp;&nbsp;
+										 文档来源：
+									<input type="text" class="form-control"
+										style="width: 100px">&nbsp;&nbsp;&nbsp;&nbsp;
+										 文档格式：
+									 <select class="form-control m-b"
+										name="account" style="width: 100px">
+										<option>全部</option>
+										<option>PPT</option>
+										<option>WORD</option>
+										<option>EXCEL</option>
+										<option>PDF</option>
+										<option>PIC</option>
+										<option>CAD</option>
+										<option>TXT</option>
+										<option>AUD</option>
+									</select>&nbsp;&nbsp;&nbsp;&nbsp;
+									文档分类：
+									 <select class="form-control m-b"
+										name="account" style="width: 100px">
+										<option>全部</option>
+										<option>说明书</option>
+										<option>招标文件</option>
+										<option>人员招录</option>
+									</select>&nbsp;&nbsp;&nbsp;&nbsp;
+									上传时间：<input placeholder="开始日期"
+										class="form-control layer-date" id="start"
+										style="width: 100px; vertical-align: middle;">- <input
+										placeholder="结束日期" class="form-control layer-date" id="end"
+										style="width: 100px; vertical-align: middle;">&nbsp;&nbsp;&nbsp;&nbsp;
+									<button type="button" class="btn btn-sm btn-primary"><i class="fa fa-search"></i>搜索</button>&nbsp;&nbsp;&nbsp;&nbsp;
+								<button type="button" class="btn btn-sm btn-primary" onclick="fileUpload()"><i class="fa fa-upload"></i>文档上传</button>
+
+									    </form>
+									</div>
+
+									<div class="ibox-content">
+										<table id="tab-1_table"></table>
+									</div>
+								</div>
+							</div>
+                        </div>
+						<div id="tab-2" class="tab-pane">
+                            <div class="panel-body">
+								<div class="ibox" >
+									<div id="gridtool" class="ibox-title"  style="border-top: 0px">
+										 <form id="searchForm">
+											 资产名称：
+									<input type="text" class="form-control"
+										style="width: 100px">&nbsp;&nbsp;&nbsp;&nbsp;
+										 资产来源：
+									<input type="text" class="form-control"
+										style="width: 100px">&nbsp;&nbsp;&nbsp;&nbsp;
+										 文件格式：
+									 <select class="form-control m-b"
+										name="account" style="width: 100px">
+										<option>全部</option>
+										<option>PPT</option>
+										<option>WORD</option>
+										<option>EXCEL</option>
+										<option>PDF</option>
+										<option>PIC</option>
+										<option>CAD</option>
+										<option>TXT</option>
+										<option>AUD</option>
+									</select>&nbsp;&nbsp;&nbsp;&nbsp;
+									资产分类：
+									 <select class="form-control m-b"
+										name="account" style="width: 100px">
+										<option>全部</option>
+										<option>说明书</option>
+										<option>招标文件</option>
+										<option>人员招录</option>
+									</select>&nbsp;&nbsp;&nbsp;&nbsp;
+									上传时间：<input placeholder="开始日期"
+										class="form-control layer-date" id="start_2"
+										style="width: 100px; vertical-align: middle;">- <input
+										placeholder="结束日期" class="form-control layer-date" id="end_2"
+										style="width: 100px; vertical-align: middle;">&nbsp;&nbsp;&nbsp;&nbsp;
+	                            <button type="button" class="btn btn-sm btn-primary"><i class="fa fa-search"></i>搜索</button>&nbsp;&nbsp;&nbsp;&nbsp;
+								<button type="button" class="btn btn-sm btn-primary" onclick="assertUpload()"><i class="fa fa-upload"></i>资产上传</button>
+									    </form>
+									</div>
+									<div class="ibox-content table-responsive">
+										<table id="tab-2_table"></table>
+								 </div>
+								</div>
+                            </div>
+						 </div>
+					</div>
+				</div>
+
+			</div>
+		</div>
+	</div>
+	<script src="../../js/jquery.min.js?v=2.1.4"></script>
+    <script src="../../js/bootstrap.min.js?v=3.3.6"></script>
+    <script src="../../js/plugins/bootstrap-table/bootstrap-table.min.js"></script>
+    <script src="../../js/plugins/bootstrap-table/bootstrap-table-mobile.min.js"></script>
+    <script src="../../js/plugins/bootstrap-table/locale/bootstrap-table-zh-CN.min.js"></script>
+	<script src="../../js/plugins/layer/layer.js"></script>
+	<script src="../../js/plugins/sweetalert/sweetalert.min.js"></script>
+	<script src="../../js/plugins/layer/laydate/laydate.js"></script>
+	<script  type="text/javascript">
+     var data_doc=[
+	{
+		"filename": "交通运输部关于同意国际航行船舶临时进出长兴岛港部分码头泊位期限的批复.pdf",
+		"state": "待审",
+		"filesize": "10M",
+		"createtime": "2016-12-07 12:45:56"
+	},
+	{
+		"filename": "2017-2019年度建设项目技术咨询服务单位.xls",
+		"state": "审核完成",
+		"filesize": "5M",
+		"createtime": "2016-12-07 12:45:56"
+	},
+	{
+		"filename": "交通运输部海事局关于加强“五一”期间水上交通安全工作的通知.wps",
+		"state": "审核完成",
+		"filesize": "10M",
+		"createtime": "2016-12-07 12:45:56"
+	},
+	{
+		"filename": "交通运输部关于同意国际航行船舶临时进出长兴岛港部分码头泊位期限的批复.pdf",
+		"state": "待审",
+		"filesize": "10M",
+		"createtime": "2016-12-07 12:45:56"
+	},
+	{
+		"filename": "交通运输部关于同意国际航行船舶临时进出长兴岛港部分码头泊位期限的批复.pdf",
+		"state": "待审",
+		"filesize": "10M",
+		"createtime": "2016-12-07 12:45:56"
+	},
+	{
+		"filename": "交通运输部关于同意国际航行船舶临时进出长兴岛港部分码头泊位期限的批复.pdf",
+		"state": "待审",
+		"filesize": "10M",
+		"createtime": "2016-12-07 12:45:56"
+	},
+	{
+		"filename": "交通运输部关于同意国际航行船舶临时进出长兴岛港部分码头泊位期限的批复.pdf",
+		"state": "待审",
+		"filesize": "10M",
+		"createtime": "2016-12-07 12:45:56"
+	},
+	{
+		"filename": "交通运输部关于同意国际航行船舶临时进出长兴岛港部分码头泊位期限的批复.pdf",
+		"state": "待审",
+		"filesize": "10M",
+		"createtime": "2016-12-07 12:45:56"
+	},
+	{
+		"filename": "交通运输部关于同意国际航行船舶临时进出长兴岛港部分码头泊位期限的批复.pdf",
+		"state": "待审",
+		"filesize": "10M",
+		"createtime": "2016-12-07 12:45:56"
+	},
+	{
+		"filename": "交通运输部关于同意国际航行船舶临时进出长兴岛港部分码头泊位期限的批复.pdf",
+		"state": "待审",
+		"filesize": "10M",
+		"createtime": "2016-12-07 12:45:56"
+	},
+	{
+		"filename": "交通运输部关于同意国际航行船舶临时进出长兴岛港部分码头泊位期限的批复.pdf",
+		"state": "待审",
+		"filesize": "10M",
+		"createtime": "2016-12-07 12:45:56"
+	},
+	{
+		"filename": "交通运输部关于同意国际航行船舶临时进出长兴岛港部分码头泊位期限的批复.pdf",
+		"state": "待审",
+		"filesize": "10M",
+		"createtime": "2016-12-07 12:45:56"
+	},
+	{
+		"filename": "交通运输部关于同意国际航行船舶临时进出长兴岛港部分码头泊位期限的批复.pdf",
+		"state": "待审",
+		"filesize": "10M",
+		"createtime": "2016-12-07 12:45:56"
+	},
+	{
+		"filename": "交通运输部关于同意国际航行船舶临时进出长兴岛港部分码头泊位期限的批复.pdf",
+		"state": "待审",
+		"filesize": "10M",
+		"createtime": "2016-12-07 12:45:56"
+	},
+	{
+		"filename": "交通运输部关于同意国际航行船舶临时进出长兴岛港部分码头泊位期限的批复.pdf",
+		"state": "待审",
+		"filesize": "10M",
+		"createtime": "2016-12-07 12:45:56"
+	},
+	{
+		"filename": "交通运输部关于同意国际航行船舶临时进出长兴岛港部分码头泊位期限的批复.pdf",
+		"state": "待审",
+		"filesize": "10M",
+		"createtime": "2016-12-07 12:45:56"
+	},
+	{
+		"filename": "交通运输部关于同意国际航行船舶临时进出长兴岛港部分码头泊位期限的批复.pdf",
+		"state": "待审",
+		"filesize": "10M",
+		"createtime": "2016-12-07 12:45:56"
+	},
+	{
+		"filename": "交通运输部关于同意国际航行船舶临时进出长兴岛港部分码头泊位期限的批复.pdf",
+		"state": "待审",
+		"filesize": "10M",
+		"createtime": "2016-12-07 12:45:56"
+	},
+	{
+		"filename": "交通运输部关于同意国际航行船舶临时进出长兴岛港部分码头泊位期限的批复.pdf",
+		"state": "待审",
+		"filesize": "10M",
+		"createtime": "2016-12-07 12:45:56"
+	}
+];
+var data_assert=[
+	{
+		"filename": "交通运输部关于同意国际航行船舶临时进出长兴岛港部分码头泊位期限的批复.pdf",
+		"state": "待审",
+		"filesize": "10M",
+		"createtime": "2016-12-07 12:45:56"
+	},
+	{
+		"filename": "2017-2019年度建设项目技术咨询服务单位.xls",
+		"state": "审核完成",
+		"filesize": "5M",
+		"createtime": "2016-12-07 12:45:56"
+	},
+	{
+		"filename": "交通运输部海事局关于加强“五一”期间水上交通安全工作的通知.wps",
+		"state": "审核完成",
+		"filesize": "10M",
+		"createtime": "2016-12-07 12:45:56"
+	},
+	{
+		"filename": "中华人民共和国海事局海事桌面办公视频系统一期招标公告.jpg",
+		"state": "待审",
+		"filesize": "5M",
+		"createtime": "2016-12-07 12:45:56"
+	},
+	{
+		"filename": "黑龙江海事局召开庆祝建党96周年暨机关作风整顿动员大会.jpg",
+		"state": "审核完成",
+		"filesize": "3M",
+		"createtime": "2016-12-07 12:45:56"
+	},
+	{
+		"filename": "世界海员日.mp4",
+		"state": "草稿",
+		"filesize": "100M",
+		"createtime": "2016-12-07 12:45:56"
+	},
+	{
+		"filename": "【新闻直播间】交通运输部：便利船员服务清单发布.flv",
+		"state": "审核中",
+		"filesize": "500M",
+		"createtime": "2016-12-07 12:45:56"
+	},
+	{
+		"filename": "交通运输部关于同意国际航行船舶临时进出长兴岛港部分码头泊位期限的批复.pdf",
+		"state": "待审",
+		"filesize": "10M",
+		"createtime": "2016-12-07 12:45:56"
+	},
+	{
+		"filename": "交通运输部关于同意国际航行船舶临时进出长兴岛港部分码头泊位期限的批复.pdf",
+		"state": "待审",
+		"filesize": "10M",
+		"createtime": "2016-12-07 12:45:56"
+	},
+	{
+		"filename": "交通运输部关于同意国际航行船舶临时进出长兴岛港部分码头泊位期限的批复.pdf",
+		"state": "待审",
+		"filesize": "10M",
+		"createtime": "2016-12-07 12:45:56"
+	},
+	{
+		"filename": "交通运输部关于同意国际航行船舶临时进出长兴岛港部分码头泊位期限的批复.pdf",
+		"state": "待审",
+		"filesize": "10M",
+		"createtime": "2016-12-07 12:45:56"
+	},
+	{
+		"filename": "交通运输部关于同意国际航行船舶临时进出长兴岛港部分码头泊位期限的批复.pdf",
+		"state": "待审",
+		"filesize": "10M",
+		"createtime": "2016-12-07 12:45:56"
+	},
+	{
+		"filename": "交通运输部关于同意国际航行船舶临时进出长兴岛港部分码头泊位期限的批复.pdf",
+		"state": "待审",
+		"filesize": "10M",
+		"createtime": "2016-12-07 12:45:56"
+	},
+	{
+		"filename": "交通运输部关于同意国际航行船舶临时进出长兴岛港部分码头泊位期限的批复.pdf",
+		"state": "待审",
+		"filesize": "10M",
+		"createtime": "2016-12-07 12:45:56"
+	},
+	{
+		"filename": "交通运输部关于同意国际航行船舶临时进出长兴岛港部分码头泊位期限的批复.pdf",
+		"state": "待审",
+		"filesize": "10M",
+		"createtime": "2016-12-07 12:45:56"
+	},
+	{
+		"filename": "交通运输部关于同意国际航行船舶临时进出长兴岛港部分码头泊位期限的批复.pdf",
+		"state": "待审",
+		"filesize": "10M",
+		"createtime": "2016-12-07 12:45:56"
+	},
+	{
+		"filename": "交通运输部关于同意国际航行船舶临时进出长兴岛港部分码头泊位期限的批复.pdf",
+		"state": "待审",
+		"filesize": "10M",
+		"createtime": "2016-12-07 12:45:56"
+	},
+	{
+		"filename": "交通运输部关于同意国际航行船舶临时进出长兴岛港部分码头泊位期限的批复.pdf",
+		"state": "待审",
+		"filesize": "10M",
+		"createtime": "2016-12-07 12:45:56"
+	},
+	{
+		"filename": "交通运输部关于同意国际航行船舶临时进出长兴岛港部分码头泊位期限的批复.pdf",
+		"state": "待审",
+		"filesize": "10M",
+		"createtime": "2016-12-07 12:45:56"
+	},
+	{
+		"filename": "交通运输部关于同意国际航行船舶临时进出长兴岛港部分码头泊位期限的批复.pdf",
+		"state": "待审",
+		"filesize": "10M",
+		"createtime": "2016-12-07 12:45:56"
+	},
+	{
+		"filename": "交通运输部关于同意国际航行船舶临时进出长兴岛港部分码头泊位期限的批复.pdf",
+		"state": "待审",
+		"filesize": "10M",
+		"createtime": "2016-12-07 12:45:56"
+	},
+	{
+		"filename": "交通运输部关于同意国际航行船舶临时进出长兴岛港部分码头泊位期限的批复.pdf",
+		"state": "待审",
+		"filesize": "10M",
+		"createtime": "2016-12-07 12:45:56"
+	},
+	{
+		"filename": "交通运输部关于同意国际航行船舶临时进出长兴岛港部分码头泊位期限的批复.pdf",
+		"state": "待审",
+		"filesize": "10M",
+		"createtime": "2016-12-07 12:45:56"
+	}
+];
+	   $(function(){
+		$("#tab-1_table").bootstrapTable({
+			//url: 'json/dev.json',
+			data: data_doc,
+			height:"500",
+			//toolbar: '#toolbar', //工具按钮用哪个容器
+			//striped: true, //是否显示行间隔色
+			//cache: false, //是否使用缓存，默认为true，所以一般情况下需要设置一下这个属性（*）
+			pagination: true, //是否显示分页
+			//sortable: true, //是否启用排序
+			//sortOrder: "asc", //排序方式
+			//queryParams: postQueryParams,//传递参数（*）
+			//sidePagination: "client",      //分页方式：client客户端分页，server服务端分页（*）
+			pageSize: 10, //每页的记录行数（*）
+			pageList: [10, 25, 50, 100], //可供选择的每页的行数（*）
+			//strictSearch: true,
+			//height: table_h, //行高，如果没有设置height属性，表格自动根据记录条数觉得表格高度,设置了行高后编辑时标头宽度不会随着下面的行改变，且颜色也不会改变？？？？
+			//uniqueId: "id", //每一行的唯一标识，一般为主键列
+			//cardView: false, //是否显示详细视图
+			//detailView: false, //是否显示父子表
+			//paginationHAlign: "left",
+			//singleSelect: true,
+			//search:true,               //是否显示表格搜索，此搜索是客户端搜索，不会进服务端
+			//strictSearch: true,
+			//showColumns: true, //是否显示所有的列
+			//showRefresh: true, //是否显示刷新按钮
+			//clickToSelect: true, //是否启用点击选中行
+			//paginationPreText: "<<",
+			//paginationNextText: ">>",
+			columns: [ {
+					field : "order",
+					title : "序号",
+					width : 10,
+					formatter: function (value, row, index) {
+                              return index+1;
+                          }
+				}, {
+					field : "filename",
+					title : "文档名称",
+					width : 520
+				},{
+					field : "state",
+					title : "状态",
+					width : 70
+				},{
+					field : "filesize",
+					title : "大小",
+					width : 40
+				},{
+					field : "createtime",
+					title : "创建时间",
+					width : 150
+				},{
+				 field:"oper",
+				 title:"操作",
+				 width:190,
+				 formatter:operateFormatter
+				}],
+
+		 });
+
+		 $("#tab-2_table").bootstrapTable({
+			//url: 'json/dev.json',
+			data: data_assert,
+			height:"500",
+			//toolbar: '#toolbar', //工具按钮用哪个容器
+			//striped: true, //是否显示行间隔色
+			//cache: false, //是否使用缓存，默认为true，所以一般情况下需要设置一下这个属性（*）
+			pagination: true, //是否显示分页
+			//sortable: true, //是否启用排序
+			//sortOrder: "asc", //排序方式
+			//queryParams: postQueryParams,//传递参数（*）
+			//sidePagination: "client",      //分页方式：client客户端分页，server服务端分页（*）
+			pageSize: 10, //每页的记录行数（*）
+			pageList: [10, 25, 50, 100], //可供选择的每页的行数（*）
+			//strictSearch: true,
+			//height: table_h, //行高，如果没有设置height属性，表格自动根据记录条数觉得表格高度,设置了行高后编辑时标头宽度不会随着下面的行改变，且颜色也不会改变？？？？
+			//uniqueId: "id", //每一行的唯一标识，一般为主键列
+			//cardView: false, //是否显示详细视图
+			//detailView: false, //是否显示父子表
+			//paginationHAlign: "left",
+			//singleSelect: true,
+			//search:true,               //是否显示表格搜索，此搜索是客户端搜索，不会进服务端
+			//strictSearch: true,
+			//showColumns: true, //是否显示所有的列
+			//showRefresh: true, //是否显示刷新按钮
+			//clickToSelect: true, //是否启用点击选中行
+			//paginationPreText: "<<",
+			//paginationNextText: ">>",
+			columns: [ {
+					field : "order",
+					title : "序号",
+					width : 10,
+					formatter: function (value, row, index) {
+                              return index+1;
+                          }
+				}, {
+					field : "filename",
+					title : "文档名称",
+					width : 520
+				},{
+					field : "state",
+					title : "状态",
+					width : 70
+				},{
+					field : "filesize",
+					title : "大小",
+					width : 40
+				},{
+					field : "createtime",
+					title : "创建时间",
+					width : 150
+				},{
+				 field:"oper",
+				 title:"操作",
+				 width:120,
+				 formatter:operateFormatter_assert
+				}],
+
+		 });
+		 $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
+			var $table = $($(e.target).attr('href') + '_table');
+			$table.bootstrapTable('resetView');
+		});
+		 });
+
+		  function operateFormatter_assert(value, row, index) {
+		  	return	["<button type='button' class='btn btn-sm btn-primary' onclick='updateAssert(1)'><i class='fa fa-edit'></i>修改</button>&nbsp;&nbsp;<button type='button' class='btn btn-sm btn-primary' onclick='deleteFile(1)'><i class='fa fa-remove'></i>删除</button>", ].join(' ');
+		}
+		function operateFormatter(value, row, index) {
+		  var initBtn = "<button type='button' class='btn btn-sm btn-primary' onclick='assertFile(1)'><i class='fa fa-arrow-right'></i>转为资产</button>";
+		  var sameBtn = "<button type='button' class='btn btn-sm btn-primary' onclick='updateAssert(1)'><i class='fa fa-edit'></i>修改</button>&nbsp;&nbsp;<button type='button' class='btn btn-sm btn-primary' onclick='deleteFile(1)'><i class='fa fa-remove'></i>删除</button>";
+		   if(row.state == '审核完成'){
+		     return [sameBtn+"&nbsp;&nbsp;"+initBtn, ].join(' ');
+		   }else{
+		    return [sameBtn, ].join(' ');
+		   }
+		}
+
+				function deleteFile(i){
+		   swal({
+	        title: "您确定要删除这条信息吗",
+	        text: "删除后将无法恢复，请谨慎操作！",
+	        type: "warning",
+	        showCancelButton: true,
+	        confirmButtonColor: "#DD6B55",
+	        confirmButtonText: "删除",
+	        closeOnConfirm: false
+	    }, function () {
+	        swal("删除成功！", "您已经永久删除了这条信息。", "success");
+	    });
+		}
+
+				function assertFile(i){
+				swal({
+  title: "确定转为资产?",
+  text: "确认后将无法更改!",
+  type: "warning",
+  showCancelButton: true,
+  confirmButtonColor: "#DD6B55",
+  confirmButtonText: "确认",
+  closeOnConfirm: false
+},
+function(){
+  swal("已转为资产!", "转为资产成功.", "success");
+});
+				}
+
+
+			  //laydate({elem:"#hello",event:"focus"});
+        var start={
+            elem:"#start",format:"YYYY/MM/DD hh:mm:ss",
+            min:laydate.now(),max:"2099-06-16 23:59:59",istime:true,
+            istoday:false,choose:
+            function(datas){end.min=datas;
+                end.start=datas
+            }
+        };
+        var end={
+                elem:"#end",
+                format:"YYYY/MM/DD hh:mm:ss",min:laydate.now(),
+                max:"2099-06-16 23:59:59",istime:true,istoday:false,
+                 choose:function(datas){
+                 start.max=datas}};
+			laydate(start);
+            laydate(end);
+			 var start_2={
+            elem:"#start_2",format:"YYYY/MM/DD hh:mm:ss",
+            min:laydate.now(),max:"2099-06-16 23:59:59",istime:true,
+            istoday:false,choose:
+            function(datas){end.min=datas;
+                end.start=datas
+            }
+        };
+        var end_2={
+                elem:"#end_2",
+                format:"YYYY/MM/DD hh:mm:ss",min:laydate.now(),
+                max:"2099-06-16 23:59:59",istime:true,istoday:false,
+                 choose:function(datas){
+                 start.max=datas}};
+			laydate(start_2);
+            laydate(end_2);
+
+       function fileUpload(){
+	       layer_open("../im/levelAuthorize.html","文档详情");
+       }
+       function layer_open(pageName,title){
+         layer.open({
+						type: 2,
+						shade: false,
+						maxmin: true,
+						title: title,
+						moveType: 1,//拖拽风格，0是默认，1是传统拖动
+						area: ['100%', '100%'], //宽高
+						content: pageName
+					});
+       }
+
+       function assertUpload(){
+         layer_open("../im/levelAuthorize.html","资产详情");
+       }
+
+       function updateFile(i){
+          layer_open("../im/levelAuthorize.html","文档编辑");
+       }
+       function updateAssert(i){
+         layer_open("../im/levelAuthorize.html","资产编辑");
+       }
+	</script>
+</body>
+</html>

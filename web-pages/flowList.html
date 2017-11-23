@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html>
+
+
+<!-- Mirrored from www.zi-han.net/theme/hplus/layouts.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 20 Jan 2016 14:18:52 GMT -->
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+    <title>H+ 后台主题UI框架 - 布局</title>
+    <meta name="keywords" content="H+后台主题,后台bootstrap框架,会员中心主题,后台HTML,响应式后台">
+    <meta name="description" content="H+是一个完全响应式，基于Bootstrap3最新版本开发的扁平化主题，她采用了主流的左右两栏式布局，使用了Html5+CSS3等现代技术">
+
+    <link href="../css/plugins/morris/morris-0.4.3.min.css" rel="stylesheet">
+    <link href="../css/animate.min.css" rel="stylesheet">
+    <link href="../css/style.min862f.css?v=4.1.0" rel="stylesheet">
+	<link href="../css/bootstrap.min14ed.css?v=3.3.6" rel="stylesheet">
+	<link href="../css/font-awesome.min93e3.css?v=4.4.0" rel="stylesheet">
+	<link href="../css/plugins/sweetalert/sweetalert.css" rel="stylesheet">
+    <link href="../css/plugins/bootstrap-table/bootstrap-table.min.css" rel="stylesheet">
+    <link href="../css/plugins/iCheck/custom.css" rel="stylesheet">
+
+<style type="text/css">
+.form-control {
+	display: inline;
+}
+</style>
+
+
+
+<body class="gray-bg" >
+    <div class="wrapper wrapper-content">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-content">
+						<div class="row">
+									&nbsp;&nbsp;工作流名称： <input type="text" class="form-control" style="width: 100px;">
+									&nbsp;&nbsp; 时间范围：
+									<input placeholder="开始日期" class="form-control layer-date" id="start" style="width: 100px; vertical-align:  middle;">
+									- <input placeholder="结束日期" class="form-control layer-date" id="end" style="width: 100px; vertical-align: middle;">
+									&nbsp;&nbsp; 创建人： <input type="text" class="form-control" style="width: 100px;">
+									&nbsp;&nbsp; <button type="button" class="btn btn-sm btn-primary">搜索</button>
+						</div>
+						<div class="bs-example">
+				          <table id = "flowList"></table>
+					 	</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+	<script src="../js/plugins/layer/laydate/laydate.js"></script>
+	<script src="../js/plugins/sweetalert/sweetalert.min.js"></script>
+	<script src="../js/jquery.min.js?v=2.1.4"></script>
+    <script src="../js/plugins/bootstrap-table/bootstrap-table.min.js"></script>
+	<script src="../js/plugins/layer/layer.js"></script>
+	<script src="../js/plugins/bootstrap-table/locale/bootstrap-table-zh-CN.min.js"></script>
+	<script type="text/javascript">
+
+	 $(function(){
+		 var e=[{"flowId":"1","flowName":"文档审核","cteateTime":"2017-01-02","flowAuthor":"张三","flowType":"1"},{"flowId":"2","flowName":"照片审核","cteateTime":"2017-01-02","flowAuthor":"赵四","flowType":"2"},{"flowId":"3","flowName":"数字资产审核","cteateTime":"2017-01-02","flowAuthor":"王五","flowType":"3"}];
+		 $("#flowList").bootstrapTable({
+			data: e,
+			height:"490",
+			striped: true, //是否显示行间隔色
+			pagination: true, //是否显示分页
+			sidePagination: "client",      //分页方式：client客户端分页，server服务端分页（*）
+			pageSize: 20, //每页的记录行数（*）
+			pageList: [10, 25, 50, 100], //可供选择的每页的行数（*）
+			columns: [{
+				field: 'flowId',
+				title: '序号',
+				width: "75px",
+				visible:false,
+			},{
+				field: 'flowName',
+				title: '工作流名',
+			},{
+				field: 'cteateTime',
+				title: '创建时间',
+			},{
+				field: 'flowType',
+				title: '工作流类型',
+				formatter: judgement
+			},{
+				field: 'flowAuthor',
+				title: '工作流创建人'
+			},{
+				field: 'operate',
+				title: '操作',
+				width: "320px",
+				events: showRoleList,
+				formatter: operateFormatter
+			}, ],
+
+		 });
+	 });
+
+	window.showRoleList = {
+              'click #downButton': function (e, value, row, index) {
+                 $('#open'+index).toggle();
+				 $('#down'+index).toggle();
+				 swal({
+					title:"关闭成功",
+					text: row.flowName+"工作流关闭成功！",
+					type:"success"
+				 });
+          },
+			'click #openButton': function (e, value, row, index) {
+                 $('#open'+index).toggle();
+				 $('#down'+index).toggle();
+				 swal({
+					title:"开启成功",
+					text: row.flowName+"工作流开启成功！",
+					type:"success"
+				 });
+          },
+		  'click #btn_detail': function (e, value, row, index) {
+                 layer.open({
+					type: 2,
+					shade: false,
+					title:"工作流流程",
+					maxmin: true,
+					moveType: 1,//拖拽风格，0是默认，1是传统拖动
+					area: ['850px', '95%'], //宽高
+					content: 'flowAction.html'
+				});
+          },
+		  'click #copy': function (e, value, row, index) {
+                layer.open({
+					type: 1,
+					shadeClose: false,
+					title:"复制工作流",
+					shade: false,
+					maxmin: true,
+					moveType: 1,//拖拽风格，0是默认，1是传统拖动
+					area: ['60%', '60%'],
+					content: '<div class=\"gray-bg\"><div class=\"wrapper wrapper-content\"><div class=\"ibox-content\"><div class=\"row\"  style="height:200px"><div  style = \" margin:0 auto;width:400px;\" ><div class=\"form-group\" ><label class=\"col-sm-3 control-label\" style = \"padding-left: 0px;\">工作流名称：</label><div class=\"col-sm-9\"><input type=\"tex\" name="newFlowName" class=\"form-control\" placeholder="请输入新工作流名称"></div></div></div></div></div></div></div>', //iframe的url
+					btn: ['确定','取消'],
+					btn1: function(index, layero){
+						layer.close(index);
+					}
+				});
+          },
+		  'click #modify': function (e, value, row, index) {
+                 layer.open({
+					type: 2,
+					shade: false,
+					maxmin: true,
+					title:"修改工作流",
+					area: ['100%', '100%'], //宽高
+					content: 'addFlow.html'
+				});
+          },
+		  'click #example': function (e, value, row, index) {
+                 layer.open({
+					type: 2,
+					shade: false,
+					maxmin: true,
+					title:"查看实例",
+					moveType: 1,//拖拽风格，0是默认，1是传统拖动
+					area: ['100%', '100%'], //宽高
+					content: 'flowExample.html'
+				});
+          },
+	}
+
+	 function operateFormatter(value, row, index) {
+        return [
+            '<span id =\"down'+index+'\" style = \"display:none\"><button id="downButton" type="button" class="btn btn-primary btn-xs" >关闭</button>&nbsp;&nbsp;</span>',
+			'<span id =\"open'+index+'\"><button id="openButton" type="button" class="btn btn-primary btn-xs" >开启</button>&nbsp;&nbsp;</span>',
+			'<button id="btn_detail" type="button" class="btn btn-primary btn-xs" >工作流流程</button>&nbsp;&nbsp;',
+			'<button id="copy" type="button" class="btn btn-primary btn-xs" >复制</button>&nbsp;&nbsp;',
+			'<button id="modify" type="button" class="btn btn-primary btn-xs" >修改</button>&nbsp;&nbsp;',
+			'<button id="example" type="button" class="btn btn-primary btn-xs" >查看实例</button>&nbsp;&nbsp;',
+        ].join('');
+    }
+
+	function judgement(value, row, index) {
+		if (value == 1)
+		{
+			 return [
+            '文档',
+        ].join('');
+		}else if(value == 2){
+			 return [
+            '照片',
+        ].join('');
+		}else{
+			 return [
+            '数字资产',
+        ].join('');
+		}
+
+    }
+
+	var start = {
+		elem: "#start",
+		format: "YYYY/MM/DD hh:mm:ss",
+		min: '1900-01-01 00:00:00',
+		max: "2099-06-16 23:59:59",
+		istime: true,
+		istoday: false,
+		choose: function(datas) {
+			end.min = datas;
+			end.start = datas
+		}
+	};
+	var end = {
+		elem: "#end",
+		format: "YYYY/MM/DD hh:mm:ss",
+		min: '1900-01-01 00:00:00',
+		max: "2099-06-16 23:59:59",
+		istime: true,
+		istoday: false,
+		choose: function(datas) {
+			start.max = datas
+		}
+	};
+	laydate(start);
+	laydate(end);
+
+	</script>
+
+</body>
+
+
+<!-- Mirrored from www.zi-han.net/theme/hplus/layouts.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 20 Jan 2016 14:18:59 GMT -->
+</html>

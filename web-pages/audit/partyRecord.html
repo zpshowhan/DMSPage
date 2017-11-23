@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>API审计</title>
+<meta name="keywords" content="#">
+<meta name="description"
+	content="H+是一个完全响应式，基于Bootstrap3最新版本开发的扁平化主题，她采用了主流的左右两栏式布局，使用了Html5+CSS3等现代技术">
+
+<link rel="shortcut icon" href="favicon.ico">
+<link href="../../css/bootstrap.min14ed.css?v=3.3.6" rel="stylesheet">
+<link href="../../css/font-awesome.min93e3.css?v=4.4.0" rel="stylesheet">
+
+<!-- jqgrid-->
+<link href="../../css/plugins/jqgrid/ui.jqgridffe4.css?0820"
+	rel="stylesheet">
+
+<link href="../../css/animate.min.css" rel="stylesheet">
+<link href="../../css/style.min862f.css?v=4.1.0" rel="stylesheet">
+<link href="../../js/plugins/layer/skin/layer.css" rel="stylesheet">
+<link href="../../css/admin.min.css" rel="stylesheet">
+<style>
+/* Additional style to fix warning dialog position */
+#alertmod_table_list_2 {
+	top: 900px !important;
+}
+.ui-jqgrid-sortable {
+    text-align: center;
+}
+</style>
+
+</head>
+<body class="gray-bg">
+	<div class="wrapper wrapper-content  animated fadeInRight">
+		<div class="row">
+			<div class="col-sm-12">
+				<div class="ibox ">
+					<div id="gridtool" class="ibox-title"  style="border-top: 0px">
+                        <h5>API审计</h5>
+					<ul class="toolbar">
+						<li><button class='btn btn-success' type='button'   id='queryBtn'><i class='fa fa-search'></i>&nbsp;&nbsp;<span class='bold'>查询</span>
+                        </button></li>&nbsp;&nbsp;
+						<li><button class='btn btn-success' type='button'   id='refreshBtn' ><i class='fa fa-refresh'></i>&nbsp;&nbsp;<span class='bold'>刷新</span>
+                        </button></li>
+						</ul>
+					</div>
+					<div class="ibox-content">
+						<div class="jqGrid_wrapper">
+							<table id="table_list_2"></table>
+							<div id="pager_list_2"></div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+ </div>
+</div>
+</div>
+</div>
+	</div>
+	<script src="../../js/jquery.min.js?v=2.1.4"></script>
+	<script src="../../js/bootstrap.min.js?v=3.3.6"></script>
+	<script src="../../js/plugins/peity/jquery.peity.min.js"></script>
+	<script src="../../js/plugins/jqgrid/i18n/grid.locale-cnffe4.js?0820"></script>
+    <script src="../../js/plugins/jqgrid/jquery.jqGrid.minffe4.js?0820"></script>
+    <script src="../../js/plugins/layer/layer.min.js"></script>
+	<script  type="text/javascript">
+		$(document).ready(function() {
+			$.jgrid.defaults.styleUI = "Bootstrap";
+
+			var mydata = [ {
+				recordId:"1",
+				userId : "0000000000000000001",
+				authzperson : "刘",
+				operStatus : "成功",
+				department:"Hz00z8967op",
+				orgName:"测试机构",
+				apiName:"putObject",
+				lastupdTime:"2017-06-08"
+			}, {
+				recordId:"1",
+				userId : "0000000000000000001",
+				authzperson : "刘",
+				operStatus : "成功",
+				department:"Hz00z8967op",
+				orgName:"测试机构",
+				apiName:"putObject",
+				lastupdTime:"2017-06-08"
+			}, {
+				recordId:"1",
+				userId : "0000000000000000001",
+				authzperson : "刘",
+				operStatus : "成功",
+				department:"Hz00z8967op",
+				orgName:"测试机构",
+				apiName:"putObject",
+				lastupdTime:"2017-06-08"
+			}, {
+				recordId:"1",
+				userId : "0000000000000000001",
+				authzperson : "刘",
+				operStatus : "成功",
+				department:"Hz00z8967op",
+				orgName:"测试机构",
+				apiName:"putObject",
+				lastupdTime:"2017-06-08"
+			}, {
+				recordId:"1",
+				userId : "0000000000000000001",
+				authzperson : "刘",
+				operStatus : "成功",
+				department:"Hz00z8967op",
+				orgName:"测试机构",
+				apiName:"putObject",
+				lastupdTime:"2017-06-08"
+			}, {
+				recordId:"1",
+				userId : "0000000000000000001",
+				authzperson : "刘",
+				operStatus : "成功",
+				department:"Hz00z8967op",
+				orgName:"测试机构",
+				apiName:"putObject",
+				lastupdTime:"2017-06-08"
+			}, {
+				recordId:"1",
+				userId : "0000000000000000001",
+				authzperson : "刘",
+				operStatus : "成功",
+				department:"Hz00z8967op",
+				orgName:"测试机构",
+				apiName:"putObject",
+				lastupdTime:"2017-06-08"
+			}, {
+				recordId:"1",
+				userId : "0000000000000000001",
+				authzperson : "刘",
+				operStatus : "成功",
+				department:"Hz00z8967op",
+				orgName:"测试机构",
+				apiName:"putObject",
+				lastupdTime:"2017-06-08"
+			}, {
+				recordId:"1",
+				userId : "0000000000000000001",
+				authzperson : "刘",
+				operStatus : "成功",
+				department:"Hz00z8967op",
+				orgName:"测试机构",
+				apiName:"putObject",
+				lastupdTime:"2017-06-08"
+			}, {
+				recordId:"1",
+				userId : "0000000000000000001",
+				authzperson : "刘",
+				operStatus : "成功",
+				department:"Hz00z8967op",
+				orgName:"测试机构",
+				apiName:"putObject",
+				lastupdTime:"2017-06-08"
+			}, {
+				recordId:"1",
+				userId : "0000000000000000001",
+				authzperson : "刘",
+				operStatus : "成功",
+				department:"Hz00z8967op",
+				orgName:"测试机构",
+				apiName:"putObject",
+				lastupdTime:"2017-06-08"
+			}, {
+				recordId:"1",
+				userId : "0000000000000000001",
+				authzperson : "刘",
+				operStatus : "成功",
+				department:"Hz00z8967op",
+				orgName:"测试机构",
+				apiName:"putObject",
+				lastupdTime:"2017-06-08"
+			}, {
+				recordId:"1",
+				userId : "0000000000000000001",
+				authzperson : "刘",
+				operStatus : "成功",
+				department:"Hz00z8967op",
+				orgName:"测试机构",
+				apiName:"putObject",
+				lastupdTime:"2017-06-08"
+			}, {
+				recordId:"1",
+				userId : "0000000000000000001",
+				authzperson : "刘",
+				operStatus : "成功",
+				department:"Hz00z8967op",
+				orgName:"测试机构",
+				apiName:"putObject",
+				lastupdTime:"2017-06-08"
+			}, {
+				recordId:"1",
+				userId : "0000000000000000001",
+				authzperson : "刘",
+				operStatus : "成功",
+				department:"Hz00z8967op",
+				orgName:"测试机构",
+				apiName:"putObject",
+				lastupdTime:"2017-06-08"
+			}, {
+				recordId:"1",
+				userId : "0000000000000000001",
+				authzperson : "刘",
+				operStatus : "成功",
+				department:"Hz00z8967op",
+				orgName:"测试机构",
+				apiName:"putObject",
+				lastupdTime:"2017-06-08"
+			}, {
+				recordId:"1",
+				userId : "0000000000000000001",
+				authzperson : "刘",
+				operStatus : "成功",
+				department:"Hz00z8967op",
+				orgName:"测试机构",
+				apiName:"putObject",
+				lastupdTime:"2017-06-08"
+			}, {
+				recordId:"1",
+				userId : "0000000000000000001",
+				authzperson : "刘",
+				operStatus : "成功",
+				department:"Hz00z8967op",
+				orgName:"测试机构",
+				apiName:"putObject",
+				lastupdTime:"2017-06-08"
+			}, {
+				recordId:"1",
+				userId : "0000000000000000001",
+				authzperson : "刘",
+				operStatus : "成功",
+				department:"Hz00z8967op",
+				orgName:"测试机构",
+				apiName:"putObject",
+				lastupdTime:"2017-06-08"
+			}, {
+				recordId:"1",
+				userId : "0000000000000000001",
+				authzperson : "刘",
+				operStatus : "成功",
+				department:"Hz00z8967op",
+				orgName:"测试机构",
+				apiName:"putObject",
+				lastupdTime:"2017-06-08"
+			},];
+
+			$("#table_list_2").jqGrid({
+				data : mydata,
+				datatype : "local",
+				height : 360,
+                rownumbers:true,
+				autowidth : true,
+				shrinkToFit : true,
+				//toolbar:[true,"top"],
+				rowNum : 10,
+				rowList : [ 10, 20, 30 ],
+				colNames : ["记录ID", "用户Id", "操作人","组织机构","部门","API名称","输入参数","输出参数","操作结果","操作时间" ],
+				colModel : [ {
+					name : "recordId",
+					index : "recordId",
+					editable : true,
+					hidden:true,
+					width : 90,
+                    align : "center"
+				},{
+					name : "userId",
+					index : "userId",
+					hidden:true,
+					editable : true,
+					width : 60,
+                    align : "center"
+				}, {
+					name : "authzperson",
+					index : "authzperson",
+					editable : true,
+					width : 90,
+                    align : "center"
+				},{
+					name : "orgName",
+					index : "orgName",
+					editable : true,
+					width : 90,
+                    align : "center"
+				}, {
+					name : "department",
+					index : "department",
+					editable : true,
+					width : 100,
+                    align : "center"
+
+				}, {
+					name : "apiName",
+					index : "apiName",
+					editable : true,
+					width : 100,
+                    align : "center"
+
+				}, {
+					name : "inParam",
+					index : "inParam",
+					editable : true,
+					width : 100,
+                    align : "center"
+
+				}, {
+					name : "outParam",
+					index : "outParam",
+					editable : true,
+					width : 100,
+                    align : "center"
+
+				}, {
+					name : "operStatus",
+					index : "operStatus",
+					editable : true,
+					width : 100,
+                    align : "center"
+				},
+				 {
+					name : "lastupdTime",
+					index : "lastupdTime",
+					editable : true,
+					width : 80,
+                    align : "center"
+
+				}],
+				pager : "#pager_list_2",
+				viewrecords : true,
+				hidegrid : true
+			});
+			/*$("#t_table_list_2").append("<div class='row'>\
+			<form id='search_form'> &nbsp;&nbsp;&nbsp;&nbsp;<label>操作人</label> \
+			<input id='userName' name='userName' class='form-control' style='vertical-align:middle;width:100px'  type='text'> \
+							 &nbsp;&nbsp;&nbsp;&nbsp;<label>API名称：</label> \
+                                <input id='ApiName' name='ApiName'  class='form-control' style='vertical-align:middle;width:100px' type='text' aria-required='true' aria-invalid='false' class='valid'> \
+								&nbsp;&nbsp;&nbsp;&nbsp;<label>操作时间：</label> \
+                                    <input placeholder='开始日期' style='width:100px;vertical-align:middle;' class='form-control layer-date' id='start'> \
+								&nbsp;-&nbsp;<input placeholder='结束日期' style='width:100px;vertical-align:middle;' class='form-control layer-date' id='end'> \
+									<button class='btn btn-success' type='button'   id='queryBtn'><i class='fa fa-search'></i>&nbsp;&nbsp;<span class='bold'>查询</span> \
+                        </button>&nbsp;&nbsp;\
+						<button class='btn btn-success' type='button'   id='refreshBtn' ><i class='fa fa-refresh'></i>&nbsp;&nbsp;<span class='bold'>刷新</span>\
+                        </button></form><div>");*/
+			$("#table_list_2").setSelection(4, true);
+			//表格重绘
+			$(window).bind("resize", function() {
+				var width = $(".jqGrid_wrapper").width();
+				$("#table_list_2").setGridWidth(width)
+			})
+			// add
+			 $('#addBtn').on('click', function(){
+               	          var index = layer.open({
+							type: 2,
+							//title: '添加页面',
+							shade: false,
+
+					    	moveType: 1,
+							content: 'partyRecord_add.html',
+							area: ['60%', '60%'],
+							closeBtn: 0,
+							title: false,
+							//maxmin: true
+							 end: function(){ //此处用于演示
+							 //alert("sss")
+							 }
+
+							});
+							layer.full(index);
+			 })
+			 //edit
+			 $('#editBtn').on('click', function(){
+			 var ids = $("#table_list_2").jqGrid('getGridParam','selarrrow');
+			 if(ids.length==1)
+			 {
+               	          var index = layer.open({
+							type: 2,
+							title: '修改页面',
+							content: 'demo_editWin.html?id='+ids,
+							area: ['60%', '60%'],
+							closeBtn: 0,
+							title: false,
+							maxmin: false,
+							end: function(){ //此处用于演示
+							 //alert("sss")
+							 }
+							});
+							layer.full(index);
+			 }else if(ids.length!=1)
+			 {
+			  layer.msg('请选中一条记录修改！', {icon: 6});
+			 }
+			})
+			 //query
+			 $('#queryBtn').on('click', function(){
+                   var   index= layer.open({
+						type: 2,
+						//title: 'layer mobile页',
+						shadeClose: false,
+						title:"查询条件",
+						shade: false,
+						maxmin: true,
+					    moveType: 1,//拖拽风格，0是默认，1是传统拖动
+						//shift: 1,
+						area: ['60%', '60%'],
+						content: 'partyRecord_query.html' //iframe的url
+					});
+
+			 })
+			 //fresh
+			 $('#refreshBtn').on('click', function(){
+               	  $("#table_list_2").trigger("reloadGrid");
+			 })
+			 //del
+			$('#delBtn').on('click', function(){
+
+			   var ids = $("#table_list_2").jqGrid('getGridParam','selarrrow');
+			   if(ids.length>=1){
+               var  table =" <div class='ibox-content'><table class='table table-bordered'><thead><tr><th>#</th><th>姓名</th><th>性别</th><th>年龄</th></tr></thead><tbody> <tr><td>1</td><td>1</td><td>1</td><td>1</td> </tr></table></div>"
+
+			   //询问框
+				parent.layer.confirm('您确定删除下列信息吗？<br/>'+table, {
+				btn: ['确定','取消'], //按钮
+				title:"删除提示",
+				shade: 0.8 //不显示遮罩
+				}, function(){
+				parent.layer.msg('删除成功!', {icon: 1});
+				}, function(){
+				parent.layer.msg('删除失败!', {shift: 6});
+				});
+
+			  }else{
+				     layer.msg('请选中一条记录删除！', {icon: 6});
+			  }
+			 })
+		});
+	</script>
+</body>
+</html>
